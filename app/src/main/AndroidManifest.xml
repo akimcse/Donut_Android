@@ -13,19 +13,19 @@
         android:theme="@style/Theme.Donut"
         tools:targetApi="31">
         <activity
-            android:name=".sign.SignUpDoneActivity"
+            android:name=".ui.sign.SignUpDoneActivity"
             android:exported="false" />
         <activity
-            android:name=".sign.SignUpConfirmActivity"
+            android:name=".ui.sign.SignUpConfirmActivity"
             android:exported="false" />
         <activity
-            android:name=".sign.SignUpActivity"
+            android:name=".ui.sign.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".sign.SignActivity"
+            android:name=".ui.sign.SignActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
