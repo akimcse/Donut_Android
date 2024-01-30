@@ -8,5 +8,9 @@
     <string name="menu_ranking">Ranking</string>
     <string name="menu_my_page">My</string>
 
+    <!--GiverHomeFragment-->
+    <string name="giverHome_title">Today,</string>
+    <string name="giverHome_title2">children</string>
+    <string name="giverHome_title3">are still hungry.</string>
 
 </resources>
