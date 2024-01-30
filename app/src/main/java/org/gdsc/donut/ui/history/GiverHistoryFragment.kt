@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.gdsc.donut.databinding.FragmentHistoryBinding
 
-class HistoryFragment : Fragment() {
+class GiverHistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(

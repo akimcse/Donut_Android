@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.gdsc.donut.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class GiverHomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(

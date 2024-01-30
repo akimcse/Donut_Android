@@ -1,20 +1,20 @@
 package org.gdsc.donut.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
-import org.gdsc.donut.databinding.ActivityMainBinding
-import org.gdsc.donut.ui.history.HistoryFragment
-import org.gdsc.donut.ui.home.HomeFragment
+import org.gdsc.donut.databinding.ActivityGiverMainBinding
+import org.gdsc.donut.ui.history.GiverHistoryFragment
+import org.gdsc.donut.ui.home.GiverHomeFragment
 import org.gdsc.donut.ui.mypage.MyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class GiverMainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityGiverMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityGiverMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setBottomNavigation()
@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
-            getString(R.string.menu_home) -> HomeFragment()
-            getString(R.string.menu_history) -> HistoryFragment()
+            getString(R.string.menu_home) -> GiverHomeFragment()
+            getString(R.string.menu_history) -> GiverHistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> MyPageFragment()
             else -> null
