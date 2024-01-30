@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.gdsc.donut.databinding.FragmentGiverHomeBinding
+import org.gdsc.donut.databinding.FragmentReceiverHomeBinding
 
-class GiverHomeFragment : Fragment() {
-    private lateinit var binding: FragmentGiverHomeBinding
+class ReceiverHomeFragment : Fragment() {
+    private lateinit var binding: FragmentReceiverHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGiverHomeBinding.inflate(inflater, container, false)
+        binding = FragmentReceiverHomeBinding.inflate(inflater, container, false)
 
         //함수 호출
 

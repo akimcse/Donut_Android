@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.gdsc.donut.databinding.FragmentHistoryBinding
+import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
 
 class GiverHistoryFragment : Fragment() {
-    private lateinit var binding: FragmentHistoryBinding
+    private lateinit var binding: FragmentGiverHistoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        binding = FragmentGiverHistoryBinding.inflate(inflater, container, false)
 
         //함수 호출
 
