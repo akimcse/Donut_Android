@@ -8,5 +8,14 @@
     <string name="menu_ranking">Ranking</string>
     <string name="menu_my_page">My</string>
 
+    <!--GiverHomeFragment-->
+    <string name="giverHome_title">You have been donated</string>
+    <string name="giverHome_title2">for</string>
+    <string name="giverHome_years">years!</string>
+    <string name="giverHome_total">Your total is</string>
+    <string name="giverHome_dollar">$</string>
+    <string name="giverHome_unused">unused</string>
+    <string name="giverHome_used">used</string>
+    <string name="giverHome_days">D-</string>
 
 </resources>
