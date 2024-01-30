@@ -16,7 +16,7 @@
             android:name=".ui.ReceiverMainActivity"
             android:exported="false" />
         <activity
-            android:name=".sign.SignUpDoneActivity"
+            android:name=".ui.sign.SignUpDoneActivity"
             android:exported="false" />
         <activity
             android:name=".ui.sign.SignUpConfirmActivity"
