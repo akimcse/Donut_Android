@@ -11,7 +11,7 @@
     <!--Donation-->
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_continue">Continue</string>
-    <string name="donation_done">You've done!</string>
+    <string name="donation_done">You\'ve done!</string>
 
     <!--GiverHomeFragment-->
     <string name="giverHome_title">Today,</string>
