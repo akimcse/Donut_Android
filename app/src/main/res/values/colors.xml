@@ -6,7 +6,9 @@
     <color name="gray_200">#CACACA</color>
     <color name="gray_300">#797979</color>
     <color name="main_coral">#F87D66</color>
+    <color name="sub_coral">#FFEEEB</color>
     <color name="red">#FF2828</color>
     <color name="yellow">#FFDC27</color>
+    <color name="blue">#00D1FF</color>
     <color name="black_100">#171717</color>
 </resources>
