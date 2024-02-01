@@ -63,16 +63,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/tv_percent_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="40"
+        android:textColor="@color/main_coral"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/iv_pointer"
+        app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
+        app:layout_constraintEnd_toStartOf="@+id/tv_percent" />
+
+    <TextView
+        android:id="@+id/tv_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="%"
+        android:textColor="@color/main_coral"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
+        app:layout_constraintEnd_toEndOf="@+id/iv_pointer"
+        app:layout_constraintStart_toEndOf="@id/tv_percent_num" />
+
+    <ImageView
+        android:id="@+id/iv_pointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/ic_pointer"
+        app:layout_constraintBottom_toTopOf="@+id/progress_bar"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="0dp"
         android:layout_height="12dp"
         android:layout_marginTop="74dp"
+        android:background="@color/white"
+        android:elevation="5dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/bg_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_year" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_year"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/sub_coral"
