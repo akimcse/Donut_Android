@@ -12,5 +12,8 @@
     <string name="giverHome_title">Today,</string>
     <string name="giverHome_title2">children</string>
     <string name="giverHome_title3">are still hungry.</string>
+    <string name="giverHome_donated">you donate</string>
+    <string name="giverHome_need">while we need</string>
+    <string name="giverHome_dollar">$</string>
 
 </resources>
