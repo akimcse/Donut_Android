@@ -1,4 +1,4 @@
-package org.gdsc.donut.ui.history
+package org.gdsc.donut.ui.history.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import org.gdsc.donut.data.local.UnusedItemData
 import org.gdsc.donut.databinding.ItemHistoryUnusedBinding
 
 class UnusedItemAdapter : RecyclerView.Adapter<UnusedItemAdapter.UnusedItemViewHolder>() {
-    private val itemList = mutableListOf<UnusedItemData>()
+    val itemList = mutableListOf<UnusedItemData>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -24,8 +24,10 @@ class UnusedItemAdapter : RecyclerView.Adapter<UnusedItemAdapter.UnusedItemViewH
 
     class UnusedItemViewHolder(private val binding: ItemHistoryUnusedBinding): RecyclerView.ViewHolder(binding.root){
         fun onBind(data: UnusedItemData){
-            binding.tvDay.text = data.name
-            // 바인딩..
+            binding.tvDayNum.text = data.day
+            binding.tvCalendar.text = data.day
+            binding.tvName.text = data.name
+            binding.tvDollar.text = data.price
         }
     }
 }
