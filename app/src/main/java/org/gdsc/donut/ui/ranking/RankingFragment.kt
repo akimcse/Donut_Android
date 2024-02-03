@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import org.gdsc.donut.databinding.FragmentRankingBinding
+import org.gdsc.donut.ui.ranking.adapter.RankingViewPagerAdapter
 
 class RankingFragment : Fragment() {
     private lateinit var binding: FragmentRankingBinding
+    private lateinit var itemViewPagerAdapter: RankingViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -16,12 +19,25 @@ class RankingFragment : Fragment() {
     ): View? {
         binding = FragmentRankingBinding.inflate(inflater, container, false)
 
-        //함수 호출
+        setViewPager()
+        initTabLayout()
 
         return binding.root
     }
 
-    //함수 작성
+    private fun setViewPager(){
+        val fragmentList = listOf(SumFragment(), NumberFragment())
+
+        itemViewPagerAdapter = RankingViewPagerAdapter(this.requireActivity())
+        itemViewPagerAdapter.fragments.addAll(fragmentList)
+
+        binding.vpItems.adapter = itemViewPagerAdapter
+    }
+
+    private fun initTabLayout(){
+        val tabLabel = listOf("sum", "number")
+        TabLayoutMediator(binding.tlMenu, binding.vpItems){tab, position -> tab.text = tabLabel[position]}.attach()
+    }
 
     companion object {
     }
