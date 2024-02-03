@@ -2,6 +2,8 @@
     <string name="app_name">Donut</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="dollar">$</string>
+
     <!--MainActivity-->
     <string name="menu_home">Home</string>
     <string name="menu_history">History</string>
@@ -19,6 +21,23 @@
     <string name="giverHome_title3">are still hungry.</string>
     <string name="giverHome_donated">you donate</string>
     <string name="giverHome_need">while we need</string>
-    <string name="giverHome_dollar">$</string>
+
+    <!--GiverHistoryFragment-->
+    <string name="giverHistory_title">You have been donated</string>
+    <string name="giverHistory_title2">for</string>
+    <string name="giverHistory_years">years!</string>
+    <string name="giverHistory_total">Your total is</string>
+    <string name="giverHistory_dollar">$</string>
+    <string name="giverHistory_unused">unused</string>
+    <string name="giverHistory_used">used</string>
+    <string name="giverHistory_days">D-</string>
+
+    <!-- RankingFragment-->
+    <string name="ranking_title">Check Today\'s</string>
+    <string name="ranking_title2">Ranking</string>
+    <string name="ranking_title3">for fun!</string>
+    <string name="ranking_sum">SUM</string>
+    <string name="ranking_number">NUMBER</string>
+
 
 </resources>
