@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
+import org.gdsc.donut.ui.history.adapter.HistoryViewPagerAdapter
 
 class GiverHistoryFragment : Fragment() {
     private lateinit var binding: FragmentGiverHistoryBinding
+    private lateinit var itemViewPagerAdapter: HistoryViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -16,12 +19,25 @@ class GiverHistoryFragment : Fragment() {
     ): View? {
         binding = FragmentGiverHistoryBinding.inflate(inflater, container, false)
 
-        //함수 호출
+        setViewPager()
+        initTabLayout()
 
         return binding.root
     }
 
-    //함수 작성
+    private fun setViewPager(){
+        val fragmentList = listOf(UnusedFragment(), UsedFragment())
+
+        itemViewPagerAdapter = HistoryViewPagerAdapter(this.requireActivity())
+        itemViewPagerAdapter.fragments.addAll(fragmentList)
+
+        binding.vpItems.adapter = itemViewPagerAdapter
+    }
+
+    private fun initTabLayout(){
+        val tabLabel = listOf("unused", "used")
+        TabLayoutMediator(binding.tlMenu, binding.vpItems){tab, position -> tab.text = tabLabel[position]}.attach()
+    }
 
     companion object {
     }

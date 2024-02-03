@@ -15,5 +15,14 @@
     <string name="giverHome_donated">you donate</string>
     <string name="giverHome_need">while we need</string>
     <string name="giverHome_dollar">$</string>
+    <!--GiverHistoryFragment-->
+    <string name="giverHistory_title">You have been donated</string>
+    <string name="giverHistory_title2">for</string>
+    <string name="giverHistory_years">years!</string>
+    <string name="giverHistory_total">Your total is</string>
+    <string name="giverHistory_dollar">$</string>
+    <string name="giverHistory_unused">unused</string>
+    <string name="giverHistory_used">used</string>
+    <string name="giverHistory_days">D-</string>
 
 </resources>
