@@ -2,6 +2,8 @@
     <string name="app_name">Donut</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="dollar">$</string>
+
     <!--MainActivity-->
     <string name="menu_home">Home</string>
     <string name="menu_history">History</string>
@@ -14,7 +16,6 @@
     <string name="giverHome_title3">are still hungry.</string>
     <string name="giverHome_donated">you donate</string>
     <string name="giverHome_need">while we need</string>
-    <string name="giverHome_dollar">$</string>
 
     <!--GiverHistoryFragment-->
     <string name="giverHistory_title">You have been donated</string>
