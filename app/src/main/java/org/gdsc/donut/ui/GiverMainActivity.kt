@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityGiverMainBinding
+import org.gdsc.donut.ui.donation.DonationConfirmFragment
 import org.gdsc.donut.ui.donation.DonationFragment
 import org.gdsc.donut.ui.history.GiverHistoryFragment
 import org.gdsc.donut.ui.home.GiverHomeFragment
@@ -41,6 +42,7 @@ class GiverMainActivity : AppCompatActivity() {
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> MyPageFragment()
             "donation" -> DonationFragment()
+            "donation_confirm" -> DonationConfirmFragment()
             else -> null
         } ?: return
 
