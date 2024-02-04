@@ -34,5 +34,11 @@
     <string name="ranking_sum">SUM</string>
     <string name="ranking_number">NUMBER</string>
 
+    <!-- MypageFragment -->
+    <string name="Mypage_profiles">Profiles</string>
+    <string name="Mypage_service">Terms of service</string>
+    <string name="Mypage_open_source">Open source</string>
+    <string name="Mypage_about">About</string>
+
 
 </resources>
