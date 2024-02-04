@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.gdsc.donut.databinding.FragmentMyPageBinding
 
@@ -16,12 +17,25 @@ class MyPageFragment : Fragment() {
     ): View? {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
-        //함수 호출
+        setClickListener()
 
         return binding.root
     }
 
-    //함수 작성
+    private fun setClickListener(){
+        binding.clProfiles.setOnClickListener {
+            Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+        binding.clService.setOnClickListener {
+            Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+        binding.clOpenSource.setOnClickListener {
+            Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+        binding.clAbout.setOnClickListener {
+            Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
     }
