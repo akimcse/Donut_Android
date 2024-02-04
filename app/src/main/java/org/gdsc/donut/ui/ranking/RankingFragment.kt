@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import org.gdsc.donut.databinding.FragmentRankingBinding
+import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.ranking.adapter.RankingViewPagerAdapter
 
 class RankingFragment : Fragment() {
@@ -21,6 +22,7 @@ class RankingFragment : Fragment() {
 
         setViewPager()
         initTabLayout()
+        setFloatingButton()
 
         return binding.root
     }
@@ -37,6 +39,12 @@ class RankingFragment : Fragment() {
     private fun initTabLayout(){
         val tabLabel = listOf("sum", "number")
         TabLayoutMediator(binding.tlMenu, binding.vpItems){tab, position -> tab.text = tabLabel[position]}.attach()
+    }
+
+    private fun setFloatingButton(){
+        binding.fabDonationBtn.setOnClickListener {
+            (activity as GiverMainActivity).changeFragment("donation")
+        }
     }
 
     companion object {
