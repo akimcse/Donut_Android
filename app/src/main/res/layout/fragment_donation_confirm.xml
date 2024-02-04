@@ -4,12 +4,269 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAFA"
     tools:context=".ui.donation.DonationConfirmFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="246dp"
+                android:src="@drawable/ic_particles2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="7dp"
+                android:src="@drawable/ic_particles1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="90dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="chupa chups"
+                android:textAlignment="center"
+                android:textColor="@color/black_100"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="420dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="220dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_amount"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_dollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="220dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/dollar"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/et_dollar_num"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_dollar_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:paddingVertical="9dp"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="2.00"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_dollar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_dollar" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/gray_200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_dollar_num" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="9dp"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_due_date"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/divider2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <EditText
+                    android:id="@+id/et_date_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:paddingVertical="9dp"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="2024.02.02"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@color/gray_200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_date_num" />
+
+                <TextView
+                    android:id="@+id/tv_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="9dp"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_exchange_store"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+                <EditText
+                    android:id="@+id/et_store_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:paddingVertical="9dp"
+                    android:background="@null"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="7 eleven"
+                    android:textColor="@color/gray_300"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_store"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_store" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/bg_coral_round"
+                    app:layout_constraintTop_toBottomOf="@id/et_store_num"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/donation_confirm"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_retry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="36dp"
+                    android:background="@drawable/bg_gray_round"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_confirm">
+
+                    <TextView
+                        android:id="@+id/tv_retry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/donation_retry"
+                        android:textColor="@color/gray_300"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_image"
+                android:layout_width="0dp"
+                android:layout_height="430dp"
+                android:layout_marginHorizontal="53dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_white_round10"
+                android:elevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/img_gifticon"
+                android:elevation="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_image"
+                app:layout_constraintEnd_toEndOf="@+id/cl_image"
+                app:layout_constraintStart_toStartOf="@+id/cl_image"
+                app:layout_constraintTop_toTopOf="@+id/cl_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

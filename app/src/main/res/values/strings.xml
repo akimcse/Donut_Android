@@ -14,6 +14,11 @@
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_upload">Upload</string>
     <string name="donation_donate">Donate</string>
+    <string name="donation_amount">amount</string>
+    <string name="donation_due_date">due date</string>
+    <string name="donation_exchange_store">exchange store</string>
+    <string name="donation_confirm">Confirm</string>
+    <string name="donation_retry">Retry</string>
     <string name="donation_done">You\'ve done!</string>
 
     <!--GiverHomeFragment-->
