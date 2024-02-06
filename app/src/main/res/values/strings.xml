@@ -4,6 +4,30 @@
 
     <string name="dollar">$</string>
 
+    <!-- SignActivity -->
+    <string name="sign_title">Donuts for Donation</string>
+    <string name="sign_google">Sign in with Google</string>
+    <string name="sign_giver">giver</string>
+    <string name="sign_receiver">receiver</string>
+    <string name="sign_username">Username</string>
+    <string name="sign_password">Password</string>
+    <string name="sign_login">Login</string>
+    <string name="sign_create">Create account</string>
+
+    <!-- SignUpActivity -->
+    <string name="sign_up_title">Sign up for Donut</string>
+    <string name="sign_up_username">Enter your Username</string>
+    <string name="sign_up_password">Enter your Password</string>
+    <string name="sign_up_confirm">Confirm Password</string>
+    <string name="sign_up_continue">Continue</string>
+    <string name="sign_up_check">Check for the availability of the username.</string>
+    <string name="sign_up_create">Create account</string>
+
+    <!-- SignUpConfirmActivity -->
+    <string name="sign_up_confirm_title">We have to confirm your status</string>
+    <string name="sign_up_confirm_upload">Upload</string>
+    <string name="sign_up_confirm_welcome">Welcome!</string>
+
     <!--MainActivity-->
     <string name="menu_home">Home</string>
     <string name="menu_history">History</string>
