@@ -24,13 +24,12 @@
         android:id="@+id/cl_input_box"
         android:layout_width="0dp"
         android:layout_height="182dp"
-        android:layout_marginTop="58dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="58dp"
         android:background="@drawable/bg_subcoral_round16_dot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@id/tv_title"></androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/iv_plus"
@@ -43,25 +42,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <ImageView
+        android:id="@+id/iv_gifticon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="2dp"
+        android:layout_marginHorizontal="2dp"
+        android:src="@drawable/img_gifticon"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_input_box"
+        app:layout_constraintEnd_toEndOf="@id/cl_input_box"
+        app:layout_constraintStart_toStartOf="@id/cl_input_box"
+        app:layout_constraintTop_toTopOf="@+id/cl_input_box" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_continue"
+        android:id="@+id/btn_upload"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/bg_coral_round_selector"
+        android:background="@drawable/bg_gray_round"
         app:layout_constraintTop_toBottomOf="@id/cl_input_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/tv_continue"
+            android:id="@+id/tv_upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/pretendard_semibold"
             android:text="@string/donation_upload"
             android:textColor="@color/gray_300"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_donate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_coral_round"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/cl_input_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_donate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/donation_donate"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
