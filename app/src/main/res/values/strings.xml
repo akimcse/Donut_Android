@@ -14,11 +14,15 @@
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_upload">Upload</string>
     <string name="donation_donate">Donate</string>
-    <string name="donation_amount">amount</string>
-    <string name="donation_due_date">due date</string>
-    <string name="donation_exchange_store">exchange store</string>
-    <string name="donation_confirm">Confirm</string>
-    <string name="donation_retry">Retry</string>
+    <string name="donation_amount">Amount</string>
+    <string name="donation_name">Name</string>
+    <string name="donation_due_date">Due date</string>
+    <string name="donation_exchange_store">Exchange store</string>
+    <string name="donation_7_eleven">7 eleven</string>
+    <string name="donation_cu">CU</string>
+    <string name="donation_gs25">GS 25</string>
+    <string name="donation_image">Image</string>
+    <string name="donation_chose">chose an exchange store</string>
     <string name="donation_done">You\'ve done!</string>
 
     <!--GiverHomeFragment-->
