@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import org.gdsc.donut.databinding.FragmentDonationConfirmBinding
 import org.gdsc.donut.ui.GiverMainActivity
 
@@ -25,9 +26,11 @@ class DonationConfirmFragment : Fragment() {
 
     private fun setButtons(){
         binding.btnConfirm.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             startActivity(Intent(context, DonationDoneActivity::class.java))
         }
         binding.btnRetry.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             (activity as GiverMainActivity).changeFragment("donation")
         }
     }
