@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityGiverMainBinding
+import org.gdsc.donut.ui.donation.DonationConfirmFragment
+import org.gdsc.donut.ui.donation.DonationFragment
 import org.gdsc.donut.ui.history.GiverHistoryFragment
 import org.gdsc.donut.ui.home.GiverHomeFragment
 import org.gdsc.donut.ui.mypage.MyPageFragment
@@ -33,12 +35,14 @@ class GiverMainActivity : AppCompatActivity() {
         changeFragment(getString(R.string.menu_home))
     }
 
-    private fun changeFragment(tag: String){
+    fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
             getString(R.string.menu_home) -> GiverHomeFragment()
             getString(R.string.menu_history) -> GiverHistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> MyPageFragment()
+            "donation" -> DonationFragment()
+            "donation_confirm" -> DonationConfirmFragment()
             else -> null
         } ?: return
 

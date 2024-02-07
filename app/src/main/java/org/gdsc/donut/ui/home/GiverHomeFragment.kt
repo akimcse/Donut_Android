@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.gdsc.donut.databinding.FragmentGiverHomeBinding
+import org.gdsc.donut.ui.GiverMainActivity
 import kotlin.properties.Delegates
 
 class GiverHomeFragment : Fragment() {
@@ -22,6 +23,7 @@ class GiverHomeFragment : Fragment() {
         setAmount()
         setProgressBar()
         setSpeechBubble()
+        setFloatingButton()
 
         return binding.root
     }
@@ -61,6 +63,12 @@ class GiverHomeFragment : Fragment() {
         binding.ivDonut.setOnClickListener {
             if(binding.clSpeechBubble.visibility == View.INVISIBLE) binding.clSpeechBubble.visibility = View.VISIBLE
             else binding.clSpeechBubble.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setFloatingButton(){
+        binding.fabDonationBtn.setOnClickListener {
+            (activity as GiverMainActivity).changeFragment("donation")
         }
     }
 
