@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import org.gdsc.donut.databinding.FragmentMyPageBinding
+import org.gdsc.donut.ui.GiverMainActivity
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
@@ -18,6 +19,7 @@ class MyPageFragment : Fragment() {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
         setClickListener()
+        setFloatingButton()
 
         return binding.root
     }
@@ -34,6 +36,12 @@ class MyPageFragment : Fragment() {
         }
         binding.clAbout.setOnClickListener {
             Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setFloatingButton(){
+        binding.fabDonationBtn.setOnClickListener {
+            (activity as GiverMainActivity).changeFragment("donation")
         }
     }
 
