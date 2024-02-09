@@ -24,7 +24,7 @@
     <string name="sign_up_create">Create account</string>
 
     <!-- SignUpConfirmActivity -->
-    <string name="sign_up_confirm_title">We have to confirm your status</string>
+    <string name="sign_up_confirm_title">We have to\nconfirm your\nstatus</string>
     <string name="sign_up_confirm_upload">Upload</string>
     <string name="sign_up_confirm_welcome">Welcome!</string>
 
