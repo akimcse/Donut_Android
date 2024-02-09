@@ -15,12 +15,12 @@ class SignActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        setSignUpBtn()
+        setContinueBtn()
     }
 
-    private fun setSignUpBtn(){
+    private fun setContinueBtn(){
         binding.btnCreate.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+            startActivity(Intent(this, SignUpConfirmActivity::class.java))
         }
     }
 }
