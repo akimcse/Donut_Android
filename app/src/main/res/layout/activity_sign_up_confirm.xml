@@ -82,7 +82,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_create"
+        android:id="@+id/btn_continue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:fontFamily="@font/pretendard_semibold"
-            android:text="@string/sign_up_create"
+            android:text="@string/sign_up_continue"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
