@@ -15,6 +15,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import org.gdsc.donut.databinding.ActivitySignUpConfirmBinding
 import java.io.IOException
+import java.net.URI
 
 class SignUpConfirmActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpConfirmBinding
@@ -25,7 +26,7 @@ class SignUpConfirmActivity : AppCompatActivity() {
                 processImageWithOCR(uri)
             }
         }
-    val recognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
+    private val recognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +37,27 @@ class SignUpConfirmActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    override fun onResume() {
+        runPhotoPicker()
+        super.onResume()
+    }
+
+    override fun onRestart() {
+        runPhotoPicker()
+        super.onRestart()
+    }
+
     private fun setUploadButton() {
         binding.btnUpload.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            startActivity(Intent(this, CameraActivity::class.java))
+        }
+    }
+
+    private fun runPhotoPicker(){
+        if(imageCaptured){
+            if(binding.ivCard.visibility != View.VISIBLE){
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
         }
     }
 
@@ -61,6 +80,7 @@ class SignUpConfirmActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "그림자가 생기지 않도록 다시 촬영해주세요.", Toast.LENGTH_SHORT).show()
+                    binding.ivCard.visibility = View.INVISIBLE
                 }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -73,6 +93,7 @@ class SignUpConfirmActivity : AppCompatActivity() {
             setContinueBtn()
         } else {
             Toast.makeText(this, "인증에 실패하였습니다. 다시 촬영해주세요.", Toast.LENGTH_SHORT).show()
+            binding.ivCard.visibility = View.INVISIBLE
         }
     }
 
@@ -82,4 +103,9 @@ class SignUpConfirmActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
+
+    companion object{
+        var imageCaptured = false
+    }
+
 }
