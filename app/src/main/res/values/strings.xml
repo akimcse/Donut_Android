@@ -2,7 +2,7 @@
     <string name="app_name">Donut</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="dollar">$</string>
+    <string name="dollar">₩</string>
 
     <!-- SignActivity -->
     <string name="sign_title">Donuts for Donation</string>
@@ -78,6 +78,5 @@
     <string name="Mypage_service">Terms of service</string>
     <string name="Mypage_open_source">Open source</string>
     <string name="Mypage_about">About</string>
-
 
 </resources>
