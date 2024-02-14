@@ -1,6 +1,7 @@
 package org.gdsc.donut.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityReceiverMainBinding
@@ -22,6 +23,7 @@ class ReceiverMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setBottomNavigation()
+        setFloatingButton()
     }
 
     private fun setBottomNavigation() {
@@ -64,5 +66,15 @@ class ReceiverMainActivity : AppCompatActivity() {
         }
 
         transaction.commit()
+    }
+
+    private fun setFloatingButton(){
+        binding.fabReceiveBtn.setOnClickListener {
+            changeFragment("receive")
+        }
+    }
+
+    fun enableFloatingButton(){
+        binding.fabReceiveBtn.visibility = View.GONE
     }
 }

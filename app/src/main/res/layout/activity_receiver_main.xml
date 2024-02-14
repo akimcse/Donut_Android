@@ -30,4 +30,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_bnv_menu"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_receive_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_floating_receiver"
+        android:backgroundTint="@color/blue"
+        app:rippleColor="@color/blue"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bnv_main"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
