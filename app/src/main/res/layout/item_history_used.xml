@@ -34,7 +34,7 @@
                 android:layout_marginVertical="4dp"
                 android:layout_marginHorizontal="10dp"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="@string/giverHistory_used"
+                android:text="@string/used"
                 android:textColor="@color/gray_300"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
