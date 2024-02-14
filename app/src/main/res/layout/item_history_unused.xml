@@ -34,7 +34,7 @@
                 android:layout_marginVertical="1dp"
                 android:layout_marginStart="9dp"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="@string/giverHistory_days"
+                android:text="@string/days"
                 android:textColor="@color/gray_300"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
