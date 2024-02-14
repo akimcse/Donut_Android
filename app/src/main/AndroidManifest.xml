@@ -23,10 +23,15 @@
             android:exported="false" />
         <activity
             android:name=".ui.ReceiverMainActivity"
-            android:exported="false" >
+            android:exported="true" >
             <meta-data
                 android:name="android.windowTranslucentStatus"
                 android:value="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.sign.SignUpDoneActivity"
@@ -51,16 +56,10 @@
         </activity>
         <activity
             android:name=".ui.sign.SignActivity"
-            android:exported="true" >
+            android:exported="false" >
             <meta-data
                 android:name="android.windowTranslucentStatus"
                 android:value="true" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.GiverMainActivity"
