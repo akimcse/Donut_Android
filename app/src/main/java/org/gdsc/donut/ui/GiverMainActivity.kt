@@ -1,6 +1,7 @@
 package org.gdsc.donut.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityGiverMainBinding
@@ -20,6 +21,7 @@ class GiverMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setBottomNavigation()
+        setFloatingButton()
     }
 
     private fun setBottomNavigation() {
@@ -62,5 +64,15 @@ class GiverMainActivity : AppCompatActivity() {
         }
 
         transaction.commit()
+    }
+
+    private fun setFloatingButton(){
+        binding.fabDonationBtn.setOnClickListener {
+            changeFragment("donation")
+        }
+    }
+
+    fun enableFloatingButton(){
+        binding.fabDonationBtn.visibility = View.GONE
     }
 }
