@@ -73,6 +73,10 @@
     <string name="giverHistory_years">years!</string>
     <string name="giverHistory_total">Your total is</string>
 
+    <!-- ReceiverHistoryFragment -->
+    <string name="receiverHistory_title">Remaining amount for\nthis month is</string>
+    <string name="receiverHistory_per">/</string>
+
     <!-- RankingFragment-->
     <string name="ranking_title">Check Today\'s</string>
     <string name="ranking_title2">Ranking</string>
