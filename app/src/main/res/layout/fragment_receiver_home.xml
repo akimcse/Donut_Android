@@ -249,7 +249,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:backgroundTint="#FFFAFA"
+                android:background="#FFFAFA"
                 app:layout_constraintTop_toBottomOf="@id/cl_7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
