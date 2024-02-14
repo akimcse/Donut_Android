@@ -23,7 +23,6 @@ class GiverHomeFragment : Fragment() {
         setAmount()
         setProgressBar()
         setSpeechBubble()
-        setFloatingButton()
 
         return binding.root
     }
@@ -63,12 +62,6 @@ class GiverHomeFragment : Fragment() {
         binding.ivDonut.setOnClickListener {
             if(binding.clSpeechBubble.visibility == View.INVISIBLE) binding.clSpeechBubble.visibility = View.VISIBLE
             else binding.clSpeechBubble.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun setFloatingButton(){
-        binding.fabDonationBtn.setOnClickListener {
-            (activity as GiverMainActivity).changeFragment("donation")
         }
     }
 

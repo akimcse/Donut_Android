@@ -158,17 +158,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_donation_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_floating_btn"
-        android:backgroundTint="@color/main_coral"
-        app:rippleColor="@color/main_coral"
-        app:fabSize="normal"
-        app:borderWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
