@@ -1,14 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.history.ReceiverHistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/menu_history" />
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="49dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_particle3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_donut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="11dp"
+                android:src="@drawable/ic_donut7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="172dp"
+                android:layout_marginHorizontal="20dp"
+                android:elevation="5dp"
+                android:background="@drawable/bg_subcoral_round16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/receiverHistory_title"
+                    android:textColor="@color/black_100"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_dollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/dollar"
+                    android:textColor="@color/main_coral"
+                    android:textSize="36sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_dollar_num"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                <TextView
+                    android:id="@+id/tv_dollar_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="12,000"
+                    android:textColor="@color/main_coral"
+                    android:textSize="36sp"
+                    app:layout_constraintTop_toTopOf="@id/tv_dollar"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dollar"
+                    app:layout_constraintEnd_toStartOf="@id/tv_dollar_per" />
+
+                <TextView
+                    android:id="@+id/tv_dollar_per"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textSize="16sp"
+                    android:textColor="@color/main_coral"
+                    android:text="@string/receiverHistory_per"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_dollar_num"
+                    app:layout_constraintEnd_toStartOf="@id/tv_dollar_total"/>
+
+                <TextView
+                    android:id="@+id/tv_dollar_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="50,000"
+                    android:textColor="@color/main_coral"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_dollar_num"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_menu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_total"
+                app:tabIndicatorColor="@color/main_coral"
+                app:tabSelectedTextColor="@color/main_coral"
+                app:tabTextColor="@color/gray_200"
+                tools:ignore="SpeakableTextPresentCheck"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tl_menu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
