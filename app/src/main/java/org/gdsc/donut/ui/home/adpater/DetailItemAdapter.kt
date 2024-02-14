@@ -10,6 +10,8 @@ import org.gdsc.donut.databinding.ItemPackageBinding
 
 class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewHolder>() {
     val itemList = mutableListOf<UnusedItemData>()
+    private var listener: ((UnusedItemData, Int) -> Unit)? = null
+    var mPosition = 0
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -24,12 +26,27 @@ class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewH
 
     override fun getItemCount(): Int = itemList.size
 
-    class DetailItemViewHolder(private val binding: ItemHistoryUnusedBinding): RecyclerView.ViewHolder(binding.root){
+    inner class DetailItemViewHolder(private val binding: ItemHistoryUnusedBinding): RecyclerView.ViewHolder(binding.root){
         fun onBind(data: UnusedItemData){
             binding.tvDayNum.text = data.day
             binding.tvCalendar.text = data.day
             binding.tvName.text = data.name
             binding.tvDollar.text = data.price
+
+            setClinkListenerOnPosition(data)
+        }
+
+        private fun setClinkListenerOnPosition(data: UnusedItemData){
+            binding.clUnusedItem.setOnClickListener {
+                val pos = adapterPosition
+                mPosition = pos
+                listener?.invoke(data, mPosition)
+            }
         }
     }
+
+    fun setOnItemClickListener(listener: ((UnusedItemData, Int) -> Unit)?) {
+        this.listener = listener
+    }
+
 }
