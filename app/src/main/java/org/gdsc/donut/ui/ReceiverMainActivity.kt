@@ -8,6 +8,7 @@ import org.gdsc.donut.ui.history.GiverHistoryFragment
 import org.gdsc.donut.ui.history.ReceiverHistoryFragment
 import org.gdsc.donut.ui.home.GiverHomeFragment
 import org.gdsc.donut.ui.home.ReceiverHomeFragment
+import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
 import org.gdsc.donut.ui.mypage.MyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 
@@ -35,12 +36,13 @@ class ReceiverMainActivity : AppCompatActivity() {
         changeFragment(getString(R.string.menu_home))
     }
 
-    private fun changeFragment(tag: String){
+    fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
             getString(R.string.menu_home) -> ReceiverHomeFragment()
             getString(R.string.menu_history) -> ReceiverHistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> MyPageFragment()
+            "package_detail" -> ReceiverHomePackageDetailFragment()
             else -> null
         } ?: return
 

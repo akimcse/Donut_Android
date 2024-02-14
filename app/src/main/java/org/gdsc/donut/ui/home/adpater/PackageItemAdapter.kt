@@ -8,6 +8,8 @@ import org.gdsc.donut.databinding.ItemPackageBinding
 
 class PackageItemAdapter : RecyclerView.Adapter<PackageItemAdapter.PackageItemViewHolder>() {
     val itemList = mutableListOf<PackageItemData>()
+    private var listener: ((PackageItemData, Int) -> Unit)? = null
+    var mPosition = 0
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,12 +24,26 @@ class PackageItemAdapter : RecyclerView.Adapter<PackageItemAdapter.PackageItemVi
 
     override fun getItemCount(): Int = itemList.size
 
-    class PackageItemViewHolder(private val binding: ItemPackageBinding): RecyclerView.ViewHolder(binding.root){
+    inner class PackageItemViewHolder(private val binding: ItemPackageBinding): RecyclerView.ViewHolder(binding.root){
         fun onBind(data: PackageItemData){
             binding.tvDayNum.text = data.day
             binding.tvCalendar.text = data.day
             binding.tvName.text = data.name
             binding.tvDollar.text = data.price
+
+            setClinkListenerOnPosition(data)
         }
+
+        private fun setClinkListenerOnPosition(data: PackageItemData){
+            binding.clPackageItem.setOnClickListener {
+                val pos = adapterPosition
+                mPosition = pos
+                listener?.invoke(data, mPosition)
+            }
+        }
+    }
+
+    fun setOnItemClickListener(listener: ((PackageItemData, Int) -> Unit)?) {
+        this.listener = listener
     }
 }
