@@ -63,6 +63,8 @@
     <!-- ReceiverHomeFragment-->
     <string name="receiverHome_title">Now you can ask for\na donut box!</string>
     <string name="receiverHome_total">This month\'s total for\nthe donut box is</string>
+    <string name="receiverHome_amount">amount  |</string>
+    <string name="receiverHome_due">due date  |</string>
 
     <!--GiverHistoryFragment-->
     <string name="giverHistory_title">You have been donating</string>
