@@ -59,6 +59,7 @@
     <string name="receive_title3">2. Please enter the amount</string>
     <string name="receive_amount">the amount</string>
     <string name="receive_left">the left amount of this month is</string>
+    <string name="receive_done">Done</string>
 
     <!--GiverHomeFragment-->
     <string name="giverHome_title">Today,</string>
