@@ -31,7 +31,6 @@ class SignActivity : AppCompatActivity() {
     }
 
 
-
     private fun setContinueBtn() {
         binding.btnCreate.setOnClickListener {
             startActivity(Intent(this, SignUpConfirmActivity::class.java))
@@ -80,5 +79,45 @@ class SignActivity : AppCompatActivity() {
         })
     }
 
+    private fun setLoginBtn() {
+        if (!binding.etUsername.text.isNullOrBlank() && !binding.etPassword.text.isNullOrBlank()) {
+            binding.btnLogin.setBackgroundDrawable(getDrawable(R.drawable.bg_coral_round))
+            binding.tvLogin.setTextColor(getColor(R.color.white))
+            binding.btnLogin.setOnClickListener {
+                requestSignIn()
+            }
+        } else {
+            binding.btnLogin.setBackgroundDrawable(getDrawable(R.drawable.bg_gray200_round))
+            binding.tvLogin.setTextColor(getColor(R.color.gray_300))
+        }
+    }
 
+
+    private fun requestSignIn() {
+        val id = binding.etUsername.text.toString()
+        val password = binding.etPassword.text.toString()
+        viewModel.requestReceiverSignIn(id, password)
+        handleNetworkException()
+    }
+
+    private fun handleNetworkException() {
+        viewModel.receiverSignInInfo.observe(this, Observer { data ->
+            when (data.code) {
+                201 -> {
+                    viewModel.saveUserId(data.data?.name)
+                    viewModel.saveAccessToken(data.data?.accesstoken)
+                    startActivity(Intent(this, ReceiverMainActivity::class.java))
+                    finish()
+                }
+
+                409 -> {
+                    Toast.makeText(this, "아이디 혹은 패스워드를 확인해주세요.", Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(this, "서버 오류입니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
 }
