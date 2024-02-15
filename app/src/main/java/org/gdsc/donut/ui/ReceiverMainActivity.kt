@@ -74,7 +74,7 @@ class ReceiverMainActivity : AppCompatActivity() {
 
     private fun setFloatingButton(){
         binding.fabReceiveBtn.setOnClickListener {
-            changeFragment("receive")
+            changeFragment("receive_store")
         }
     }
 
