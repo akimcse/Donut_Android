@@ -13,6 +13,8 @@ import org.gdsc.donut.ui.home.ReceiverHomeGiftDetailFragment
 import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
 import org.gdsc.donut.ui.mypage.MyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
+import org.gdsc.donut.ui.receive.ReceiveAmountFragment
+import org.gdsc.donut.ui.receive.ReceiveStoreFragment
 
 class ReceiverMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReceiverMainBinding
@@ -47,6 +49,8 @@ class ReceiverMainActivity : AppCompatActivity() {
             getString(R.string.menu_my_page) -> MyPageFragment()
             "package_detail" -> ReceiverHomePackageDetailFragment()
             "gift_detail" -> ReceiverHomeGiftDetailFragment()
+            "receive_store" -> ReceiveStoreFragment()
+            "receive_amount" -> ReceiveAmountFragment()
             else -> null
         } ?: return
 
