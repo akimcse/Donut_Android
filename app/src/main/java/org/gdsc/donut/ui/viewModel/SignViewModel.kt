@@ -11,6 +11,7 @@ import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
+import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
 
@@ -22,6 +23,10 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
     private val _receiverSignInInfo = MutableLiveData<ResponseSignInReceiver>()
     val receiverSignInInfo: LiveData<ResponseSignInReceiver>
         get() = _receiverSignInInfo
+
+    private val _giverSignInInfo = MutableLiveData<ResponseSignInGiver>()
+    val giverSignInInfo: LiveData<ResponseSignInGiver>
+        get() = _giverSignInInfo
 
     fun saveUserId(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,4 +57,10 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
                 )
             )
         }
+
+    fun requestGiverSignIn(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
+        _giverSignInInfo.postValue(
+            RetrofitBuilder.authService.signInGiver(accessToken)
+        )
+    }
 }

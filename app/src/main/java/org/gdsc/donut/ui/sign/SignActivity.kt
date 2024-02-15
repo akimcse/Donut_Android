@@ -25,6 +25,7 @@ class SignActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         autoLogin()
+        setGoogleLoginBtn()
         setContinueBtn()
         checkNameStatus()
         checkPasswordStatus()
@@ -35,6 +36,19 @@ class SignActivity : AppCompatActivity() {
         if (DonutSharedPreferences.getAccessToken()?.isNotEmpty() == true) {
             startActivity(Intent(this, ReceiverMainActivity::class.java))
             finish()
+        }
+    }
+
+    private fun setGoogleLoginBtn(){
+        binding.btnGoogle.setOnClickListener {
+
+        }
+    }
+
+    private fun requestGiverSignIn(){
+        val accessToken = DonutSharedPreferences.getAccessToken()
+        if (accessToken != null) {
+            viewModel.requestGiverSignIn(accessToken)
         }
     }
 
@@ -91,7 +105,7 @@ class SignActivity : AppCompatActivity() {
             binding.btnLogin.setBackgroundDrawable(getDrawable(R.drawable.bg_coral_round))
             binding.tvLogin.setTextColor(getColor(R.color.white))
             binding.btnLogin.setOnClickListener {
-                requestSignIn()
+                requestReceiverSignIn()
             }
         } else {
             binding.btnLogin.setBackgroundDrawable(getDrawable(R.drawable.bg_gray200_round))
@@ -99,8 +113,7 @@ class SignActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun requestSignIn() {
+    private fun requestReceiverSignIn() {
         val id = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
         viewModel.requestReceiverSignIn(id, password)
