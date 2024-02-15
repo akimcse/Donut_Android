@@ -13,4 +13,8 @@ interface AuthService {
         @Body receiverInfo: RequestSignUpReceiver
     ): ResponseSignUpReceiver
 
+    @POST("auth/receiver/signin")
+    suspend fun signInReceiver(
+        @Body receiverInfo: RequestSignInReceiver
+    ): ResponseSignInReceiver
 }
