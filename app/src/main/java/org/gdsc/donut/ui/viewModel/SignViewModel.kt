@@ -9,7 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.api.RetrofitBuilder
+import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
+import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
 
 class SignViewModel(application: Application) : AndroidViewModel(application) {
@@ -17,9 +19,19 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
     val receiverSignUpInfo: LiveData<ResponseSignUpReceiver>
         get() = _receiverSignUpInfo
 
-    fun saveUserId(token: String?) {
+    private val _receiverSignInInfo = MutableLiveData<ResponseSignInReceiver>()
+    val receiverSignInInfo: LiveData<ResponseSignInReceiver>
+        get() = _receiverSignInInfo
+
+    fun saveUserId(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            DonutSharedPreferences.setUserId(token)
+            DonutSharedPreferences.setUserId(id)
+        }
+    }
+
+    fun saveAccessToken(token: String?){
+        viewModelScope.launch(Dispatchers.IO) {
+            DonutSharedPreferences.setAccessToken(token)
         }
     }
 
@@ -28,6 +40,15 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
             _receiverSignUpInfo.postValue(
                 RetrofitBuilder.authService.signUpReceiver(
                     RequestSignUpReceiver(id, password)
+                )
+            )
+        }
+
+    fun requestReceiverSignIn(id: String, password: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            _receiverSignInInfo.postValue(
+                RetrofitBuilder.authService.signInReceiver(
+                    RequestSignInReceiver(id, password)
                 )
             )
         }
