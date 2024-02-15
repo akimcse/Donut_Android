@@ -1,6 +1,7 @@
 package org.gdsc.donut.ui.receive
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.FragmentReceiveAmountBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.sign.CameraActivity
 
 class ReceiveAmountFragment : Fragment() {
     private lateinit var binding: FragmentReceiveAmountBinding
@@ -52,7 +54,13 @@ class ReceiveAmountFragment : Fragment() {
         binding.tvDone.text = getString(R.string.receive_done)
         binding.tvDone.setTextColor(resources.getColor(R.color.white))
         binding.btnDone.setOnClickListener {
-            (activity as ReceiverMainActivity).changeFragment("receive_amount")
+            // sendReceiveInfo()
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+            startActivity(Intent(context, ReceiveDoneActivity::class.java))
         }
+    }
+
+    private fun sendReceiveInfo() {
+        // api 리스폰스에 사용처, 금액 담아서 전송
     }
 }

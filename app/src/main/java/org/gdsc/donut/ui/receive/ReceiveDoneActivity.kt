@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.databinding.ActivityReceiveDoneBinding
-import org.gdsc.donut.ui.GiverMainActivity
+import org.gdsc.donut.ui.ReceiverMainActivity
 
 class ReceiveDoneActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReceiveDoneBinding
@@ -20,7 +20,7 @@ class ReceiveDoneActivity : AppCompatActivity() {
 
     private fun moveMain(sec: Int) {
         Handler().postDelayed(Runnable {
-            startActivity(Intent(this, GiverMainActivity::class.java))
+            startActivity(Intent(this, ReceiverMainActivity::class.java))
             finish()
         }, 1000 * sec.toLong()) // sec초 정도 딜레이를 준 후 시작
     }
