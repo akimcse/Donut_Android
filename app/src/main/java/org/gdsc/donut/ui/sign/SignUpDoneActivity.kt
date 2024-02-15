@@ -15,12 +15,11 @@ class SignUpDoneActivity : AppCompatActivity() {
         binding = ActivitySignUpDoneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        moveMain(1)
+        moveSignIn(1)
     }
 
-    private fun moveMain(sec: Int) {
+    private fun moveSignIn(sec: Int) {
         Handler().postDelayed(Runnable {
-            startActivity(Intent(this, GiverMainActivity::class.java))
             finish()
         }, 1000 * sec.toLong()) // sec초 정도 딜레이를 준 후 시작
     }

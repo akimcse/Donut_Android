@@ -89,7 +89,6 @@ class SignUpConfirmActivity : AppCompatActivity() {
 
     private fun verifyUserStatusFromOCRText(text: String){
         if(text.contains("가상계좌") && text.contains("NH") && text.contains("채움")){
-            Toast.makeText(this, "인증에 성공하였습니다!.", Toast.LENGTH_SHORT).show()
             setContinueBtn()
         } else {
             Toast.makeText(this, "인증에 실패하였습니다. 다시 촬영해주세요.", Toast.LENGTH_SHORT).show()
@@ -101,6 +100,7 @@ class SignUpConfirmActivity : AppCompatActivity() {
         binding.btnContinue.visibility = View.VISIBLE
         binding.btnContinue.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
     }
 

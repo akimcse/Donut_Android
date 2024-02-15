@@ -3,6 +3,7 @@ package org.gdsc.donut.ui.sign
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.ActivitySignBinding
 import org.gdsc.donut.ui.GiverMainActivity
 

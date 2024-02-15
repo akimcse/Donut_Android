@@ -4,13 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivitySignUpBinding
+import org.gdsc.donut.ui.viewModel.SignViewModel
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
+    private val viewModel: SignViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,17 +95,39 @@ class SignUpActivity : AppCompatActivity() {
             if(binding.etPassword.text.toString() == binding.etConfirm.text.toString()){
                 binding.btnCreate.setBackgroundDrawable(getDrawable(R.drawable.bg_coral_round))
                 binding.tvContinue.setTextColor(getColor(R.color.white))
-            }else{
-                Toast.makeText(this, "패스워드를 확인해주세요.", Toast.LENGTH_SHORT).show()
+                binding.btnCreate.setOnClickListener {
+                    requestSignUp()
+                }
+            }else {
+                binding.btnCreate.setBackgroundDrawable(getDrawable(R.drawable.bg_gray200_round))
+                binding.tvContinue.setTextColor(getColor(R.color.gray_300))
             }
-
-        } else {
-            binding.btnCreate.setBackgroundDrawable(getDrawable(R.drawable.bg_gray200_round))
-            binding.tvContinue.setTextColor(getColor(R.color.gray_300))
         }
+    }
 
-        binding.btnCreate.setOnClickListener {
-            startActivity(Intent(this, SignUpDoneActivity::class.java))
-        }
+    private fun requestSignUp(){
+        val id = binding.etUsername.text.toString()
+        val password = binding.etPassword.text.toString()
+        viewModel.requestReceiverSignUp(id, password)
+        handleNetworkException(id)
+    }
+
+    private fun handleNetworkException(id: String){
+        viewModel.receiverSignUpInfo.observe(this, Observer { data ->
+            when (data.code) {
+                201 -> {
+                    viewModel.saveUserId(id)
+                    startActivity(Intent(this, SignUpDoneActivity::class.java))
+                    finish()
+                }
+                409 -> {
+                    binding.ivCancel.visibility = View.VISIBLE
+                    binding.tvCheck.visibility = View.VISIBLE
+                }
+                else -> {
+                    Toast.makeText(this, "서버 오류입니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }
