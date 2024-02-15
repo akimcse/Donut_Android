@@ -90,7 +90,7 @@ class SignActivity : AppCompatActivity() {
 
     private fun requestGiverSignIn() {
         viewModel.googleLoginInfo.observe(this, Observer { data ->
-            viewModel.requestGiverSignIn(data.access_token)
+            viewModel.requestGiverSignIn(data.id_token)
             setGiverUserInfo()
         })
     }
