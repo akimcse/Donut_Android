@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     private const val BASE_URL = "http://34.47.72.193:8080/api/"
+    private const val Google_URL = "https://www.googleapis.com/"
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(
@@ -27,7 +28,14 @@ object RetrofitBuilder {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
+    private val googleRetrofit = Retrofit.Builder()
+        .baseUrl(Google_URL)
+        .client(client)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+
     val authService: AuthService = donutRetrofit.create(AuthService::class.java)
+    val googleService: GoogleService = googleRetrofit.create(GoogleService::class.java)
     val donationService: DonationService = donutRetrofit.create(DonationService::class.java)
     val historyService: HistoryService = donutRetrofit.create(HistoryService::class.java)
     val homeService: HomeService = donutRetrofit.create(HomeService::class.java)
