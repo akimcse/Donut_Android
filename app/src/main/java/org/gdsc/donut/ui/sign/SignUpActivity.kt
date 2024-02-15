@@ -109,14 +109,13 @@ class SignUpActivity : AppCompatActivity() {
         val id = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
         viewModel.requestReceiverSignUp(id, password)
-        handleNetworkException(id)
+        handleNetworkException()
     }
 
-    private fun handleNetworkException(id: String){
+    private fun handleNetworkException(){
         viewModel.receiverSignUpInfo.observe(this, Observer { data ->
             when (data.code) {
                 201 -> {
-                    viewModel.saveUserId(id)
                     startActivity(Intent(this, SignUpDoneActivity::class.java))
                     finish()
                 }
