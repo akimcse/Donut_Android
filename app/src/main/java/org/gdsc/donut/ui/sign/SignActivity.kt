@@ -5,18 +5,33 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
+import com.google.android.gms.tasks.Task
 import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.ActivitySignBinding
+import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.viewModel.SignViewModel
 
 class SignActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
     private val viewModel: SignViewModel by viewModels()
+    private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
+    private val googleAuthLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            getGoogleAccessToken(task)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,22 +49,57 @@ class SignActivity : AppCompatActivity() {
     private fun autoLogin() {
         DonutSharedPreferences.init(applicationContext)
         if (DonutSharedPreferences.getAccessToken()?.isNotEmpty() == true) {
-            startActivity(Intent(this, ReceiverMainActivity::class.java))
-            finish()
+            if (DonutSharedPreferences.getUserRole() == "giver") {
+                startActivity(Intent(this, GiverMainActivity::class.java))
+                finish()
+            } else if (DonutSharedPreferences.getUserRole() == "receiver") {
+                startActivity(Intent(this, ReceiverMainActivity::class.java))
+                finish()
+            }
         }
     }
 
-    private fun setGoogleLoginBtn(){
+    private fun setGoogleLoginBtn() {
         binding.btnGoogle.setOnClickListener {
-
+            val signInIntent = googleSignInClient.signInIntent
+            googleAuthLauncher.launch(signInIntent)
         }
     }
 
-    private fun requestGiverSignIn(){
-        val accessToken = DonutSharedPreferences.getAccessToken()
-        if (accessToken != null) {
-            viewModel.requestGiverSignIn(accessToken)
+    private fun getGoogleClient(): GoogleSignInClient {
+        val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestServerAuthCode(getString(R.string.google_login_client_id), true)
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(this, googleSignInOption)
+    }
+
+    private fun getGoogleAccessToken(completedTask: Task<GoogleSignInAccount>) {
+        val account = completedTask.getResult(ApiException::class.java)
+        val clientId = getString(R.string.google_login_client_id)
+        val clientSecret = getString(R.string.gooogle_clinet_secret)
+        val code = account.serverAuthCode
+        val grantType = "authorization_code"
+        val redirectUri = ""
+
+        if (code != null) {
+            viewModel.requestGoogleLogin(clientId, clientSecret, code, grantType, redirectUri)
+            requestGiverSignIn()
         }
+    }
+
+    private fun requestGiverSignIn() {
+        viewModel.googleLoginInfo.observe(this, Observer { data ->
+            viewModel.requestGiverSignIn(data.access_token)
+            setGiverUserInfo()
+        })
+    }
+
+    private fun setGiverUserInfo(){
+        viewModel.giverSignInInfo.observe(this, Observer { data->
+            DonutSharedPreferences.setAccessToken(data.data?.accesstoken)
+            DonutSharedPreferences.setUserRole("giver")
+        })
     }
 
     private fun setContinueBtn() {
@@ -126,6 +176,7 @@ class SignActivity : AppCompatActivity() {
                 201 -> {
                     viewModel.saveUserId(data.data?.name)
                     viewModel.saveAccessToken(data.data?.accesstoken)
+                    DonutSharedPreferences.setUserRole("receiver")
                     startActivity(Intent(this, ReceiverMainActivity::class.java))
                     finish()
                 }
