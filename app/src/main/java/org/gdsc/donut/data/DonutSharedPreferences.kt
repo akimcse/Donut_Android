@@ -8,6 +8,7 @@ object DonutSharedPreferences {
     private lateinit var preferences: SharedPreferences
     private const val PREFERENCES_NAME = "DONUT_PREFERENCES"
     private const val KEY_ACCESS_TOKEN = "KEY_ACCESS_TOKEN"
+    private const val KEY_USER_ID = "KEY_USER_ID"
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
@@ -20,17 +21,15 @@ object DonutSharedPreferences {
         }
     }
 
-    /* 예시
-    fun setUserName(token: String?){
+    fun setUserId(token: String?){
         preferences.edit {
             if (token == null) {
-                remove(KEY_USER_NAME)
+                remove(KEY_USER_ID)
             } else {
-                putString(KEY_USER_NAME, token)
+                putString(KEY_USER_ID, token)
             }
         }
     }
 
-    fun getUserName(): String? = preferences.getString(KEY_USER_NAME, null)
-     */
+    fun getUserId(): String? = preferences.getString(KEY_USER_ID, null)
 }
