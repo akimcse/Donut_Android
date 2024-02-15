@@ -34,6 +34,7 @@ class SignActivity : AppCompatActivity() {
         DonutSharedPreferences.init(applicationContext)
         if (DonutSharedPreferences.getAccessToken()?.isNotEmpty() == true) {
             startActivity(Intent(this, ReceiverMainActivity::class.java))
+            finish()
         }
     }
 
