@@ -30,6 +30,12 @@ class SignActivity : AppCompatActivity() {
         checkPasswordStatus()
     }
 
+    private fun autoLogin() {
+        DonutSharedPreferences.init(applicationContext)
+        if (DonutSharedPreferences.getAccessToken()?.isNotEmpty() == true) {
+            startActivity(Intent(this, ReceiverMainActivity::class.java))
+        }
+    }
 
     private fun setContinueBtn() {
         binding.btnCreate.setOnClickListener {
