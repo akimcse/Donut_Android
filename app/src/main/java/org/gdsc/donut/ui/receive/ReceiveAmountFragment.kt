@@ -24,6 +24,7 @@ class ReceiveAmountFragment : Fragment() {
     ): View? {
         binding = FragmentReceiveAmountBinding.inflate(inflater, container, false)
 
+        (activity as ReceiverMainActivity).enableFloatingButton()
         checkAmountStatus()
 
         return binding.root

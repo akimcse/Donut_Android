@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.FragmentDonationBinding
+import org.gdsc.donut.ui.GiverMainActivity
 
 class DonationFragment : Fragment() {
     private lateinit var binding: FragmentDonationBinding
@@ -31,6 +32,7 @@ class DonationFragment : Fragment() {
     ): View? {
         binding = FragmentDonationBinding.inflate(inflater, container, false)
 
+        (activity as GiverMainActivity).enableFloatingButton()
         setEditTextFocus()
         setStoreList()
         setUploadButton()

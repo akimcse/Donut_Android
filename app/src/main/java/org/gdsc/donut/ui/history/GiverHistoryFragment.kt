@@ -22,7 +22,6 @@ class GiverHistoryFragment : Fragment() {
 
         setViewPager()
         initTabLayout()
-        setFloatingButton()
 
         return binding.root
     }
@@ -39,12 +38,6 @@ class GiverHistoryFragment : Fragment() {
     private fun initTabLayout(){
         val tabLabel = listOf("unused", "used")
         TabLayoutMediator(binding.tlMenu, binding.vpItems){tab, position -> tab.text = tabLabel[position]}.attach()
-    }
-
-    private fun setFloatingButton(){
-        binding.fabDonationBtn.setOnClickListener {
-            (activity as GiverMainActivity).changeFragment("donation")
-        }
     }
 
     companion object {

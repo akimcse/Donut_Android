@@ -19,6 +19,7 @@ class DonationConfirmFragment : Fragment() {
     ): View? {
         binding = FragmentDonationConfirmBinding.inflate(inflater, container, false)
 
+        (activity as GiverMainActivity).enableFloatingButton()
         setButtons()
 
         return binding.root
