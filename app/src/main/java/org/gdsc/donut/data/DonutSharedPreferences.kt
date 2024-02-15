@@ -9,6 +9,7 @@ object DonutSharedPreferences {
     private const val PREFERENCES_NAME = "DONUT_PREFERENCES"
     private const val KEY_ACCESS_TOKEN = "KEY_ACCESS_TOKEN"
     private const val USER_ID = "USER_ID"
+    private const val USER_ROLE = "USER_ROLE"
     private const val ACCESS_TOKEN = "ACCESS_TOKEN"
 
     fun init(context: Context) {
@@ -45,4 +46,16 @@ object DonutSharedPreferences {
     }
 
     fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
+
+    fun setUserRole(role: String?){
+        preferences.edit {
+            if (role == null) {
+                remove(USER_ROLE)
+            } else {
+                putString(USER_ROLE, role)
+            }
+        }
+    }
+
+    fun getUserRole(): String? = preferences.getString(ACCESS_TOKEN, null)
 }
