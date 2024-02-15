@@ -109,8 +109,25 @@ class SignUpActivity : AppCompatActivity() {
         val id = binding.etUsername.text.toString()
         val password = binding.etPassword.text.toString()
         viewModel.requestReceiverSignUp(id, password)
-        //handleNetworkException(id)
+        handleNetworkException(id)
     }
 
-
+    private fun handleNetworkException(id: String){
+        viewModel.receiverSignUpInfo.observe(this, Observer { data ->
+            when (data.code) {
+                201 -> {
+                    viewModel.saveUserId(id)
+                    startActivity(Intent(this, SignUpDoneActivity::class.java))
+                    finish()
+                }
+                409 -> {
+                    binding.ivCancel.visibility = View.VISIBLE
+                    binding.tvCheck.visibility = View.VISIBLE
+                }
+                else -> {
+                    Toast.makeText(this, "서버 오류입니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
 }
