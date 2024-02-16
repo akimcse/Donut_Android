@@ -57,5 +57,5 @@ object DonutSharedPreferences {
         }
     }
 
-    fun getUserRole(): String? = preferences.getString(ACCESS_TOKEN, null)
+    fun getUserRole(): String? = preferences.getString(USER_ROLE, null)
 }
