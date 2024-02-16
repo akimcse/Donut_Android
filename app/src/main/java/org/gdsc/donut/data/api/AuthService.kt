@@ -22,6 +22,6 @@ interface AuthService {
 
     @POST("auth/giver/signin")
     suspend fun signInGiver(
-        @Header("accesstoken") accessToken : String
+        @Header("Authorization") accessToken : String
     ): ResponseSignInGiver
 }
