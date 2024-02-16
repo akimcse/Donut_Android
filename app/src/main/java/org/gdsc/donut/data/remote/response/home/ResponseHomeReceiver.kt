@@ -12,7 +12,7 @@ data class ResponseHomeReceiverData(
     val cu: Int,
     val gs25: Int,
     val sevenEleven: Int,
-    val boxList: ResponseHomeReceiverBox?
+    val boxList: List<ResponseHomeReceiverBox>?
 )
 
 data class ResponseHomeReceiverBox(
