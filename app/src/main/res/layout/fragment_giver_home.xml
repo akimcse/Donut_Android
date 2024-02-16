@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:fontFamily="@font/pretendard_semibold"
-        android:text="103"
+        android:text="0"
         android:textColor="@color/main_coral"
         android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@+id/tv_title"
@@ -68,12 +68,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semibold"
-        android:text="40"
+        android:text="0"
+        android:paddingStart="5dp"
         android:textColor="@color/main_coral"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
         app:layout_constraintEnd_toStartOf="@+id/tv_percent"
-        app:layout_constraintStart_toStartOf="@id/iv_pointer" />
+        app:layout_constraintHorizontal_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_percent"
@@ -81,6 +82,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semibold"
         android:text="%"
+        android:paddingStart="5dp"
         android:textColor="@color/main_coral"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
