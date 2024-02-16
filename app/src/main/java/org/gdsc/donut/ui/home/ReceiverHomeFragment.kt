@@ -63,24 +63,22 @@ class ReceiverHomeFragment : Fragment() {
         itemAdapter = PackageItemAdapter()
         binding.rvPackageItem.adapter = itemAdapter
         binding.rvPackageItem.layoutManager = GridLayoutManager(context, 2)
-        itemAdapter.itemList.addAll(
-            listOf(
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-                PackageItemData("34", "7 ELEVEN", "19.94"),
-            )
-        )
 
         itemAdapter.setOnItemClickListener { _, pos ->
             for (changePos in itemAdapter.itemList.indices) {
                 (activity as ReceiverMainActivity).changeFragment("package_detail")
             }
         }
+
+        setDataList()
+    }
+
+    private fun setDataList(){
+        viewModel.receiverHomeInfo.observe(viewLifecycleOwner, Observer { data ->
+            with(binding.rvPackageItem.adapter as PackageItemAdapter){
+                itemAdapter.setItemList(data)
+            }
+        })
     }
 
     companion object {
