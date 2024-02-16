@@ -27,7 +27,7 @@ class GiverHomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverSignIn(it) }
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverHomeInfo(it) }
     }
 
     override fun onCreateView(
