@@ -67,7 +67,7 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
 
     fun requestGiverSignIn(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _giverSignInInfo.postValue(
-            RetrofitBuilder.authService.signInGiver(accessToken)
+            RetrofitBuilder.authService.signInGiver("Bearer $accessToken")
         )
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -30,6 +31,8 @@ class SignActivity : AppCompatActivity() {
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            val account = task.getResult(ApiException::class.java)
+            //account.idToken?.let { viewModel.requestGiverSignIn(it) }
             getGoogleAccessToken(task)
         }
 
@@ -70,6 +73,7 @@ class SignActivity : AppCompatActivity() {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestServerAuthCode(getString(R.string.google_login_client_id), true)
             .requestEmail()
+            .requestIdToken(getString(R.string.google_login_client_id))
             .build()
         return GoogleSignIn.getClient(this, googleSignInOption)
     }
