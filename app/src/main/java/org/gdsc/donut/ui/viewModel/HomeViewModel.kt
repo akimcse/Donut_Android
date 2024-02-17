@@ -1,30 +1,18 @@
 package org.gdsc.donut.ui.viewModel
 
 import android.app.Application
-import android.util.Log
-import android.util.MutableLong
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.api.RetrofitBuilder
-import org.gdsc.donut.data.remote.request.auth.RequestGoogleLogin
-import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
-import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
-import org.gdsc.donut.data.remote.request.report.RequestReportUsed
-import org.gdsc.donut.data.remote.response.auth.ResponseGoogleLogin
-import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
-import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
-import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
 import org.gdsc.donut.data.remote.response.report.ResponseReportUsed
-import kotlin.properties.Delegates
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _giverHomeInfo = MutableLiveData<ResponseHomeGiver>()
@@ -83,7 +71,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun requestReportUsed(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
         _reportUsedInfo.postValue(
-            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", RequestReportUsed(giftId))
+            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", giftId)
         )
     }
 }
