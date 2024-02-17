@@ -10,13 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import org.gdsc.donut.R
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentReceiveAmountBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.sign.CameraActivity
+import org.gdsc.donut.ui.viewModel.DonationViewModel
+import org.gdsc.donut.util.DonutUtil
 
 class ReceiveAmountFragment : Fragment() {
     private lateinit var binding: FragmentReceiveAmountBinding
+    private val viewModel: DonationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +60,13 @@ class ReceiveAmountFragment : Fragment() {
         binding.tvDone.text = getString(R.string.receive_done)
         binding.tvDone.setTextColor(resources.getColor(R.color.white))
         binding.btnDone.setOnClickListener {
-            // sendReceiveInfo()
+            sendReceiveInfo()
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             startActivity(Intent(context, ReceiveDoneActivity::class.java))
         }
     }
 
     private fun sendReceiveInfo() {
-        // api 리스폰스에 사용처, 금액 담아서 전송
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestAssignReceiver(it, binding.etAmount.text.toString().toInt()) }
     }
 }
