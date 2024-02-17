@@ -71,7 +71,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun requestReportUsed(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
         _reportUsedInfo.postValue(
-            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", giftId)
+            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", giftId= giftId)
         )
     }
 }
