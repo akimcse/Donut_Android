@@ -37,7 +37,7 @@ class ReceiveStoreFragment : Fragment() {
             binding.cl7.isSelected = true
             binding.clCu.isSelected = false
             binding.clGs.isSelected = false
-            setContinueButton("GS25")
+            setContinueButton("SEVENELEVEN")
         }
 
         binding.clCu.setOnClickListener {
@@ -51,7 +51,7 @@ class ReceiveStoreFragment : Fragment() {
             binding.cl7.isSelected = false
             binding.clCu.isSelected = false
             binding.clGs.isSelected = true
-            setContinueButton("SEVENELEVEN")
+            setContinueButton("GS25")
         }
     }
 

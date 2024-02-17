@@ -19,7 +19,7 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     val assignReceiverInfo: LiveData<ResponseAssignReceiver>
         get() = _assignReceiverInfo
 
-    val sharedStoreName = MutableLiveData<String>()
+    private val sharedStoreName = MutableLiveData<String>()
     fun setStoreName(input: String) {
         sharedStoreName.value = input
     }
@@ -27,9 +27,7 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     fun requestAssignReceiver(accessToken: String, price: Int) = viewModelScope.launch(Dispatchers.IO) {
         _assignReceiverInfo.postValue(
             sharedStoreName.value?.let { RequestAssignReceiver(it, price) }?.let {
-                RetrofitBuilder.donationService.assignReceiver("Bearer $accessToken",
-                    it
-                )
+                RetrofitBuilder.donationService.assignReceiver("Bearer $accessToken", it)
             }
         )
     }
