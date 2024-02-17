@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentReceiverHomeBinding
 import org.gdsc.donut.databinding.FragmentReceiverHomeGiftDetailBinding
+import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 import org.gdsc.donut.util.DonutUtil
@@ -27,6 +28,7 @@ class ReceiverHomeGiftDetailFragment : Fragment() {
 
         initNetwork()
         getReceiverHomeGiftInfo()
+        setReportBtn()
 
         return binding.root
     }
@@ -42,6 +44,7 @@ class ReceiverHomeGiftDetailFragment : Fragment() {
             val date = data.data!!.dueDate.substring(0, 10)
             binding.tvTitle.text = data.data.product
             binding.tvAmountNum.text = data.data.price.toString()
+            binding.tvDueTitleNum.text = DonutUtil().setCalendarFormat(date)
             binding.tvDueNum.text = date
             binding.tvStoreText.text = data.data.store
             if(data.data.status == "USED") binding.tvStatusText.text = "can use"
@@ -50,5 +53,15 @@ class ReceiverHomeGiftDetailFragment : Fragment() {
                 .fitCenter()
                 .into(binding.ivImage)
         })
+    }
+
+    private fun setReportBtn(){
+        binding.btnReport.setOnClickListener {
+            viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+                DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReportUsed(it, data) }
+            })
+            (activity as ReceiverMainActivity).changeFragment("package_detail")
+            // 나중에 viewModel로 response 옵저빙해서 마지막 아이템인지 받고 메세지 띄우기
+        }
     }
 }
