@@ -1,6 +1,8 @@
 package org.gdsc.donut.ui.viewModel
 
 import android.app.Application
+import android.util.Log
+import android.util.MutableLong
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +21,7 @@ import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
+import kotlin.properties.Delegates
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _giverHomeInfo = MutableLiveData<ResponseHomeGiver>()
@@ -32,6 +35,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _receiverHomeBoxInfo = MutableLiveData<ResponseHomeReceiverBoxItem>()
     val receiverHomeBoxInfo: LiveData<ResponseHomeReceiverBoxItem>
         get() = _receiverHomeBoxInfo
+
+    val sharedBoxId = MutableLiveData<Long>()
+
+    fun setBoxId(input: Long) {
+        sharedBoxId.value = input
+    }
 
     fun requestGiverHomeInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _giverHomeInfo.postValue(
