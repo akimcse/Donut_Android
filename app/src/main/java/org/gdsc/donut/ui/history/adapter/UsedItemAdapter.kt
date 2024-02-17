@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.gdsc.donut.data.local.UnusedItemData
 import org.gdsc.donut.data.local.UsedItemData
-import org.gdsc.donut.data.remote.response.home.ResponseHistoryReceiverGift
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiverGift
 import org.gdsc.donut.databinding.ItemHistoryUnusedBinding
 import org.gdsc.donut.databinding.ItemHistoryUsedBinding
 import org.gdsc.donut.util.DonutUtil

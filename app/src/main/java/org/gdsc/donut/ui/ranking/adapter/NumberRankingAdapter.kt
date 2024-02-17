@@ -1,15 +1,15 @@
 package org.gdsc.donut.ui.ranking.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.gdsc.donut.data.local.NumberRankingData
-import org.gdsc.donut.data.local.SumRankingData
+import org.gdsc.donut.data.remote.response.ranking.ResponseNumberRankingData
+import org.gdsc.donut.data.remote.response.ranking.ResponsePriceRankingData
 import org.gdsc.donut.databinding.ItemRankingNumberBinding
-import org.gdsc.donut.databinding.ItemRankingSumBinding
 
 class NumberRankingAdapter : RecyclerView.Adapter<NumberRankingAdapter.NumberRankingViewHolder>() {
-    val itemList = mutableListOf<NumberRankingData>()
+    var itemList = mutableListOf<ResponseNumberRankingData>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,10 +25,17 @@ class NumberRankingAdapter : RecyclerView.Adapter<NumberRankingAdapter.NumberRan
     override fun getItemCount(): Int = itemList.size
 
     class NumberRankingViewHolder(private val binding: ItemRankingNumberBinding): RecyclerView.ViewHolder(binding.root){
-        fun onBind(data: NumberRankingData){
-            binding.tvRankingNum.text = data.ranking.toString()
+        fun onBind(data: ResponseNumberRankingData){
+            binding.tvRankingNum.text = data.rank.toString()
             binding.tvName.text = data.name
-            binding.tvNumberNum.text = data.Number
+            binding.tvNumberNum.text = data.number.toString()
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setNumberRankingItemList(data: List<ResponseNumberRankingData>){
+        itemList.clear()
+        itemList.addAll(data.drop(1))
+        notifyDataSetChanged()
     }
 }

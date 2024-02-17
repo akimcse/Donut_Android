@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.gdsc.donut.data.api.RetrofitBuilder
-import org.gdsc.donut.data.remote.response.home.ResponseHistoryReceiver
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
 
 class HistoryViewModel(application: Application) : AndroidViewModel(application) {
     private val _receiverHistoryInfo = MutableLiveData<ResponseHistoryReceiver>()
