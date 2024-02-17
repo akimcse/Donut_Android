@@ -14,7 +14,7 @@ data class ResponseHomeReceiverBoxItemData(
 )
 
 data class ResponseHomeReceiverGift(
-    val giftId: Int,
+    val giftId: Long,
     val product: String,
     val price: Int,
     val dueDate: String,

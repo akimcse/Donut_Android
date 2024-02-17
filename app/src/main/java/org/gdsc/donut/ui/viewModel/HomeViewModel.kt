@@ -37,8 +37,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         get() = _receiverHomeBoxInfo
 
     val sharedBoxId = MutableLiveData<Long>()
-
     fun setBoxId(input: Long) {
+        sharedBoxId.value = input
+    }
+
+    val sharedGiftId = MutableLiveData<Long>()
+    fun setGiftId(input: Long) {
         sharedBoxId.value = input
     }
 

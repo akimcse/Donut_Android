@@ -59,6 +59,7 @@ class ReceiverHomePackageDetailFragment : Fragment() {
 
         itemAdapter.setOnItemClickListener { _, pos ->
             for (changePos in itemAdapter.itemList.indices) {
+                viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
                 (activity as ReceiverMainActivity).changeFragment("gift_detail")
             }
         }
