@@ -16,7 +16,7 @@ data class ResponseHomeReceiverData(
 )
 
 data class ResponseHomeReceiverBox(
-    val boxId: Int,
+    val boxId: Long,
     val store: String,
     val dueDate: String,
     val amount: Int

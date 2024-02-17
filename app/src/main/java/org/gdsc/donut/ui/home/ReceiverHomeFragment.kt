@@ -1,32 +1,25 @@
 package org.gdsc.donut.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.data.DonutSharedPreferences
-import org.gdsc.donut.data.local.PackageItemData
 import org.gdsc.donut.databinding.FragmentReceiverHomeBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
 import org.gdsc.donut.ui.viewModel.HomeViewModel
-import org.gdsc.donut.ui.viewModel.SignViewModel
 
 class ReceiverHomeFragment : Fragment() {
     private lateinit var binding: FragmentReceiverHomeBinding
     private lateinit var itemAdapter: PackageItemAdapter
-    private val viewModel: HomeViewModel by viewModels()
-
-    override fun onStart() {
-        super.onStart()
-
-        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReceiverHomeInfo(it) }
-    }
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +27,15 @@ class ReceiverHomeFragment : Fragment() {
     ): View? {
         binding = FragmentReceiverHomeBinding.inflate(inflater, container, false)
 
+        initNetwork()
         getReceiverHomeInfo()
         setAdapter()
 
         return binding.root
+    }
+
+    private fun initNetwork(){
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReceiverHomeInfo(it) }
     }
 
     private fun getReceiverHomeInfo(){
@@ -66,17 +64,17 @@ class ReceiverHomeFragment : Fragment() {
 
         itemAdapter.setOnItemClickListener { _, pos ->
             for (changePos in itemAdapter.itemList.indices) {
+                viewModel.setBoxId(itemAdapter.itemList[itemAdapter.mPosition].boxId)
                 (activity as ReceiverMainActivity).changeFragment("package_detail")
             }
         }
-
         setDataList()
     }
 
-    private fun setDataList(){
+    private fun setDataList() {
         viewModel.receiverHomeInfo.observe(viewLifecycleOwner, Observer { data ->
-            with(binding.rvPackageItem.adapter as PackageItemAdapter){
-                itemAdapter.setItemList(data)
+            with(binding.rvPackageItem.adapter as PackageItemAdapter) {
+                data.data!!.boxList?.let { itemAdapter.setBoxItemList(it) }
             }
         })
     }
