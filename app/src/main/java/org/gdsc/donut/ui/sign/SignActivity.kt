@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -30,7 +31,10 @@ class SignActivity : AppCompatActivity() {
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            getGoogleAccessToken(task)
+            val account = task.getResult(ApiException::class.java)
+            account.idToken?.let { viewModel.requestGiverSignIn(it) }
+            // getGoogleAccessToken(task)
+            setGiverUserInfo()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,10 +74,12 @@ class SignActivity : AppCompatActivity() {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestServerAuthCode(getString(R.string.google_login_client_id), true)
             .requestEmail()
+            .requestIdToken(getString(R.string.google_login_client_id))
             .build()
         return GoogleSignIn.getClient(this, googleSignInOption)
     }
 
+/* 엔드포인트까지 직접 가서 access token 받아오는 코드
     private fun getGoogleAccessToken(completedTask: Task<GoogleSignInAccount>) {
         val account = completedTask.getResult(ApiException::class.java)
         val clientId = getString(R.string.google_login_client_id)
@@ -91,14 +97,15 @@ class SignActivity : AppCompatActivity() {
     private fun requestGiverSignIn() {
         viewModel.googleLoginInfo.observe(this, Observer { data ->
             viewModel.requestGiverSignIn(data.id_token)
-            setGiverUserInfo()
         })
     }
+*/
 
     private fun setGiverUserInfo(){
         viewModel.giverSignInInfo.observe(this, Observer { data->
             DonutSharedPreferences.setAccessToken(data.data?.accesstoken)
             DonutSharedPreferences.setUserRole("giver")
+            startActivity(Intent(this, GiverMainActivity::class.java))
         })
     }
 
