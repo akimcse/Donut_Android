@@ -9,7 +9,7 @@ data class ResponseHistoryReceiver(
 data class ResponseHistoryReceiverData(
     val amount: Int,
     val availability: Boolean,
-    val boxList: List<ResponseHistoryReceiverGift>?
+    val giftList: List<ResponseHistoryReceiverGift>?
 )
 
 data class ResponseHistoryReceiverGift(
