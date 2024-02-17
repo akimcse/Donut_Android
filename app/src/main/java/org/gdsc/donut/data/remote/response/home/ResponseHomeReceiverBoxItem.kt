@@ -3,7 +3,7 @@ package org.gdsc.donut.data.remote.response.home
 data class ResponseHomeReceiverBoxItem(
     val code: Int,
     val message: String,
-    val `data`: ResponseHomeReceiverData?
+    val `data`: ResponseHomeReceiverBoxItemData?
 )
 
 data class ResponseHomeReceiverBoxItemData(
