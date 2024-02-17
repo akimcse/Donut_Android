@@ -1,6 +1,6 @@
 package org.gdsc.donut.data.api
 
-import org.gdsc.donut.data.remote.response.home.ResponseHistoryReceiver
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
 import retrofit2.http.GET
 import retrofit2.http.Header
 

@@ -1,4 +1,4 @@
-package org.gdsc.donut.data.remote.response.home
+package org.gdsc.donut.data.remote.response.history
 
 data class ResponseHistoryReceiver(
     val code: Int,
