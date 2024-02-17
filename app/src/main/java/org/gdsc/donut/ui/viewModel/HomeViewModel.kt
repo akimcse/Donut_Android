@@ -21,6 +21,7 @@ import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
+import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
 import kotlin.properties.Delegates
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,6 +37,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val receiverHomeBoxInfo: LiveData<ResponseHomeReceiverBoxItem>
         get() = _receiverHomeBoxInfo
 
+    private val _receiverHomeGiftInfo = MutableLiveData<ResponseHomeReceiverGiftItem>()
+    val receiverHomeGiftInfo: LiveData<ResponseHomeReceiverGiftItem>
+        get() = _receiverHomeGiftInfo
+
     val sharedBoxId = MutableLiveData<Long>()
     fun setBoxId(input: Long) {
         sharedBoxId.value = input
@@ -43,7 +48,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val sharedGiftId = MutableLiveData<Long>()
     fun setGiftId(input: Long) {
-        sharedBoxId.value = input
+        sharedGiftId.value = input
     }
 
     fun requestGiverHomeInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -61,6 +66,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun requestReceiverHomeBoxInfo(accessToken: String, boxId: Long) = viewModelScope.launch(Dispatchers.IO) {
         _receiverHomeBoxInfo.postValue(
             RetrofitBuilder.homeService.getReceiverHomeBoxInfo("Bearer $accessToken", boxId)
+        )
+    }
+
+    fun requestReceiverHomeGiftInfo(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
+        _receiverHomeGiftInfo.postValue(
+            RetrofitBuilder.homeService.getReceiverHomeGiftInfo("Bearer $accessToken", giftId)
         )
     }
 }
