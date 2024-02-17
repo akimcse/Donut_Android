@@ -1,5 +1,6 @@
 package org.gdsc.donut.data.api
 
+import org.gdsc.donut.data.remote.request.auth.RequestSignInGiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
@@ -22,6 +23,6 @@ interface AuthService {
 
     @POST("auth/giver/signin")
     suspend fun signInGiver(
-        @Header("Authorization") accessToken : String
+        @Body giverSignInInfo: RequestSignInGiver
     ): ResponseSignInGiver
 }

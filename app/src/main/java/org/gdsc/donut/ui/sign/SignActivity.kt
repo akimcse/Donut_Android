@@ -32,8 +32,9 @@ class SignActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             val account = task.getResult(ApiException::class.java)
-            //account.idToken?.let { viewModel.requestGiverSignIn(it) }
-            getGoogleAccessToken(task)
+            account.idToken?.let { viewModel.requestGiverSignIn(it) }
+            // getGoogleAccessToken(task)
+            setGiverUserInfo()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +79,7 @@ class SignActivity : AppCompatActivity() {
         return GoogleSignIn.getClient(this, googleSignInOption)
     }
 
+/* 엔드포인트까지 직접 가서 access token 받아오는 코드
     private fun getGoogleAccessToken(completedTask: Task<GoogleSignInAccount>) {
         val account = completedTask.getResult(ApiException::class.java)
         val clientId = getString(R.string.google_login_client_id)
@@ -95,9 +97,9 @@ class SignActivity : AppCompatActivity() {
     private fun requestGiverSignIn() {
         viewModel.googleLoginInfo.observe(this, Observer { data ->
             viewModel.requestGiverSignIn(data.id_token)
-            setGiverUserInfo()
         })
     }
+*/
 
     private fun setGiverUserInfo(){
         viewModel.giverSignInInfo.observe(this, Observer { data->

@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.auth.RequestGoogleLogin
+import org.gdsc.donut.data.remote.request.auth.RequestSignInGiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseGoogleLogin
@@ -65,9 +66,9 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
             )
         }
 
-    fun requestGiverSignIn(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun requestGiverSignIn(idToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _giverSignInInfo.postValue(
-            RetrofitBuilder.authService.signInGiver("Bearer $accessToken")
+            RetrofitBuilder.authService.signInGiver(RequestSignInGiver(idToken))
         )
     }
 
