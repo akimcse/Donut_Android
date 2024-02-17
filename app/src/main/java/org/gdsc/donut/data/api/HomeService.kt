@@ -3,6 +3,7 @@ package org.gdsc.donut.data.api
 import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
+import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -23,4 +24,10 @@ interface HomeService {
         @Header("Authorization") accessToken : String,
         @Path("boxId") boxId: Long
     ): ResponseHomeReceiverBoxItem
+
+    @GET("home/receiver/gift/{giftId}")
+    suspend fun getReceiverHomeGiftInfo(
+        @Header("Authorization") accessToken : String,
+        @Path("giftId") giftId: Long
+    ): ResponseHomeReceiverGiftItem
 }
