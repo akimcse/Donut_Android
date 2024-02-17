@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface RankingService {
-    @GET("history/ranking/giver/info/price")
+    @GET("ranking/giver/info/price")
     suspend fun getPriceRankingInfo(
         @Header("Authorization") accessToken : String
     ): ResponsePriceRanking
