@@ -14,6 +14,7 @@ import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.auth.RequestGoogleLogin
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
+import org.gdsc.donut.data.remote.request.report.RequestReportUsed
 import org.gdsc.donut.data.remote.response.auth.ResponseGoogleLogin
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
@@ -22,6 +23,7 @@ import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
+import org.gdsc.donut.data.remote.response.report.ResponseReportUsed
 import kotlin.properties.Delegates
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -40,6 +42,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _receiverHomeGiftInfo = MutableLiveData<ResponseHomeReceiverGiftItem>()
     val receiverHomeGiftInfo: LiveData<ResponseHomeReceiverGiftItem>
         get() = _receiverHomeGiftInfo
+
+    private val _reportUsedInfo = MutableLiveData<ResponseReportUsed>()
+    val reportUsedInfo: LiveData<ResponseReportUsed>
+        get() = _reportUsedInfo
 
     val sharedBoxId = MutableLiveData<Long>()
     fun setBoxId(input: Long) {
@@ -72,6 +78,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun requestReceiverHomeGiftInfo(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
         _receiverHomeGiftInfo.postValue(
             RetrofitBuilder.homeService.getReceiverHomeGiftInfo("Bearer $accessToken", giftId)
+        )
+    }
+
+    fun requestReportUsed(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
+        _reportUsedInfo.postValue(
+            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", RequestReportUsed(giftId))
         )
     }
 }
