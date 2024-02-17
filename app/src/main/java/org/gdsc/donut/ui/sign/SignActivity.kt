@@ -105,6 +105,7 @@ class SignActivity : AppCompatActivity() {
         viewModel.giverSignInInfo.observe(this, Observer { data->
             DonutSharedPreferences.setAccessToken(data.data?.accesstoken)
             DonutSharedPreferences.setUserRole("giver")
+            startActivity(Intent(this, GiverMainActivity::class.java))
         })
     }
 
