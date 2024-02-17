@@ -4,35 +4,44 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.gdsc.donut.data.local.PackageItemData
-import org.gdsc.donut.data.local.UnusedItemData
-import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBox
-import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItemData
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGift
 import org.gdsc.donut.databinding.ItemHistoryUnusedBinding
-import org.gdsc.donut.databinding.ItemPackageBinding
+import org.gdsc.donut.databinding.ItemHistoryUsedBinding
 import org.gdsc.donut.util.DonutUtil
 
-class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewHolder>() {
+class DetailItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var itemList = emptyList<ResponseHomeReceiverGift>()
     private var listener: ((ResponseHomeReceiverGift, Int) -> Unit)? = null
     var mPosition = 0
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): DetailItemViewHolder {val binding = ItemHistoryUnusedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    return DetailItemViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if(viewType == OptionViewType.USED){
+            return UsedItemViewHolder(ItemHistoryUsedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
+        }
+        return UnusedItemViewHolder(ItemHistoryUnusedBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: DetailItemViewHolder, position: Int) {
-        holder.onBind(itemList[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(itemList[position].isUsed == "USED") (holder as UsedItemViewHolder).onBind(itemList[position])
+        else (holder as UnusedItemViewHolder).onBind(itemList[position])
     }
 
     override fun getItemCount(): Int = itemList.size
 
-    inner class DetailItemViewHolder(private val binding: ItemHistoryUnusedBinding): RecyclerView.ViewHolder(binding.root){
-        fun onBind(data: ResponseHomeReceiverGift){
+    inner class UsedItemViewHolder(private val binding: ItemHistoryUsedBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: ResponseHomeReceiverGift) {
+            val date = data.dueDate.substring(0, 10)
+            binding.tvCalendar.text = DonutUtil().setCalendarFormat(date)
+            binding.tvName.text = data.product
+            binding.tvDollar.text = data.price.toString()
+        }
+    }
+
+    inner class UnusedItemViewHolder(private val binding: ItemHistoryUnusedBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: ResponseHomeReceiverGift) {
             val date = data.dueDate.substring(0, 10)
             binding.tvDayNum.text = DonutUtil().getDDayInfo(date).toString()
             binding.tvCalendar.text = DonutUtil().setCalendarFormat(date)
@@ -42,7 +51,7 @@ class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewH
             setClinkListenerOnPosition(data)
         }
 
-        private fun setClinkListenerOnPosition(data: ResponseHomeReceiverGift){
+        private fun setClinkListenerOnPosition(data: ResponseHomeReceiverGift) {
             binding.clUnusedItem.setOnClickListener {
                 val pos = adapterPosition
                 mPosition = pos
@@ -61,11 +70,11 @@ class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewH
         notifyDataSetChanged()
     }
 
-    /*
+
     override fun getItemViewType(position: Int): Int {
-        return when (itemList[position].isUsed) {
-            true -> PackageItemAdapter.OptionViewType.USED
-            false -> PackageItemAdapter.OptionViewType.UNUSED
+        return when (itemList[position].isUsed == "USED") {
+            true -> OptionViewType.USED
+            false -> OptionViewType.UNUSED
         }
     }
 
@@ -73,5 +82,4 @@ class DetailItemAdapter : RecyclerView.Adapter<DetailItemAdapter.DetailItemViewH
         const val USED = 1
         const val UNUSED = 2
     }
-*/
 }
