@@ -51,7 +51,7 @@ class SumFragment : Fragment() {
                 data.data!!.let { itemAdapter.setPriceRankingItemList(it) }
             }
             binding.tvName.text = data.data?.get(0)!!.name
-            binding.tvDollar.text = data.data?.get(0)!!.price.toString()
+            binding.tvDollar.text = data.data[0].price.toString()
         })
     }
 

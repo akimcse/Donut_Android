@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
+import org.gdsc.donut.data.remote.response.ranking.ResponseNumberRanking
 import org.gdsc.donut.data.remote.response.ranking.ResponsePriceRanking
 
 class RankingViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,9 +17,19 @@ class RankingViewModel(application: Application) : AndroidViewModel(application)
     val priceRankingInfo: LiveData<ResponsePriceRanking>
         get() = _priceRankingInfo
 
+    private val _numberRankingInfo = MutableLiveData<ResponseNumberRanking>()
+    val numberRankingInfo: LiveData<ResponseNumberRanking>
+        get() = _numberRankingInfo
+
     fun requestPriceRankingInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _priceRankingInfo.postValue(
             RetrofitBuilder.rankingService.getPriceRankingInfo("Bearer $accessToken")
+        )
+    }
+
+    fun requestNumberRankingInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
+        _numberRankingInfo.postValue(
+            RetrofitBuilder.rankingService.getNumberRankingInfo("Bearer $accessToken")
         )
     }
 }
