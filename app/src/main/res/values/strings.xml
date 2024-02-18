@@ -81,6 +81,7 @@
     <string name="giverHistory_title">You have been donating</string>
     <string name="giverHistory_title2">for</string>
     <string name="giverHistory_years">years!</string>
+    <string name="giverHistory_year">year!</string>
     <string name="giverHistory_total">Your total is</string>
     <string name="giverHistory_unreceived">unreceived</string>
     <string name="giverHistory_received">received</string>

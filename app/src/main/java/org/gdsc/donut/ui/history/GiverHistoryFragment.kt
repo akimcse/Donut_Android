@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
@@ -75,11 +76,16 @@ class GiverHistoryFragment : Fragment() {
 
     private fun getReceiverHomeBoxInfo(){
         viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
-            binding.tvTitleYearNum.text = data.data!!.period.toString()
-            binding.tvDollarNum.text = data.data.totalAmount.toString()
+            binding.tvDollarNum.text = data.data!!.totalAmount.toString()
             binding.tvUnreceivedNum.text = data.data.unreceived.toString()
             binding.tvReceivedNum.text = data.data.received.toString()
             binding.tvMsgNum.text = data.data.msg.toString()
+
+            if(data.data.period >= 2) {
+                binding.tvTitleYearNum.text = data.data.period.toString()
+                binding.tvTitleYear.text = getString(R.string.giverHistory_years)
+            }
+            else binding.tvTitleYearNum.text = "a"
         })
     }
 
