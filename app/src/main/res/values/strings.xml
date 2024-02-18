@@ -2,7 +2,6 @@
     <string name="app_name">Donut</string>
     <!-- client_id 그대로 붙여넣어야 함. 안 그러면 com.google.android.gms.common.api.ApiException: 10 에러 뜸 -->
     <string name="google_login_client_id">434933064490-18qds2gj253dib3ps05qadjuvvho83j9.apps.googleusercontent.com</string>
-    <string name="gooogle_clinet_secret">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</string>
 
     <!-- Common -->
     <string name="dollar">₩</string>
@@ -88,6 +87,8 @@
     <string name="giverHistory_msg">msg</string>
     <string name="giverHistory_givenDay">the day you give</string>
     <string name="giverHistory_to">to</string>
+    <string name="giverHistory_receivedMsg">the message\nyou received</string>
+    <string name="giverHistory_NoReceivedMsg">haven’t\nreceived yet</string>
 
     <!-- ReceiverHistoryFragment -->
     <string name="receiverHistory_title">Remaining amount for\nthis month is</string>

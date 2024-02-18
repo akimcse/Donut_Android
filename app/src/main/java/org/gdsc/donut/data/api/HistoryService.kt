@@ -1,6 +1,7 @@
 package org.gdsc.donut.data.api
 
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiver
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiverDetail
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -18,4 +19,10 @@ interface HistoryService {
         @Header("Authorization") accessToken : String,
         @Path("donateDate") donateDate: LocalDateTime
     ): ResponseHistoryGiver
+
+    @GET("history/giver/info/detail/{giftId}")
+    suspend fun getGiverHistoryDetailInfo(
+        @Header("Authorization") accessToken : String,
+        @Path("giftId") giftId: Long
+    ): ResponseHistoryGiverDetail
 }

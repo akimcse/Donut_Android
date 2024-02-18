@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
-import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.history.adapter.HistoryAdapter
 import org.gdsc.donut.ui.history.adapter.MonthAdapter
 import org.gdsc.donut.ui.viewModel.HistoryViewModel
@@ -98,7 +98,7 @@ class GiverHistoryFragment : Fragment() {
         itemAdapter.setOnItemClickListener { _, pos ->
             for (changePos in itemAdapter.itemList.indices) {
                 viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
-                (activity as ReceiverMainActivity).changeFragment("history_detail")
+                (activity as GiverMainActivity).changeFragment("history_detail")
             }
         }
         setDataList()
