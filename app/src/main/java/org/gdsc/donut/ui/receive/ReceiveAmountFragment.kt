@@ -72,7 +72,6 @@ class ReceiveAmountFragment : Fragment() {
 
         viewModel.assignReceiverInfo.observe(viewLifecycleOwner, Observer{ data ->
             if(data.code == 201){
-                Toast.makeText(context, "신청이 승인되지 않았습니다.", Toast.LENGTH_SHORT).show()
                 requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
                 startActivity(Intent(context, ReceiveDoneActivity::class.java))
             } else {
