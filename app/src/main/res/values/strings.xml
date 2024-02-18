@@ -82,6 +82,9 @@
     <string name="giverHistory_title2">for</string>
     <string name="giverHistory_years">years!</string>
     <string name="giverHistory_total">Your total is</string>
+    <string name="giverHistory_unreceived">unreceived</string>
+    <string name="giverHistory_received">received</string>
+    <string name="giverHistory_msg">msg</string>
 
     <!-- ReceiverHistoryFragment -->
     <string name="receiverHistory_title">Remaining amount for\nthis month is</string>
