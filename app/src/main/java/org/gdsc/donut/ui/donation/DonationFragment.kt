@@ -30,6 +30,7 @@ import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentDonationBinding
 import org.gdsc.donut.ui.GiverMainActivity
+import org.gdsc.donut.ui.receive.ReceiveDoneActivity
 import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.ui.viewModel.RankingViewModel
 import java.io.File
@@ -202,7 +203,8 @@ class DonationFragment : Fragment() {
                 binding.btnDonate.visibility = View.VISIBLE
                 binding.btnDonate.setOnClickListener {
                     sendDonationInfo()
-                }
+                    requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                    startActivity(Intent(context, DonationDoneActivity::class.java))                }
             }
         }
     }
