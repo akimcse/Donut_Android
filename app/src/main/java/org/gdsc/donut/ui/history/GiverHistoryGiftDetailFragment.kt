@@ -19,14 +19,19 @@ class GiverHistoryGiftDetailFragment : Fragment() {
     private lateinit var binding: FragmentGiverHistoryGiftDetailBinding
     private val viewModel: HistoryViewModel by activityViewModels()
 
+    override fun onStart() {
+        super.onStart()
+
+        initNetwork()
+        getGiverHistoryDetailInfo()
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGiverHistoryGiftDetailBinding.inflate(inflater, container, false)
-
-        initNetwork()
-        getGiverHistoryDetailInfo()
 
         return binding.root
     }
@@ -50,6 +55,7 @@ class GiverHistoryGiftDetailFragment : Fragment() {
             binding.tvGivenDateNum.text = givenDate
             binding.tvStoreText.text = data.data.store
             binding.tvMsgText.text = data.data.message
+            binding.tvStatusText.text = data.data.receiver
 
             if(data.data.status == "USED"){
                 binding.tvStatusText.text = data.data.receiver

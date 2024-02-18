@@ -45,17 +45,32 @@ class GiverHistoryFragment : Fragment() {
     }
 
     @SuppressLint("ResourceType")
-    private fun setDropDownMenu(){
+    private fun setDropDownMenu() {
         val years = arrayOf(2024, 2023, 2022, 2021)
         val yearSpinner = binding.spnYearMenu
-        val spinnerAdapter: ArrayAdapter<Int>? = context?.let { ArrayAdapter(it, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, years) }
+        val spinnerAdapter: ArrayAdapter<Int>? = context?.let {
+            ArrayAdapter(
+                it,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                years
+            )
+        }
         spinnerAdapter?.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
         yearSpinner.adapter = spinnerAdapter
         yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 filteredYear = parent?.getItemAtPosition(position) as Int
-                initNetwork(LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth).withDayOfMonth(1))
+                initNetwork(
+                    LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth)
+                        .withDayOfMonth(1)
+                )
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -67,26 +82,28 @@ class GiverHistoryFragment : Fragment() {
 
         menuAdapter.setOnItemClickListener { _, pos ->
             filteredMonth = pos + 1
-            initNetwork(LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth).withDayOfMonth(1))
+            initNetwork(
+                LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth)
+                    .withDayOfMonth(1)
+            )
         }
     }
 
-    private fun initNetwork(date: LocalDateTime){
-        DonutSharedPreferences.getAccessToken()?.let {viewModel.requestGiverHistoryInfo(it, date)}
+    private fun initNetwork(date: LocalDateTime) {
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverHistoryInfo(it, date) }
     }
 
-    private fun getReceiverHomeBoxInfo(){
+    private fun getReceiverHomeBoxInfo() {
         viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
             binding.tvDollarNum.text = data.data!!.totalAmount.toString()
             binding.tvUnreceivedNum.text = data.data.unreceived.toString()
             binding.tvReceivedNum.text = data.data.received.toString()
             binding.tvMsgNum.text = data.data.msg.toString()
 
-            if(data.data.period >= 2) {
+            if (data.data.period >= 2) {
                 binding.tvTitleYearNum.text = data.data.period.toString()
                 binding.tvTitleYear.text = getString(R.string.giverHistory_years)
-            }
-            else binding.tvTitleYearNum.text = "a"
+            } else binding.tvTitleYearNum.text = "a"
         })
     }
 
@@ -96,15 +113,13 @@ class GiverHistoryFragment : Fragment() {
         binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
 
         itemAdapter.setOnItemClickListener { _, pos ->
-            for (changePos in itemAdapter.itemList.indices) {
-                viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
-                (activity as GiverMainActivity).changeFragment("history_detail")
-            }
+            viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+            (activity as GiverMainActivity).changeFragment("history_detail")
         }
         setDataList()
     }
 
-    private fun setDataList(){
+    private fun setDataList() {
         viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
             with(binding.rvGiftItem.adapter as HistoryAdapter) {
                 data.data!!.donationList?.let { itemAdapter.setGiftItemList(it) }

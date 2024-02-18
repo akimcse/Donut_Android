@@ -9,12 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.data.DonutSharedPreferences
-import org.gdsc.donut.data.local.UnusedItemData
 import org.gdsc.donut.databinding.FragmentUnusedBinding
-import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.history.adapter.UnusedItemAdapter
-import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
 import org.gdsc.donut.ui.viewModel.HistoryViewModel
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 
@@ -36,20 +33,19 @@ class UnusedFragment : Fragment() {
         return binding.root
     }
 
-    private fun initNetwork(){
+    private fun initNetwork() {
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReceiverHistoryInfo(it) }
     }
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         itemAdapter = UnusedItemAdapter()
         binding.rvUnusedItem.adapter = itemAdapter
         binding.rvUnusedItem.layoutManager = GridLayoutManager(context, 2)
 
         itemAdapter.setOnItemClickListener { _, pos ->
-            for (changePos in itemAdapter.itemList.indices) {
-                homeViewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
-                (activity as ReceiverMainActivity).changeFragment("gift_detail")
-            }
+            homeViewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+            (activity as ReceiverMainActivity).changeFragment("gift_detail")
+
         }
         setDataList()
     }
