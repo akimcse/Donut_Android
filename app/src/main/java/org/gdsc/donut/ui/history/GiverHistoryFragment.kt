@@ -1,18 +1,29 @@
 package org.gdsc.donut.ui.history
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import org.gdsc.donut.R
+import org.gdsc.donut.databinding.ActivityCameraBinding.bind
+import org.gdsc.donut.databinding.ActivityCameraBinding.inflate
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
-import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.history.adapter.HistoryViewPagerAdapter
+import org.gdsc.donut.ui.history.adapter.MonthAdapter
 
 class GiverHistoryFragment : Fragment() {
     private lateinit var binding: FragmentGiverHistoryBinding
-    private lateinit var itemViewPagerAdapter: HistoryViewPagerAdapter
+    private lateinit var itemAdapter: MonthAdapter
+    private var filteredYear = ""
+    private var filteredMonth = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,26 +31,34 @@ class GiverHistoryFragment : Fragment() {
     ): View? {
         binding = FragmentGiverHistoryBinding.inflate(inflater, container, false)
 
-        setViewPager()
-        initTabLayout()
+        setDropDownMenu()
+        setChipAdapter()
 
         return binding.root
     }
 
-    private fun setViewPager(){
-        val fragmentList = listOf(UnusedFragment(), UsedFragment())
-
-        itemViewPagerAdapter = HistoryViewPagerAdapter(this.requireActivity())
-        itemViewPagerAdapter.fragments.addAll(fragmentList)
-
-        binding.vpItems.adapter = itemViewPagerAdapter
+    @SuppressLint("ResourceType")
+    private fun setDropDownMenu(){
+        val years = arrayOf("2024", "2023", "2022", "2021")
+        val yearSpinner = binding.spnYearMenu
+        val spinnerAdapter: ArrayAdapter<String>? = context?.let { ArrayAdapter(it, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, years) }
+        spinnerAdapter?.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
+        yearSpinner.adapter = spinnerAdapter
+        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                filteredYear = parent?.getItemAtPosition(position) as String
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
-    private fun initTabLayout(){
-        val tabLabel = listOf("unused", "used")
-        TabLayoutMediator(binding.tlMenu, binding.vpItems){tab, position -> tab.text = tabLabel[position]}.attach()
-    }
+    @SuppressLint("ResourceAsColor")
+    private fun setChipAdapter() {
+        itemAdapter = MonthAdapter()
+        binding.rvMonths.adapter = itemAdapter
 
-    companion object {
+        itemAdapter.setOnItemClickListener { _, pos ->
+            filteredMonth = itemAdapter.itemList[pos]
+        }
     }
 }

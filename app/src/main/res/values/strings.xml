@@ -49,8 +49,8 @@
     <string name="donation_donate">Donate</string>
     <string name="donation_amount">Amount</string>
     <string name="donation_name">Name</string>
-    <string name="donation_due_date">Due date</string>
-    <string name="donation_exchange_store">Exchange store</string>
+    <string name="donation_due_date">due date</string>
+    <string name="donation_exchange_store">exchange store</string>
     <string name="donation_image">Image</string>
     <string name="donation_chose">chose an exchange store</string>
     <string name="donation_done">You\'ve done!</string>
@@ -82,6 +82,11 @@
     <string name="giverHistory_title2">for</string>
     <string name="giverHistory_years">years!</string>
     <string name="giverHistory_total">Your total is</string>
+    <string name="giverHistory_unreceived">unreceived</string>
+    <string name="giverHistory_received">received</string>
+    <string name="giverHistory_msg">msg</string>
+    <string name="giverHistory_givenDay">the day you give</string>
+    <string name="giverHistory_to">to</string>
 
     <!-- ReceiverHistoryFragment -->
     <string name="receiverHistory_title">Remaining amount for\nthis month is</string>
@@ -99,5 +104,7 @@
     <string name="Mypage_service">Terms of service</string>
     <string name="Mypage_open_source">Open source</string>
     <string name="Mypage_about">About</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
