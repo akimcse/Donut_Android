@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.gdsc.donut.data.local.UnusedItemData
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiverDonationList
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiverGift
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGift
@@ -15,6 +16,8 @@ import org.gdsc.donut.util.DonutUtil
 
 class UnusedItemAdapter : RecyclerView.Adapter<UnusedItemAdapter.UnusedItemViewHolder>() {
     var itemList = mutableListOf<ResponseHistoryReceiverGift>()
+    private var listener: ((ResponseHistoryReceiverGift, Int) -> Unit)? = null
+    var mPosition = 0
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -37,8 +40,22 @@ class UnusedItemAdapter : RecyclerView.Adapter<UnusedItemAdapter.UnusedItemViewH
                 binding.tvCalendar.text = DonutUtil().setCalendarFormat(date)
                 binding.tvName.text = data.product
                 binding.tvDollar.text = data.price.toString()
+
+                setClinkListenerOnPosition(data)
             }
         }
+
+        private fun setClinkListenerOnPosition(data: ResponseHistoryReceiverGift) {
+            binding.clUnusedItem.setOnClickListener {
+                val pos = adapterPosition
+                mPosition = pos
+                listener?.invoke(data, mPosition)
+            }
+        }
+    }
+
+    fun setOnItemClickListener(listener: ((ResponseHistoryReceiverGift, Int) -> Unit)?) {
+        this.listener = listener
     }
 
     @SuppressLint("NotifyDataSetChanged")
