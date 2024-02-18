@@ -144,7 +144,7 @@ class DonationFragment : Fragment() {
             binding.tv7eleven.setTextColor(resources.getColor(R.color.main_coral))
             binding.tvCu.setTextColor(resources.getColor(R.color.black_100))
             binding.tvGs25.setTextColor(resources.getColor(R.color.black_100))
-            store = "7 ELEVEN"
+            store = "SEVENELEVEN"
             setDonateButton()
         }
 
@@ -208,7 +208,7 @@ class DonationFragment : Fragment() {
     }
 
     private fun sendDonationInfo() {
-        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), img)
+        val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), File(img))
         val giftImage = MultipartBody.Part.createFormData("giftImage", File(img).name, requestFile)
         val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val price = binding.etAmount.text.toString().toInt()
