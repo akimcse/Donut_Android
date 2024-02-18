@@ -37,6 +37,16 @@ class HistoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tvCalendar.text = DonutUtil().setCalendarFormat(date)
             binding.tvName.text = data.product
             binding.tvDollar.text = data.price.toString()
+
+            setClinkListenerOnPosition(data)
+        }
+
+        private fun setClinkListenerOnPosition(data: ResponseHistoryGiverDonationList) {
+            binding.clUsedItem.setOnClickListener {
+                val pos = adapterPosition
+                mPosition = pos
+                listener?.invoke(data, mPosition)
+            }
         }
     }
 

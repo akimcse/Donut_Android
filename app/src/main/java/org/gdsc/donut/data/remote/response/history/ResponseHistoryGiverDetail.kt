@@ -14,5 +14,6 @@ data class ResponseHistoryGiverDetailData(
     val receiver: String,
     val isAssigned: Boolean,
     val status: String,
-    val message: String
+    val message: String,
+    val donateDate: String
 )
