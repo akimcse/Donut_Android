@@ -58,10 +58,15 @@ class GiverHistoryGiftDetailFragment : Fragment() {
             binding.tvStatusText.text = data.data.receiver
 
             if(data.data.status == "USED"){
-                binding.tvStatusText.text = data.data.receiver
                 binding.clTag.setBackgroundResource(R.drawable.bg_gray100_round20)
-                binding.tvTag.setTextColor(R.color.gray_300)
+                binding.tvTag.setTextColor(resources.getColor(R.color.gray_300))
                 binding.tvTag.text = getString(R.string.used)
+            }
+
+            if(data.data.status == "UNUSED"){
+                binding.clTag.setBackgroundResource(R.drawable.bg_coral_maincoral_round20)
+                binding.tvTag.setTextColor(resources.getColor(R.color.main_coral))
+                binding.tvTag.text = getString(R.string.unused)
             }
         })
     }
