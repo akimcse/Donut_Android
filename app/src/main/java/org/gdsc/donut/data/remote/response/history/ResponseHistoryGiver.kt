@@ -3,7 +3,7 @@ package org.gdsc.donut.data.remote.response.history
 data class ResponseHistoryGiver(
     val code: Int,
     val message: String,
-    val `data`: ResponseHistoryReceiverData?
+    val `data`: ResponseHistoryGiverData?
 )
 
 data class ResponseHistoryGiverData(
@@ -12,7 +12,7 @@ data class ResponseHistoryGiverData(
     val unreceived: Long,
     val received: Long,
     val msg: Long,
-    val giftList: List<ResponseHistoryReceiverGift>?
+    val donationList: List<ResponseHistoryGiverDonationList>?
 )
 
 data class ResponseHistoryGiverDonationList(

@@ -2,26 +2,28 @@ package org.gdsc.donut.ui.history
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import org.gdsc.donut.R
-import org.gdsc.donut.databinding.ActivityCameraBinding.bind
-import org.gdsc.donut.databinding.ActivityCameraBinding.inflate
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
+import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.history.adapter.HistoryAdapter
 import org.gdsc.donut.ui.history.adapter.MonthAdapter
+import org.gdsc.donut.ui.viewModel.HistoryViewModel
+import java.time.LocalDateTime
 
 class GiverHistoryFragment : Fragment() {
     private lateinit var binding: FragmentGiverHistoryBinding
-    private lateinit var itemAdapter: MonthAdapter
+    private lateinit var menuAdapter: MonthAdapter
+    private lateinit var itemAdapter: HistoryAdapter
+    private val viewModel: HistoryViewModel by activityViewModels()
     private var filteredYear = ""
     private var filteredMonth = ""
 
@@ -33,6 +35,9 @@ class GiverHistoryFragment : Fragment() {
 
         setDropDownMenu()
         setChipAdapter()
+        initNetwork()
+        getReceiverHomeBoxInfo()
+        setAdapter()
 
         return binding.root
     }
@@ -54,11 +59,49 @@ class GiverHistoryFragment : Fragment() {
 
     @SuppressLint("ResourceAsColor")
     private fun setChipAdapter() {
-        itemAdapter = MonthAdapter()
-        binding.rvMonths.adapter = itemAdapter
+        menuAdapter = MonthAdapter()
+        binding.rvMonths.adapter = menuAdapter
+
+        menuAdapter.setOnItemClickListener { _, pos ->
+            filteredMonth = menuAdapter.itemList[pos]
+        }
+    }
+
+    private fun initNetwork(){
+        val date = LocalDateTime.now().withDayOfMonth(1)
+        //DonutSharedPreferences.getAccessToken()?.let {viewModel.requestGiverHistoryInfo(it, date)}
+        viewModel.requestGiverHistoryInfo("eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoia2FuZzZAZXdhaGluLm5ldCIsInJvbGUiOiJST0xFX0dJVkVSIiwiaWF0IjoxNzA4MDk5MzAxLCJleHAiOjE3MTA2OTEzMDF9.LU4jKp3CnWxuAuN2qH8pUKLZxUUnmdnVl74o1F1fDbg", date)
+    }
+
+    private fun getReceiverHomeBoxInfo(){
+        viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
+            binding.tvTitleYearNum.text = data.data!!.period.toString()
+            binding.tvDollarNum.text = data.data.totalAmount.toString()
+            binding.tvUnreceivedNum.text = data.data.unreceived.toString()
+            binding.tvReceivedNum.text = data.data.received.toString()
+            binding.tvMsgNum.text = data.data.msg.toString()
+        })
+    }
+
+    private fun setAdapter() {
+        itemAdapter = HistoryAdapter()
+        binding.rvGiftItem.adapter = itemAdapter
+        binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
 
         itemAdapter.setOnItemClickListener { _, pos ->
-            filteredMonth = itemAdapter.itemList[pos]
+            for (changePos in itemAdapter.itemList.indices) {
+                viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+                (activity as ReceiverMainActivity).changeFragment("history_detail")
+            }
         }
+        setDataList()
+    }
+
+    private fun setDataList(){
+        viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
+            with(binding.rvGiftItem.adapter as HistoryAdapter) {
+                data.data!!.donationList?.let { itemAdapter.setGiftItemList(it) }
+            }
+        })
     }
 }
