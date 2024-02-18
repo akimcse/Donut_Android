@@ -8,16 +8,33 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.gdsc.donut.data.api.RetrofitBuilder
+import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiver
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
+import java.time.LocalDateTime
 
 class HistoryViewModel(application: Application) : AndroidViewModel(application) {
     private val _receiverHistoryInfo = MutableLiveData<ResponseHistoryReceiver>()
     val receiverHistoryInfo: LiveData<ResponseHistoryReceiver>
         get() = _receiverHistoryInfo
 
+    private val _giverHistoryInfo = MutableLiveData<ResponseHistoryGiver>()
+    val giverHistoryInfo: LiveData<ResponseHistoryGiver>
+        get() = _giverHistoryInfo
+
+    val sharedGiftId = MutableLiveData<Long>()
+    fun setGiftId(input: Long) {
+        sharedGiftId.value = input
+    }
+
     fun requestReceiverHistoryInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _receiverHistoryInfo.postValue(
             RetrofitBuilder.historyService.getReceiverHistoryInfo("Bearer $accessToken")
+        )
+    }
+
+    fun requestGiverHistoryInfo(accessToken: String, date: LocalDateTime) = viewModelScope.launch(Dispatchers.IO) {
+        _giverHistoryInfo.postValue(
+            RetrofitBuilder.historyService.getGiverHistoryInfo("Bearer $accessToken", date)
         )
     }
 }
