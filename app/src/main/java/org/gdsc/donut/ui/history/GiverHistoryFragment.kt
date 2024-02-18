@@ -18,6 +18,7 @@ import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.history.adapter.HistoryAdapter
 import org.gdsc.donut.ui.history.adapter.MonthAdapter
 import org.gdsc.donut.ui.viewModel.HistoryViewModel
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class GiverHistoryFragment : Fragment() {
@@ -25,8 +26,8 @@ class GiverHistoryFragment : Fragment() {
     private lateinit var menuAdapter: MonthAdapter
     private lateinit var itemAdapter: HistoryAdapter
     private val viewModel: HistoryViewModel by activityViewModels()
-    private var filteredYear = ""
-    private var filteredMonth = ""
+    private var filteredYear: Int = LocalDate.now().year
+    private var filteredMonth: Int = LocalDate.now().monthValue
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class GiverHistoryFragment : Fragment() {
 
         setDropDownMenu()
         setChipAdapter()
-        initNetwork()
+        initNetwork(LocalDateTime.now().withDayOfMonth(1))
         getReceiverHomeBoxInfo()
         setAdapter()
 
@@ -45,14 +46,15 @@ class GiverHistoryFragment : Fragment() {
 
     @SuppressLint("ResourceType")
     private fun setDropDownMenu(){
-        val years = arrayOf("2024", "2023", "2022", "2021")
+        val years = arrayOf(2024, 2023, 2022, 2021)
         val yearSpinner = binding.spnYearMenu
-        val spinnerAdapter: ArrayAdapter<String>? = context?.let { ArrayAdapter(it, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, years) }
+        val spinnerAdapter: ArrayAdapter<Int>? = context?.let { ArrayAdapter(it, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, years) }
         spinnerAdapter?.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
         yearSpinner.adapter = spinnerAdapter
         yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                filteredYear = parent?.getItemAtPosition(position) as String
+                filteredYear = parent?.getItemAtPosition(position) as Int
+                initNetwork(LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth).withDayOfMonth(1))
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
@@ -64,14 +66,13 @@ class GiverHistoryFragment : Fragment() {
         binding.rvMonths.adapter = menuAdapter
 
         menuAdapter.setOnItemClickListener { _, pos ->
-            filteredMonth = menuAdapter.itemList[pos]
+            filteredMonth = pos + 1
+            initNetwork(LocalDateTime.now().withYear(filteredYear).withMonth(filteredMonth).withDayOfMonth(1))
         }
     }
 
-    private fun initNetwork(){
-        val date = LocalDateTime.now().withDayOfMonth(1)
-        //DonutSharedPreferences.getAccessToken()?.let {viewModel.requestGiverHistoryInfo(it, date)}
-        viewModel.requestGiverHistoryInfo("eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoia2FuZzZAZXdhaGluLm5ldCIsInJvbGUiOiJST0xFX0dJVkVSIiwiaWF0IjoxNzA4MDk5MzAxLCJleHAiOjE3MTA2OTEzMDF9.LU4jKp3CnWxuAuN2qH8pUKLZxUUnmdnVl74o1F1fDbg", date)
+    private fun initNetwork(date: LocalDateTime){
+        DonutSharedPreferences.getAccessToken()?.let {viewModel.requestGiverHistoryInfo(it, date)}
     }
 
     private fun getReceiverHomeBoxInfo(){
