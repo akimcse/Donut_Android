@@ -12,12 +12,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -200,8 +202,6 @@ class DonationFragment : Fragment() {
                 binding.btnDonate.visibility = View.VISIBLE
                 binding.btnDonate.setOnClickListener {
                     sendDonationInfo()
-                    requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                    startActivity(Intent(context, DonationDoneActivity::class.java))
                 }
             }
         }

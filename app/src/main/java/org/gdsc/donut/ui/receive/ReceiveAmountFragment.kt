@@ -8,13 +8,16 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentReceiveAmountBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.donation.DonationDoneActivity
 import org.gdsc.donut.ui.sign.CameraActivity
 import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.util.DonutUtil
@@ -61,12 +64,26 @@ class ReceiveAmountFragment : Fragment() {
         binding.tvDone.setTextColor(resources.getColor(R.color.white))
         binding.btnDone.setOnClickListener {
             sendReceiveInfo()
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-            startActivity(Intent(context, ReceiveDoneActivity::class.java))
         }
     }
 
     private fun sendReceiveInfo() {
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestAssignReceiver(it, binding.etAmount.text.toString().toInt()) }
+
+        viewModel.assignReceiverInfo.observe(viewLifecycleOwner, Observer{ data ->
+            if(data.code == 201){
+                Toast.makeText(context, "신청이 승인되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+                startActivity(Intent(context, ReceiveDoneActivity::class.java))
+            } else {
+                Toast.makeText(context, "신청이 승인되지 않았습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.showErrorToast.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let{
+                Toast.makeText(context, "신청이 승인되지 않았습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
