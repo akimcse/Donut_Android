@@ -2,8 +2,10 @@ package org.gdsc.donut.ui.donation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -15,13 +17,25 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.gdsc.donut.R
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentDonationBinding
 import org.gdsc.donut.ui.GiverMainActivity
+import org.gdsc.donut.ui.viewModel.DonationViewModel
+import org.gdsc.donut.ui.viewModel.RankingViewModel
+import java.io.File
 
 class DonationFragment : Fragment() {
     private lateinit var binding: FragmentDonationBinding
+    private val viewModel: DonationViewModel by activityViewModels()
+
     private var store = ""
     private var img = ""
     private val pickMedia =
@@ -157,18 +171,31 @@ class DonationFragment : Fragment() {
         }
     }
 
+    private fun uriToFile(uri: Uri): File? {
+        val cursor: Cursor? = context?.contentResolver?.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val filePathColumnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                val filePath = it.getString(filePathColumnIndex)
+                return File(filePath)
+            }
+        }
+        return null
+    }
+
     private fun setImage(uri: Uri) {
         Glide.with(this)
             .load(uri)
             .centerCrop()
             .into(binding.ivGifticon)
         binding.ivGifticon.visibility = View.VISIBLE
-        img = uri.toString()
+        img = uriToFile(uri)?.path ?: ""
+
         setDonateButton()
     }
 
     private fun setDonateButton() {
-        if (!binding.etName.text.isNullOrBlank() && !binding.etAmount.text.isNullOrBlank() && !binding.etDue.text.isNullOrBlank() && store.isNotBlank() && img.toString().isNotBlank()) {
+        if (!binding.etName.text.isNullOrBlank() && !binding.etAmount.text.isNullOrBlank() && !binding.etDue.text.isNullOrBlank() && store.isNotBlank() && img.isNotBlank()) {
             if(store.isNotBlank() && img.isNotBlank()){
                 binding.btnDonate.visibility = View.VISIBLE
                 binding.btnDonate.setOnClickListener {
@@ -181,13 +208,13 @@ class DonationFragment : Fragment() {
     }
 
     private fun sendDonationInfo() {
-        Log.d("donation name", binding.etName.text.toString())
-        Log.d("donation amount", binding.etAmount.text.toString())
-        Log.d("donation due date", binding.etDue.text.toString())
-        Log.d("donation store", store)
-        Log.d("donation img", img)
-    }
+        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), img)
+        val giftImage = MultipartBody.Part.createFormData("giftImage", File(img).name, requestFile)
+        val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val price = binding.etAmount.text.toString().toInt()
+        val dueDate = (binding.etDue.text.toString()+"T00:00:00.000000").toRequestBody("text/plain".toMediaTypeOrNull())
+        val store = store.toRequestBody("text/plain".toMediaTypeOrNull())
 
-    companion object {
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store) }
     }
 }
