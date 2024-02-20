@@ -40,9 +40,11 @@ class GiverHomeFragment : Fragment() {
 
     private fun setProgressBar() {
         viewModel.giverHomeInfo.observe(viewLifecycleOwner, Observer { data ->
-            donatedAmount = data.data!!.donated
-            requiredAmount = data.data.need
-            binding.tvChildrenNum.text = data.data.receivers.toString()
+            //donatedAmount = data.data!!.donated
+            //requiredAmount = data.data.need
+            donatedAmount = 30.0
+            requiredAmount = 100.0
+            binding.tvChildrenNum.text = data.data!!.receivers.toString()
 
             val percentage = (donatedAmount / requiredAmount * 100)
             binding.progressBar.progress = percentage.toInt()
@@ -60,18 +62,14 @@ class GiverHomeFragment : Fragment() {
     }
 
     private fun setProgressBarPointer(ratio: Int) {
-        viewModel.giverHomeInfo.observe(viewLifecycleOwner, Observer { data ->
-            donatedAmount = data.data!!.donated
-            requiredAmount = data.data.need
+        val percentage = (donatedAmount / requiredAmount * 100)
+        val percentage360 = percentage / 100 * ratio
+        binding.tvPercentNum.translationX = percentage360.toFloat()
+        binding.tvPercent.translationX = percentage360.toFloat()
+        binding.ivPointer.translationX = percentage360.toFloat()
 
-            val percentage = (donatedAmount / requiredAmount * 100)
-            val percentage360 = percentage / 100 * ratio
-            binding.tvPercent.translationX = percentage360.toFloat()
-            binding.ivPointer.translationX = percentage360.toFloat()
-
-            binding.tvPercentNum.text = percentage.toInt().toString()
-            Log.d("info", percentage.toInt().toString()+"퍼센트")
-        })
+        binding.tvPercentNum.text = percentage.toInt().toString()
+        Log.d("info", percentage.toInt().toString() + "퍼센트")
     }
 
     private fun setSpeechBubble() {
@@ -81,7 +79,8 @@ class GiverHomeFragment : Fragment() {
         })
 
         binding.ivDonut.setOnClickListener {
-            if(binding.clSpeechBubble.visibility == View.INVISIBLE) binding.clSpeechBubble.visibility = View.VISIBLE
+            if (binding.clSpeechBubble.visibility == View.INVISIBLE) binding.clSpeechBubble.visibility =
+                View.VISIBLE
             else binding.clSpeechBubble.visibility = View.INVISIBLE
         }
     }
