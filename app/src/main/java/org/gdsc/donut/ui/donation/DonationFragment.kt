@@ -12,12 +12,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -28,6 +30,7 @@ import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentDonationBinding
 import org.gdsc.donut.ui.GiverMainActivity
+import org.gdsc.donut.ui.receive.ReceiveDoneActivity
 import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.ui.viewModel.RankingViewModel
 import java.io.File
@@ -144,7 +147,7 @@ class DonationFragment : Fragment() {
             binding.tv7eleven.setTextColor(resources.getColor(R.color.main_coral))
             binding.tvCu.setTextColor(resources.getColor(R.color.black_100))
             binding.tvGs25.setTextColor(resources.getColor(R.color.black_100))
-            store = "7 ELEVEN"
+            store = "SEVENELEVEN"
             setDonateButton()
         }
 
@@ -201,14 +204,13 @@ class DonationFragment : Fragment() {
                 binding.btnDonate.setOnClickListener {
                     sendDonationInfo()
                     requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                    startActivity(Intent(context, DonationDoneActivity::class.java))
-                }
+                    startActivity(Intent(context, DonationDoneActivity::class.java))                }
             }
         }
     }
 
     private fun sendDonationInfo() {
-        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), img)
+        val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), File(img))
         val giftImage = MultipartBody.Part.createFormData("giftImage", File(img).name, requestFile)
         val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val price = binding.etAmount.text.toString().toInt()

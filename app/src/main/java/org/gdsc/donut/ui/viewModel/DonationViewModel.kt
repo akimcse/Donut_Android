@@ -1,6 +1,9 @@
 package org.gdsc.donut.ui.viewModel
 
 import android.app.Application
+import android.net.http.HttpException
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +16,8 @@ import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.donation.RequestAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
+import org.gdsc.donut.util.Event
+import kotlin.Exception
 
 class DonationViewModel(application: Application) : AndroidViewModel(application) {
     private val _assignReceiverInfo = MutableLiveData<ResponseAssignReceiver>()
@@ -23,6 +28,9 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     val donateGiverInfo: LiveData<ResponseDonateGiver>
         get() = _donateGiverInfo
 
+    private val _showErrorToast = MutableLiveData<Event<Boolean>>()
+    val showErrorToast: LiveData<Event<Boolean>> = _showErrorToast
+
     private val sharedStoreName = MutableLiveData<String>()
     fun setStoreName(input: String) {
         sharedStoreName.value = input
@@ -30,11 +38,13 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
 
     fun requestAssignReceiver(accessToken: String, price: Int) =
         viewModelScope.launch(Dispatchers.IO) {
-            _assignReceiverInfo.postValue(
-                sharedStoreName.value?.let { RequestAssignReceiver(it, price) }?.let {
+            try {
+            _assignReceiverInfo.postValue(sharedStoreName.value?.let { RequestAssignReceiver(it, price) }?.let {
                     RetrofitBuilder.donationService.assignReceiver("Bearer $accessToken", it)
-                }
-            )
+                })
+            } catch (e: Exception){
+                _showErrorToast.postValue(Event(true))
+            }
         }
 
     fun requestDonateGiver(accessToken: String, giftImage: MultipartBody.Part?, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody) =

@@ -1,5 +1,6 @@
 package org.gdsc.donut.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import org.gdsc.donut.databinding.FragmentReceiverHomeBinding
 import org.gdsc.donut.databinding.FragmentReceiverHomeGiftDetailBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
+import org.gdsc.donut.ui.receive.ReceiveDoneActivity
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 import org.gdsc.donut.util.DonutUtil
 
@@ -60,7 +62,8 @@ class ReceiverHomeGiftDetailFragment : Fragment() {
             viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
                 DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReportUsed(it, data) }
             })
-            (activity as ReceiverMainActivity).changeFragment("package_detail")
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+            startActivity(Intent(context, ReceiverMainActivity::class.java))
             // 나중에 viewModel로 response 옵저빙해서 마지막 아이템인지 받고 메세지 띄우기
         }
     }

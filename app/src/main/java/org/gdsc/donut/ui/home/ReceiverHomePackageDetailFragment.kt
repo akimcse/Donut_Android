@@ -58,10 +58,8 @@ class ReceiverHomePackageDetailFragment : Fragment() {
         binding.rvDetailItem.layoutManager = GridLayoutManager(context, 2)
 
         itemAdapter.setOnItemClickListener { _, pos ->
-            for (changePos in itemAdapter.itemList.indices) {
-                viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
-                (activity as ReceiverMainActivity).changeFragment("gift_detail")
-            }
+            viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+            (activity as ReceiverMainActivity).changeFragment("gift_detail")
         }
         setDataList()
     }

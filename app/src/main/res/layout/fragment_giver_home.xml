@@ -69,12 +69,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semibold"
         android:text="0"
-        android:paddingStart="5dp"
+        android:paddingEnd="6dp"
         android:textColor="@color/main_coral"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
-        app:layout_constraintEnd_toStartOf="@+id/tv_percent"
-        app:layout_constraintHorizontal_chainStyle="packed" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_pointer"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_percent"
@@ -82,12 +82,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semibold"
         android:text="%"
-        android:paddingStart="5dp"
         android:textColor="@color/main_coral"
         android:textSize="18sp"
+        android:paddingStart="7dp"
         app:layout_constraintBottom_toTopOf="@+id/iv_pointer"
-        app:layout_constraintEnd_toEndOf="@+id/iv_pointer"
-        app:layout_constraintStart_toEndOf="@id/tv_percent_num" />
+        app:layout_constraintStart_toStartOf="@+id/iv_pointer"
+        tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:id="@+id/iv_pointer"
