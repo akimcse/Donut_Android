@@ -47,10 +47,10 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
             }
         }
 
-    fun requestDonateGiver(accessToken: String, giftImage: MultipartBody.Part?, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody) =
+    fun requestDonateGiver(accessToken: String, giftImage: MultipartBody.Part?, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody, isRestored: RequestBody) =
         viewModelScope.launch(Dispatchers.IO) {
             _donateGiverInfo.postValue(
-                RetrofitBuilder.donationService.donateGiver("Bearer $accessToken", giftImage, product, price, dueDate, store)
+                RetrofitBuilder.donationService.donateGiver("Bearer $accessToken", giftImage, product, price, dueDate, store, isRestored)
             )
         }
 }

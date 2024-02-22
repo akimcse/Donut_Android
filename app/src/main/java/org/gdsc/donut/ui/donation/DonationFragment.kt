@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +40,7 @@ class DonationFragment : Fragment() {
     private lateinit var binding: FragmentDonationBinding
     private val viewModel: DonationViewModel by activityViewModels()
 
+    private var highResolution = false
     private var store = ""
     private var img = ""
     private val pickMedia =
@@ -59,6 +61,7 @@ class DonationFragment : Fragment() {
         checkAmountStatus()
         checkDueDateStatus()
         setStoreList()
+        setSwitch()
         setUploadButton()
         setDonateButton()
 
@@ -197,6 +200,18 @@ class DonationFragment : Fragment() {
         setDonateButton()
     }
 
+    private fun setSwitch(){
+        binding.swResolution.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                highResolution = true
+                binding.tvResolution.setTextColor(resources.getColor(R.color.main_coral))
+            } else{
+                highResolution = false
+                binding.tvResolution.setTextColor(resources.getColor(R.color.gray_300))
+            }
+        }
+    }
+
     private fun setDonateButton() {
         if (!binding.etName.text.isNullOrBlank() && !binding.etAmount.text.isNullOrBlank() && !binding.etDue.text.isNullOrBlank() && store.isNotBlank() && img.isNotBlank()) {
             if(store.isNotBlank() && img.isNotBlank()){
@@ -216,7 +231,8 @@ class DonationFragment : Fragment() {
         val price = binding.etAmount.text.toString().toInt()
         val dueDate = (binding.etDue.text.toString()+"T00:00:00.000000").toRequestBody("text/plain".toMediaTypeOrNull())
         val store = store.toRequestBody("text/plain".toMediaTypeOrNull())
+        val isRestored = highResolution.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store) }
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store, isRestored) }
     }
 }
