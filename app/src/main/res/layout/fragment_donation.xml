@@ -242,6 +242,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cl_store_list" />
 
+            <TextView
+                android:id="@+id/tv_resolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/donation_resolution"
+                android:textColor="@color/gray_300"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/sw_resolution"
+                app:layout_constraintEnd_toStartOf="@+id/sw_resolution"
+                app:layout_constraintTop_toTopOf="@+id/sw_resolution" />
+
+
+            <Switch
+                android:id="@+id/sw_resolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="28dp"
+                android:track="@drawable/swich_track"
+                android:thumb="@drawable/swich_thumb"
+                android:minWidth="37dp"
+                android:switchMinWidth="0dp"
+                android:textOff=""
+                android:textOn=""
+                android:thumbTextPadding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cl_store_list"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_input_box"
                 android:layout_width="0dp"
