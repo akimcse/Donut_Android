@@ -27,19 +27,18 @@ class GiverMainActivity : AppCompatActivity() {
     private fun setBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.menu_home -> changeFragment(getString(R.string.menu_home))
-                R.id.menu_history -> changeFragment(getString(R.string.menu_history))
+                R.id.menu_wallet -> changeFragment(getString(R.string.menu_wallet))
                 R.id.menu_ranking -> changeFragment(getString(R.string.menu_ranking))
                 R.id.menu_my_page -> changeFragment(getString(R.string.menu_my_page))
             }
             true
         }
-        changeFragment(getString(R.string.menu_home))
+        changeFragment(getString(R.string.menu_wallet))
     }
 
     fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
-            getString(R.string.menu_home) -> GiverHomeFragment()
+            getString(R.string.menu_wallet) -> GiverHomeFragment()
             getString(R.string.menu_history) -> GiverHistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> MyPageFragment()
