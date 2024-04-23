@@ -33,26 +33,7 @@ class ReceiveStoreFragment : Fragment() {
     }
 
     private fun setStoreSelector() {
-        binding.cl7.setOnClickListener {
-            binding.cl7.isSelected = true
-            binding.clCu.isSelected = false
-            binding.clGs.isSelected = false
-            setContinueButton("SEVENELEVEN")
-        }
 
-        binding.clCu.setOnClickListener {
-            binding.cl7.isSelected = false
-            binding.clCu.isSelected = true
-            binding.clGs.isSelected = false
-            setContinueButton("CU")
-        }
-
-        binding.clGs.setOnClickListener {
-            binding.cl7.isSelected = false
-            binding.clCu.isSelected = false
-            binding.clGs.isSelected = true
-            setContinueButton("GS25")
-        }
     }
 
     @SuppressLint("ResourceAsColor")
