@@ -55,11 +55,11 @@
     <string name="donation_done">You\'ve done!</string>
     <string name="donation_resolution">high resolution</string>
 
-
     <!-- Receive -->
     <string name="receive_title">Let\'s get\nthe donut box!</string>
     <string name="receive_title2">1. Chose the exchange store</string>
     <string name="receive_title3">2. Please enter the amount</string>
+    <string name="receive_find">find the exchange store near you</string>
     <string name="receive_amount">the amount</string>
     <string name="receive_left">the left amount of this month is</string>
     <string name="receive_done">Done</string>
