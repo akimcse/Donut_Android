@@ -55,7 +55,6 @@
     <string name="donation_done">You\'ve done!</string>
     <string name="donation_resolution">high resolution</string>
 
-
     <!-- Receive -->
     <string name="receive_title">Let\'s get\nthe donut box!</string>
     <string name="receive_title2">1. Chose the exchange store</string>
@@ -77,6 +76,10 @@
     <string name="receiverHome_amount">amount  |</string>
     <string name="receiverHome_due">due date  |</string>
     <string name="receiverHome_report">report</string>
+
+    <!-- GiverWalletFragment -->
+    <string name="giverWallet_donate_title">Donate your donuts!</string>
+    <string name="giverWallet_donate">Donate</string>
 
     <!--GiverHistoryFragment-->
     <string name="giverHistory_title">You have been donating</string>
