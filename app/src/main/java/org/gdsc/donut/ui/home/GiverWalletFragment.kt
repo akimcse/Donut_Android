@@ -1,4 +1,4 @@
-package org.gdsc.donut.ui.wallet
+package org.gdsc.donut.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

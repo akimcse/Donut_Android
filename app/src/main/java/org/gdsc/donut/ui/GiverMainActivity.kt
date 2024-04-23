@@ -8,8 +8,7 @@ import org.gdsc.donut.databinding.ActivityGiverMainBinding
 import org.gdsc.donut.ui.donation.DonationFragment
 import org.gdsc.donut.ui.history.GiverHistoryFragment
 import org.gdsc.donut.ui.history.GiverHistoryGiftDetailFragment
-import org.gdsc.donut.ui.home.GiverHomeFragment
-import org.gdsc.donut.ui.wallet.GiverWalletFragment
+import org.gdsc.donut.ui.home.GiverWalletFragment
 import org.gdsc.donut.ui.mypage.MyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 
