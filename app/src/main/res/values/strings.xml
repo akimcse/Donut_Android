@@ -43,6 +43,9 @@
     <string name="menu_my_page">My</string>
 
     <!--Donation-->
+    <string name="donation_start_title">Hi!\nNow you can\nadd your gifticons\nto our donut</string>
+    <string name="donation_start_wallet">Add gifticon to wallet</string>
+    <string name="donation_start_donate">Donate directly</string>
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_upload">Upload</string>
     <string name="donation_donate">Donate</string>
@@ -54,7 +57,6 @@
     <string name="donation_chose">chose an exchange store</string>
     <string name="donation_done">You\'ve done!</string>
     <string name="donation_resolution">high resolution</string>
-
 
     <!-- Receive -->
     <string name="receive_title">Let\'s get\nthe donut box!</string>
