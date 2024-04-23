@@ -114,4 +114,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Message -->
+    <string name="message_title">Send a message\nto GIVER</string>
+    <string name="message_thanks">Thanks for your help!</string>
+    <string name="message_lifesaver">You are a lifesaver :)</string>
+    <string name="message_emoticon">😘</string>
+    <string name="message_etc">etc</string>
+    <string name="message_send">Send a message</string>
+
 </resources>
