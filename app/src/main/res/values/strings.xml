@@ -49,6 +49,7 @@
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_upload">Upload</string>
     <string name="donation_donate">Donate</string>
+    <string name="donation_complete">Complete</string>
     <string name="donation_amount">Amount</string>
     <string name="donation_name">Name</string>
     <string name="donation_due_date">Due date</string>
