@@ -26,6 +26,7 @@ interface DonationService {
         @Part("product") product: RequestBody,
         @Part("price") price: Int,
         @Part("dueDate") dueDate: RequestBody,
-        @Part("store") store: RequestBody
+        @Part("store") store: RequestBody,
+        @Part("isRestored") isRestored: RequestBody
     ): ResponseDonateGiver
 }
