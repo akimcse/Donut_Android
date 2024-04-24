@@ -43,15 +43,26 @@
     <string name="menu_my_page">My</string>
 
     <!--Donation-->
+    <string name="donation_start_title">Hi!\nNow you can\nadd your gifticons\nto our donut</string>
+    <string name="donation_start_wallet">Add gifticon to wallet</string>
+    <string name="donation_start_donate">Donate directly</string>
     <string name="donation_title">Let\'s start\nthe Donation!</string>
     <string name="donation_upload">Upload</string>
     <string name="donation_donate">Donate</string>
+    <string name="donation_complete">Complete</string>
     <string name="donation_amount">Amount</string>
     <string name="donation_name">Name</string>
     <string name="donation_due_date">Due date</string>
     <string name="donation_exchange_store">Exchange store</string>
     <string name="donation_image">Image</string>
     <string name="donation_chose">chose an exchange store</string>
+    <string name="donation_agree_title">Do you agree with\nauto donation?</string>
+    <string name="donation_agree_content1">Do you agree that</string>
+    <string name="donation_agree_content2">  \'gifticons with 30 days  </string>
+    <string name="donation_agree_content3">  remaining validity\'  </string>
+    <string name="donation_agree_content4">will be automatically donated?</string>
+    <string name="donation_agree_agree">Sure, agree</string>
+    <string name="donation_agree_disagree">Sorry, disagree</string>
     <string name="donation_done">You\'ve done!</string>
     <string name="donation_resolution">high resolution</string>
 
