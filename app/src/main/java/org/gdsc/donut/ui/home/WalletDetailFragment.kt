@@ -16,8 +16,14 @@ class WalletDetailFragment : Fragment() {
     ): View? {
         binding = FragmentWalletDetailBinding.inflate(inflater, container, false)
 
-
+        setButton()
 
         return binding.root
+    }
+
+    private fun setButton(){
+        binding.ivDots.setOnClickListener {
+            binding.clReport.visibility = View.VISIBLE
+        }
     }
 }
