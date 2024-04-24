@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.donation.DonationCheckFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="@string/donation_agree_title"
+        android:textAlignment="center"
+        android:textColor="@color/black_100"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_box"
+        android:layout_width="152dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/ic_package"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="33dp"
+        android:background="@drawable/bg_coral_maincoral_round20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_box">
+
+        <TextView
+            android:id="@+id/tv_content1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/donation_agree_content1"
+            android:textAlignment="center"
+            android:textColor="@color/black_100"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_content2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/main_coral"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/donation_agree_content2"
+            android:textAlignment="center"
+            android:textColor="@color/black_100"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content1" />
+
+        <TextView
+            android:id="@+id/tv_content3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/main_coral"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/donation_agree_content3"
+            android:textAlignment="center"
+            android:textColor="@color/black_100"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content2" />
+
+        <TextView
+            android:id="@+id/tv_content4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            android:text="@string/donation_agree_content4"
+            android:textAlignment="center"
+            android:textColor="@color/black_100"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <CheckBox
+        android:id="@+id/cb_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_agree"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/cb_disagree"
+        app:layout_constraintTop_toBottomOf="@+id/cl_content" />
+
+    <TextView
+        android:id="@+id/tv_agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="@string/donation_agree_agree"
+        android:textAlignment="center"
+        android:textColor="@color/black_100"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cb_agree"
+        app:layout_constraintStart_toEndOf="@+id/cb_agree"
+        app:layout_constraintTop_toTopOf="@+id/cb_agree" />
+
+    <CheckBox
+        android:id="@+id/cb_disagree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_disagree"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_agree" />
+
+    <TextView
+        android:id="@+id/tv_disagree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="@string/donation_agree_disagree"
+        android:textAlignment="center"
+        android:textColor="@color/black_100"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cb_disagree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cb_disagree"
+        app:layout_constraintTop_toTopOf="@+id/cb_disagree" />
+</androidx.constraintlayout.widget.ConstraintLayout>

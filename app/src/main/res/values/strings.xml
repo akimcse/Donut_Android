@@ -56,6 +56,13 @@
     <string name="donation_exchange_store">Exchange store</string>
     <string name="donation_image">Image</string>
     <string name="donation_chose">chose an exchange store</string>
+    <string name="donation_agree_title">Do you agree with\nauto donation?</string>
+    <string name="donation_agree_content1">Do you agree that</string>
+    <string name="donation_agree_content2">  \'gifticons with 30 days  </string>
+    <string name="donation_agree_content3">  remaining validity\'  </string>
+    <string name="donation_agree_content4">will be automatically donated?</string>
+    <string name="donation_agree_agree">Sure, agree</string>
+    <string name="donation_agree_disagree">Sorry, disagree</string>
     <string name="donation_done">You\'ve done!</string>
     <string name="donation_resolution">high resolution</string>
 
