@@ -81,6 +81,10 @@
     <string name="giverWallet_donate_title">Donate your donuts!</string>
     <string name="giverWallet_donate">Donate</string>
 
+    <!-- WalletDetailFragment -->
+    <string name="walletDetail_used">Click when used</string>
+    <string name="walletDetail_unused">Click when unused</string>
+
     <!--GiverHistoryFragment-->
     <string name="giverHistory_title">You have been donating</string>
     <string name="giverHistory_title2">for</string>
@@ -113,5 +117,13 @@
     <string name="Mypage_about">About</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Message -->
+    <string name="message_title">Send a message\nto GIVER</string>
+    <string name="message_thanks">Thanks for your help!</string>
+    <string name="message_lifesaver">You are a lifesaver :)</string>
+    <string name="message_emoticon">😘</string>
+    <string name="message_etc">etc</string>
+    <string name="message_send">Send a message</string>
 
 </resources>
