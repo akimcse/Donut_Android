@@ -34,7 +34,7 @@ class GiverMyPageFragment : Fragment() {
         }
 
         binding.clHistory.setOnClickListener {
-            (activity as GiverMainActivity).changeFragment("history_detail")
+            (activity as GiverMainActivity).changeFragment("History")
         }
         binding.clService.setOnClickListener {
             Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
