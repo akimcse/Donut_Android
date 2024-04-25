@@ -9,6 +9,7 @@ import org.gdsc.donut.ui.history.ReceiverHistoryFragment
 import org.gdsc.donut.ui.home.ReceiverHomeFragment
 import org.gdsc.donut.ui.home.ReceiverHomeGiftDetailFragment
 import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
+import org.gdsc.donut.ui.mypage.ReceiverMyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
@@ -42,7 +43,7 @@ class ReceiverMainActivity : AppCompatActivity() {
             getString(R.string.menu_wallet) -> ReceiverHomeFragment()
             getString(R.string.menu_history) -> ReceiverHistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
-            getString(R.string.menu_my_page) -> MyPageFragment()
+            getString(R.string.menu_my_page) -> ReceiverMyPageFragment()
             "package_detail" -> ReceiverHomePackageDetailFragment()
             "gift_detail" -> ReceiverHomeGiftDetailFragment()
             "receive_store" -> ReceiveStoreFragment()

@@ -112,7 +112,7 @@
     <string name="giverHistory_NoReceivedMsg">haven’t\nreceived yet</string>
 
     <!-- ReceiverHistoryFragment -->
-    <string name="receiverHistory_title">Remaining amount for\nthis month is</string>
+    <string name="receiverHistory_title">Total received\ndonation is</string>
     <string name="receiverHistory_per">/</string>
 
     <!-- RankingFragment-->
