@@ -102,7 +102,7 @@
     <string name="giverHistory_title2">for</string>
     <string name="giverHistory_years">years!</string>
     <string name="giverHistory_year">year!</string>
-    <string name="giverHistory_total">Your total is</string>
+    <string name="giverHistory_total">Your total donation is</string>
     <string name="giverHistory_unreceived">unreceived</string>
     <string name="giverHistory_received">received</string>
     <string name="giverHistory_msg">msg</string>
@@ -123,7 +123,7 @@
     <string name="ranking_number">NUMBER</string>
 
     <!-- MypageFragment -->
-    <string name="Mypage_profiles">Profiles</string>
+    <string name="Mypage_history">History / Message</string>
     <string name="Mypage_service">Terms of service</string>
     <string name="Mypage_open_source">Open source</string>
     <string name="Mypage_about">About</string>
