@@ -5,13 +5,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityReceiverMainBinding
-import org.gdsc.donut.ui.history.GiverHistoryFragment
 import org.gdsc.donut.ui.history.ReceiverHistoryFragment
-import org.gdsc.donut.ui.home.GiverHomeFragment
 import org.gdsc.donut.ui.home.ReceiverHomeFragment
 import org.gdsc.donut.ui.home.ReceiverHomeGiftDetailFragment
 import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
-import org.gdsc.donut.ui.mypage.MyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
