@@ -7,8 +7,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BASE_URL = "http://34.64.166.104:8080"
-    private const val Google_URL = "https://www.googleapis.com/"
+    private const val BASE_URL = "http://34.64.166.104:8080/api/"
+    private const val Google_URL = "https://www.googleapis.com"
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(
