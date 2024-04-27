@@ -31,6 +31,11 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     private val _showErrorToast = MutableLiveData<Event<Boolean>>()
     val showErrorToast: LiveData<Event<Boolean>> = _showErrorToast
 
+    private val sharedDirectDonationOption = MutableLiveData<Boolean>()
+    fun setDirectDonationOption(input: Boolean) {
+        sharedDirectDonationOption.value = input
+    }
+
     private val sharedStoreName = MutableLiveData<String>()
     fun setStoreName(input: String) {
         sharedStoreName.value = input

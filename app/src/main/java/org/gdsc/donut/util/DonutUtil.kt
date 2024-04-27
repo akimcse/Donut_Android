@@ -17,4 +17,15 @@ class DonutUtil {
         val parsedDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
         return parsedDate?.let { SimpleDateFormat("MMM d").format(it) }
     }
+
+    fun formatDate(date: String): String {
+        val regex = """(\d{4})년 (\d{1,2})월 (\d{1,2})일""".toRegex()
+        val matchResult = regex.find(date)
+        return if (matchResult != null) {
+            val (year, month, day) = matchResult.destructured
+            "$year-${month.padStart(2, '0')}-${day.padStart(2, '0')}"
+        } else {
+            date
+        }
+    }
 }

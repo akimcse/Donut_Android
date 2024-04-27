@@ -25,209 +25,247 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="95dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/donation_title"
-                android:textAlignment="center"
-                android:textColor="@color/black_100"
-                android:textSize="28sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="34dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/donation_name"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_upload" />
-
-            <EditText
-                android:id="@+id/et_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
-                android:backgroundTint="@color/black_100"
-                android:fontFamily="@font/pretendard_medium"
-                android:textColor="@color/black_100"
-                android:textCursorDrawable="@color/main_coral"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-            <TextView
-                android:id="@+id/tv_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="19dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/donation_amount"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_name" />
-
-            <EditText
-                android:id="@+id/et_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
-                android:backgroundTint="@color/black_100"
-                android:fontFamily="@font/pretendard_medium"
-                android:textColor="@color/black_100"
-                android:textCursorDrawable="@color/main_coral"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
-
-            <TextView
-                android:id="@+id/tv_due"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="19dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/donation_due_date"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_amount" />
-
-            <EditText
-                android:id="@+id/et_due"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
-                android:backgroundTint="@color/black_100"
-                android:fontFamily="@font/pretendard_medium"
-                android:textColor="@color/black_100"
-                android:textCursorDrawable="@color/main_coral"
-                android:textSize="12sp"
-                android:hint="YYYY-MM-DD"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_due" />
-
-            <TextView
-                android:id="@+id/tv_store"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="19dp"
-                android:fontFamily="@font/pretendard_medium"
-                android:text="@string/donation_exchange_store"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_due" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="95dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/donation_title"
+            android:textAlignment="center"
+            android:textColor="@color/black_100"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_store"
-                android:layout_width="0dp"
+                android:id="@+id/cl_fill_out"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_white_300_round6"
+                android:layout_marginTop="32dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_store">
+                app:layout_constraintTop_toBottomOf="@+id/btn_upload">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="7dp"
-                    android:layout_marginStart="13dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    android:text="@string/donation_chose"
-                    android:textColor="@color/gray_300"
+                    android:layout_marginStart="28dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_name"
+                    android:textColor="@color/black_100"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_right"
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:backgroundTint="@color/black_100"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textColor="@color/black_100"
+                    android:textCursorDrawable="@color/main_coral"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_right2"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_amount"
+                    android:textColor="@color/black_100"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+                <EditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:backgroundTint="@color/black_100"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:textColor="@color/black_100"
+                    android:textCursorDrawable="@color/main_coral"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
+
+                <TextView
+                    android:id="@+id/tv_due"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_due_date"
+                    android:textColor="@color/black_100"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_amount" />
+
+                <EditText
+                    android:id="@+id/et_due"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:backgroundTint="@color/black_100"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:hint="YYYY-MM-DD"
+                    android:textColor="@color/black_100"
+                    android:textCursorDrawable="@color/main_coral"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_due" />
+
+                <TextView
+                    android:id="@+id/tv_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="19dp"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="@string/donation_exchange_store"
+                    android:textColor="@color/black_100"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_due" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_store"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_white_300_round6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_store">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="7dp"
+                        android:layout_marginStart="13dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="@string/donation_chose"
+                        android:textColor="@color/gray_300"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:src="@drawable/ic_right2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_store_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_white_maincoral_round6"
+                    android:paddingVertical="10dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_store">
+
+                    <TextView
+                        android:id="@+id/tv_7eleven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="13dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:paddingEnd="50dp"
+                        android:text="@string/eleven"
+                        android:textColor="@color/black_100"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_cu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="13dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:paddingEnd="100dp"
+                        android:text="@string/cu"
+                        android:textColor="@color/black_100"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_7eleven" />
+
+                    <TextView
+                        android:id="@+id/tv_gs25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="13dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:paddingEnd="50dp"
+                        android:text="@string/gs25"
+                        android:textColor="@color/black_100"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_cu" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_donate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_gray200_round"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_store_list">
+
+                    <TextView
+                        android:id="@+id/tv_donate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="@string/donation_donate"
+                        android:textColor="@color/gray_300"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_store_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="28dp"
-            android:layout_marginTop="8dp"
-            android:paddingVertical="10dp"
-            android:visibility="invisible"
-            android:background="@drawable/bg_white_maincoral_round6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_store">
-
-            <TextView
-                android:id="@+id/tv_7eleven"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:layout_marginStart="13dp"
-                android:paddingEnd="50dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="@string/eleven"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_cu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:layout_marginStart="13dp"
-                android:paddingEnd="100dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="@string/cu"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_7eleven"/>
-
-            <TextView
-                android:id="@+id/tv_gs25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:layout_marginStart="13dp"
-                android:paddingEnd="50dp"
-                android:visibility="gone"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="@string/gs25"
-                android:textColor="@color/black_100"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_cu"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_image"
@@ -252,26 +290,25 @@
                 android:text="@string/donation_resolution"
                 android:textColor="@color/gray_300"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/sw_resolution"
                 app:layout_constraintEnd_toStartOf="@+id/sw_resolution"
-                app:layout_constraintTop_toTopOf="@+id/sw_resolution" />
-
+                app:layout_constraintBottom_toBottomOf="@+id/tv_image"
+                app:layout_constraintTop_toTopOf="@+id/tv_image" />
 
             <Switch
                 android:id="@+id/sw_resolution"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
                 android:layout_marginEnd="28dp"
-                android:track="@drawable/swich_track"
-                android:thumb="@drawable/swich_thumb"
                 android:minWidth="37dp"
                 android:switchMinWidth="0dp"
                 android:textOff=""
                 android:textOn=""
+                android:thumb="@drawable/swich_thumb"
                 android:thumbTextPadding="15dp"
+                android:track="@drawable/swich_track"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl_store_list"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_image"
+                app:layout_constraintTop_toTopOf="@+id/tv_image"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -355,34 +392,6 @@
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/donation_complete"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_donate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_gray200_round"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_store">
-
-                <TextView
-                    android:id="@+id/tv_donate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="15dp"
-                    android:fontFamily="@font/pretendard_semibold"
-                    android:text="@string/donation_donate"
-                    android:textColor="@color/gray_300"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
