@@ -197,7 +197,14 @@ class DonationFragment : Fragment() {
         binding.ivGifticon.visibility = View.VISIBLE
         img = uriToFile(uri)?.path ?: ""
 
+        binding.btnComplete.visibility = View.VISIBLE
+
+        setGifticonInfo()
         setDonateButton()
+    }
+
+    private fun setGifticonInfo(){
+        binding.clFillOut.visibility = View.VISIBLE
     }
 
     private fun setSwitch(){
