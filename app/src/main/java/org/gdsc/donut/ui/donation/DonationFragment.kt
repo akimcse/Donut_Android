@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -30,6 +31,7 @@ import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentDonationBinding
 import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.viewModel.DonationViewModel
+import org.gdsc.donut.util.DonutUtil
 import java.io.File
 import java.io.IOException
 
@@ -224,7 +226,45 @@ class DonationFragment : Fragment() {
         }
     }
 
-    
+    private fun getGifticonInfoFromImage(){
+        val dueDate = DonutUtil().formatDate(recognizedWords[recognizedWords.size-3])
+
+        binding.clFillOut.visibility = View.VISIBLE
+        binding.etName.setText(recognizedWords[1])
+        binding.etDue.setText(dueDate)
+        setStoreAutoFill(recognizedWords[0])
+    }
+
+    private fun setStoreAutoFill(recognizedStore: String){
+        binding.clStore.visibility = View.GONE
+        binding.clStoreList.visibility = View.VISIBLE
+        binding.tvCu.visibility = View.VISIBLE
+        binding.tvGs25.visibility = View.VISIBLE
+
+        when (recognizedStore) {
+            "세븐일레븐" -> {
+                binding.tv7eleven.setTextColor(resources.getColor(R.color.main_coral))
+                binding.tvCu.setTextColor(resources.getColor(R.color.black_100))
+                binding.tvGs25.setTextColor(resources.getColor(R.color.black_100))
+                store = "SEVENELEVEN"
+                setDonateButton()
+            }
+            "CU" -> {
+                binding.tv7eleven.setTextColor(resources.getColor(R.color.black_100))
+                binding.tvCu.setTextColor(resources.getColor(R.color.main_coral))
+                binding.tvGs25.setTextColor(resources.getColor(R.color.black_100))
+                store = "CU"
+                setDonateButton()
+            }
+            "GS25" -> {
+                binding.tv7eleven.setTextColor(resources.getColor(R.color.black_100))
+                binding.tvCu.setTextColor(resources.getColor(R.color.black_100))
+                binding.tvGs25.setTextColor(resources.getColor(R.color.main_coral))
+                store = "GS25"
+                setDonateButton()
+            }
+        }
+    }
 
     private fun setSwitch(){
         binding.swResolution.setOnCheckedChangeListener { _, isChecked ->
@@ -241,7 +281,8 @@ class DonationFragment : Fragment() {
     private fun setDonateButton() {
         if (!binding.etName.text.isNullOrBlank() && !binding.etAmount.text.isNullOrBlank() && !binding.etDue.text.isNullOrBlank() && store.isNotBlank() && img.isNotBlank()) {
             if(store.isNotBlank() && img.isNotBlank()){
-                binding.btnDonate.visibility = View.VISIBLE
+                binding.btnDonate.setBackgroundDrawable(context?.let { AppCompatResources.getDrawable(it, R.drawable.bg_coral_round) })
+                binding.tvDonate.setTextColor(resources.getColor(R.color.white))
                 binding.btnDonate.setOnClickListener {
                     sendDonationInfo()
                     requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
