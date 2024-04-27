@@ -5,13 +5,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityReceiverMainBinding
-import org.gdsc.donut.ui.history.GiverHistoryFragment
-import org.gdsc.donut.ui.history.ReceiverHistoryFragment
-import org.gdsc.donut.ui.home.GiverHomeFragment
+import org.gdsc.donut.ui.history.HistoryDetailFragment
+import org.gdsc.donut.ui.history.HistoryFragment
 import org.gdsc.donut.ui.home.ReceiverHomeFragment
 import org.gdsc.donut.ui.home.ReceiverHomeGiftDetailFragment
 import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
-import org.gdsc.donut.ui.mypage.MyPageFragment
+import org.gdsc.donut.ui.mypage.ReceiverMyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
@@ -43,9 +42,10 @@ class ReceiverMainActivity : AppCompatActivity() {
     fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
             getString(R.string.menu_wallet) -> ReceiverHomeFragment()
-            getString(R.string.menu_history) -> ReceiverHistoryFragment()
+            getString(R.string.menu_history) -> HistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
-            getString(R.string.menu_my_page) -> MyPageFragment()
+            getString(R.string.menu_my_page) -> ReceiverMyPageFragment()
+            "history_detail" -> HistoryDetailFragment()
             "package_detail" -> ReceiverHomePackageDetailFragment()
             "gift_detail" -> ReceiverHomeGiftDetailFragment()
             "receive_store" -> ReceiveStoreFragment()

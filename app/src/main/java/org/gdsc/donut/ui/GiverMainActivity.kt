@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityGiverMainBinding
 import org.gdsc.donut.ui.donation.DonationFragment
-import org.gdsc.donut.ui.history.GiverHistoryFragment
-import org.gdsc.donut.ui.history.GiverHistoryGiftDetailFragment
-import org.gdsc.donut.ui.home.GiverHomeFragment
-import org.gdsc.donut.ui.mypage.MyPageFragment
+import org.gdsc.donut.ui.history.HistoryDetailFragment
+import org.gdsc.donut.ui.history.HistoryFragment
+import org.gdsc.donut.ui.home.GiverWalletFragment
+import org.gdsc.donut.ui.mypage.GiverMyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 
 class GiverMainActivity : AppCompatActivity() {
@@ -38,12 +38,12 @@ class GiverMainActivity : AppCompatActivity() {
 
     fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
-            getString(R.string.menu_wallet) -> GiverHomeFragment()
-            getString(R.string.menu_history) -> GiverHistoryFragment()
+            getString(R.string.menu_wallet) -> GiverWalletFragment()
+            getString(R.string.menu_history) -> HistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
-            getString(R.string.menu_my_page) -> MyPageFragment()
+            getString(R.string.menu_my_page) -> GiverMyPageFragment()
             "donation" -> DonationFragment()
-            "history_detail" -> GiverHistoryGiftDetailFragment()
+            "history_detail" -> HistoryDetailFragment()
             else -> null
         } ?: return
 
