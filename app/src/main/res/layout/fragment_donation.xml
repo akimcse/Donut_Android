@@ -249,7 +249,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_store">
+                    app:layout_constraintTop_toBottomOf="@id/cl_store_list">
 
                     <TextView
                         android:id="@+id/tv_donate"
