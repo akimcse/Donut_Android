@@ -12,29 +12,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat.getColor
-import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentDonationBinding
 import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.receive.ReceiveDoneActivity
 import org.gdsc.donut.ui.viewModel.DonationViewModel
-import org.gdsc.donut.ui.viewModel.RankingViewModel
 import java.io.File
+import java.io.IOException
 
 class DonationFragment : Fragment() {
     private lateinit var binding: FragmentDonationBinding
@@ -47,8 +44,11 @@ class DonationFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 setImage(uri)
+                processImageWithOCR(uri)
             }
         }
+    private val recognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
+    private var recognizedWords = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -198,14 +198,33 @@ class DonationFragment : Fragment() {
         img = uriToFile(uri)?.path ?: ""
 
         binding.btnComplete.visibility = View.VISIBLE
+        binding.btnUpload.visibility = View.INVISIBLE
 
-        setGifticonInfo()
         setDonateButton()
     }
 
-    private fun setGifticonInfo(){
-        binding.clFillOut.visibility = View.VISIBLE
+    private fun processImageWithOCR(uri: Uri){
+        val image: InputImage
+        try {
+            image = InputImage.fromFilePath(requireContext(), uri)
+            val result = recognizer.process(image)
+                .addOnSuccessListener { visionText ->
+                    for(block in visionText.textBlocks){
+                        for(line in block.lines){
+                            recognizedWords.add(line.text)
+                        }
+                    }
+                    getGifticonInfoFromImage()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(context, "그림자가 생기지 않도록 다시 촬영해주세요.", Toast.LENGTH_SHORT).show()
+                }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
+
+    
 
     private fun setSwitch(){
         binding.swResolution.setOnCheckedChangeListener { _, isChecked ->
