@@ -5,7 +5,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.gdsc.donut.R
 import org.gdsc.donut.databinding.ActivityGiverMainBinding
+import org.gdsc.donut.ui.donation.DonationCheckFragment
 import org.gdsc.donut.ui.donation.DonationFragment
+import org.gdsc.donut.ui.donation.DonationStartFragment
 import org.gdsc.donut.ui.history.HistoryDetailFragment
 import org.gdsc.donut.ui.history.HistoryFragment
 import org.gdsc.donut.ui.home.GiverWalletFragment
@@ -42,7 +44,9 @@ class GiverMainActivity : AppCompatActivity() {
             getString(R.string.menu_history) -> HistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> GiverMyPageFragment()
+            "donation_start" -> DonationStartFragment()
             "donation" -> DonationFragment()
+            "donation_check" -> DonationCheckFragment()
             "history_detail" -> HistoryDetailFragment()
             else -> null
         } ?: return
@@ -67,7 +71,7 @@ class GiverMainActivity : AppCompatActivity() {
 
     private fun setFloatingButton(){
         binding.fabDonationBtn.setOnClickListener {
-            changeFragment("donation")
+            changeFragment("donation_start")
         }
     }
 
