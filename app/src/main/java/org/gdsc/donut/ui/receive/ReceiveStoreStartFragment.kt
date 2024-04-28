@@ -33,7 +33,7 @@ class ReceiveStoreStartFragment : Fragment(){
     private fun setFindButton(){
         binding.btnFind.setOnClickListener {
             startActivity(Intent(context, ReceiveMapsActivity::class.java))
-            (activity as ReceiverMainActivity).changeFragment("receive_store")
+            //(activity as ReceiverMainActivity).changeFragment("receive_store")
         }
     }
 
