@@ -14,6 +14,7 @@ import org.gdsc.donut.ui.mypage.ReceiverMyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
+import org.gdsc.donut.ui.receive.ReceiveStoreStartFragment
 
 class ReceiverMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReceiverMainBinding
@@ -48,6 +49,7 @@ class ReceiverMainActivity : AppCompatActivity() {
             "history_detail" -> HistoryDetailFragment()
             "package_detail" -> ReceiverHomePackageDetailFragment()
             "gift_detail" -> ReceiverHomeGiftDetailFragment()
+            "receive_store_start" -> ReceiveStoreStartFragment()
             "receive_store" -> ReceiveStoreFragment()
             "receive_amount" -> ReceiveAmountFragment()
             else -> null
@@ -73,7 +75,7 @@ class ReceiverMainActivity : AppCompatActivity() {
 
     private fun setFloatingButton(){
         binding.fabReceiveBtn.setOnClickListener {
-            changeFragment("receive_store")
+            changeFragment("receive_store_start")
         }
     }
 

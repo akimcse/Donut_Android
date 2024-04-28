@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id("com.google.gms.google-services")
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -123,4 +124,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation("com.google.firebase:firebase-analytics")
+
+    // Google Map
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 }

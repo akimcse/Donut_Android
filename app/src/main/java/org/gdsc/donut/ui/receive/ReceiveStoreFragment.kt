@@ -33,15 +33,32 @@ class ReceiveStoreFragment : Fragment() {
     }
 
     private fun setStoreSelector() {
-
+        val storeViewList = listOf(binding.cl7, binding.clGs, binding.clCu)
+        for(i in storeViewList.indices){
+            storeViewList[i].setOnClickListener {
+                storeViewList[i].visibility = View.INVISIBLE
+                when (i) {
+                    0 -> {
+                        storeViewList[1].visibility = View.VISIBLE
+                        store = "GS25"
+                    }
+                    1 -> {
+                        storeViewList[2].visibility = View.VISIBLE
+                        store = "CU"
+                    }
+                    2 -> {
+                        storeViewList[0].visibility = View.VISIBLE
+                        store = "SEVENELEVEN"
+                    }
+                }
+                setContinueButton()
+            }
+        }
     }
 
-    @SuppressLint("ResourceAsColor")
-    private fun setContinueButton(store: String) {
-        binding.btnContinue.setBackgroundDrawable(context?.let {getDrawable(it,R.drawable.bg_coral_round)})
-        binding.tvContinue.setTextColor(resources.getColor(R.color.white))
+    private fun setContinueButton(){
+        viewModel.setStoreName(store)
         binding.btnContinue.setOnClickListener {
-            viewModel.setStoreName(store)
             (activity as ReceiverMainActivity).changeFragment("receive_amount")
         }
     }
