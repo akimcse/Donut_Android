@@ -50,7 +50,7 @@ class ReceiveMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             // 현재 위치 표시 기능
             it.isMyLocationEnabled = true
             // 현재 위치 표시하는 버튼 표시 여부
-            it.uiSettings.isMyLocationButtonEnabled = true
+            it.uiSettings.isMyLocationButtonEnabled = false
             // 위치 정보 관리하는 객체 가져오기
             val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -59,7 +59,8 @@ class ReceiveMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (a1 == PackageManager.PERMISSION_GRANTED && a2 == PackageManager.PERMISSION_GRANTED) {
                 // 현재 저장되어 있는 위치 정보값 가져오기
                 val location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                val location2 = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                val location2 =
+                    locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (location1 != null) setMyLocation(location1)
                 else if (location2 != null) setMyLocation(location2)
 
