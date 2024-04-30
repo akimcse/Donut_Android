@@ -15,7 +15,7 @@ interface HomeService {
         @Header("Authorization") accessToken : String
     ): ResponseHomeGiver
 
-    @GET("home/wallet")
+    @GET("wallet")
     suspend fun getGiverWalletInfo(
         @Header("Authorization") accessToken : String
     ): ResponseWalletGiver
