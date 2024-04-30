@@ -44,7 +44,7 @@ class GiverWalletFragment : Fragment() {
     private fun getGiverWalletInfo(){
         viewModel.giverWalletInfo.observe(viewLifecycleOwner, Observer { data ->
             binding.tvChildrenNum.text = data.data!!.receivers.toString()
-            binding.tvDollarNum.text = data.data.amount.toString()
+            binding.tvDollarNum.text = data.data.amount.toInt().toString()
             binding.tv7Num.text = data.data.sevenEleven.toString()
             binding.tvCuNum.text = data.data.cu.toString()
             binding.tvGsNum.text = data.data.gs25.toString()
