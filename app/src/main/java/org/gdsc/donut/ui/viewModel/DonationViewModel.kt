@@ -15,6 +15,7 @@ import okhttp3.RequestBody
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.donation.RequestAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseAssignReceiver
+import org.gdsc.donut.data.remote.response.donation.ResponseDirectDonation
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
 import org.gdsc.donut.util.Event
 import kotlin.Exception
@@ -27,6 +28,10 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     private val _donateGiverInfo = MutableLiveData<ResponseDonateGiver>()
     val donateGiverInfo: LiveData<ResponseDonateGiver>
         get() = _donateGiverInfo
+
+    private val _donateDirectInfo = MutableLiveData<ResponseDirectDonation>()
+    val donateDirectInfo: LiveData<ResponseDirectDonation>
+        get() = _donateDirectInfo
 
     private val _showErrorToast = MutableLiveData<Event<Boolean>>()
     val showErrorToast: LiveData<Event<Boolean>> = _showErrorToast
@@ -58,4 +63,8 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
                 RetrofitBuilder.donationService.donateGiver("Bearer $accessToken", giftImage, product, price, dueDate, store, isRestored)
             )
         }
+
+    fun requestDirectDonation(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO){
+        _donateDirectInfo.postValue((RetrofitBuilder.donationService.requestDirectDonation("Bearer $accessToken", giftId)))
+    }
 }

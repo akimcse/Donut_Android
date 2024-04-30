@@ -11,6 +11,7 @@ import org.gdsc.donut.ui.donation.DonationStartFragment
 import org.gdsc.donut.ui.history.HistoryDetailFragment
 import org.gdsc.donut.ui.history.HistoryFragment
 import org.gdsc.donut.ui.home.GiverWalletFragment
+import org.gdsc.donut.ui.home.WalletDetailFragment
 import org.gdsc.donut.ui.mypage.GiverMyPageFragment
 import org.gdsc.donut.ui.ranking.RankingFragment
 
@@ -41,6 +42,7 @@ class GiverMainActivity : AppCompatActivity() {
     fun changeFragment(tag: String){
         val fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (tag) {
             getString(R.string.menu_wallet) -> GiverWalletFragment()
+            "wallet_detail" -> WalletDetailFragment()
             getString(R.string.menu_history) -> HistoryFragment()
             getString(R.string.menu_ranking) -> RankingFragment()
             getString(R.string.menu_my_page) -> GiverMyPageFragment()

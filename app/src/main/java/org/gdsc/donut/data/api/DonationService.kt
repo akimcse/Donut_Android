@@ -4,12 +4,15 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.gdsc.donut.data.remote.request.donation.RequestAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseAssignReceiver
+import org.gdsc.donut.data.remote.response.donation.ResponseDirectDonation
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface DonationService {
     @POST("donation/receiver/assign")
@@ -29,4 +32,10 @@ interface DonationService {
         @Part("store") store: RequestBody,
         @Part("isRestored") isRestored: RequestBody
     ): ResponseDonateGiver
+
+    @PATCH("donation/wallet/{giftId}")
+    suspend fun requestDirectDonation(
+        @Header("Authorization") accessToken: String,
+        @Path("giftId") giftId: Long
+    ): ResponseDirectDonation
 }
