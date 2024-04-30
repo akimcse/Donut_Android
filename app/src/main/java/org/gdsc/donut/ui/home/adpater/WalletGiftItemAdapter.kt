@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGift
 import org.gdsc.donut.data.remote.response.home.ResponseWalletGiftList
 import org.gdsc.donut.databinding.ItemHistoryUnusedBinding
-import org.gdsc.donut.databinding.ItemHistoryUsedBinding
-import org.gdsc.donut.ui.history.adapter.UnusedItemAdapter
 import org.gdsc.donut.util.DonutUtil
 
-class WalletDetailItemAdapter : RecyclerView.Adapter<WalletDetailItemAdapter.UnusedItemViewHolder>() {
+class WalletGiftItemAdapter : RecyclerView.Adapter<WalletGiftItemAdapter.UnusedItemViewHolder>() {
     var itemList = emptyList<ResponseWalletGiftList>()
     private var listener: ((ResponseWalletGiftList, Int) -> Unit)? = null
     var mPosition = 0
@@ -34,7 +31,6 @@ class WalletDetailItemAdapter : RecyclerView.Adapter<WalletDetailItemAdapter.Unu
             binding.tvCalendar.text = DonutUtil().setCalendarFormat(date)
             binding.tvName.text = data.product
             binding.tvDollar.text = data.price.toString()
-
             setClinkListenerOnPosition(data)
         }
 

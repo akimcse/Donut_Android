@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverWalletBinding
 import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.home.adpater.DetailItemAdapter
-import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
-import org.gdsc.donut.ui.home.adpater.WalletDetailItemAdapter
+import org.gdsc.donut.ui.home.adpater.WalletImpedingItemAdapter
+import org.gdsc.donut.ui.home.adpater.WalletGiftItemAdapter
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 
 
 class GiverWalletFragment : Fragment() {
     private lateinit var binding: FragmentGiverWalletBinding
-    private lateinit var itemAdapter: WalletDetailItemAdapter
+    private lateinit var giftItemAdapter: WalletGiftItemAdapter
+    private lateinit var impendingItemAdapter: WalletImpedingItemAdapter
     private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -50,12 +50,14 @@ class GiverWalletFragment : Fragment() {
     }
 
     private fun setAdapter(){
-        itemAdapter = WalletDetailItemAdapter()
-        binding.rvGiftItem.adapter = itemAdapter
+        impendingItemAdapter = WalletImpedingItemAdapter(viewModel)
+        binding.rvImminentGiftItem.adapter = impendingItemAdapter
+        giftItemAdapter = WalletGiftItemAdapter()
+        binding.rvGiftItem.adapter = giftItemAdapter
         binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
 
-        itemAdapter.setOnItemClickListener { _, pos ->
-            viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+        giftItemAdapter.setOnItemClickListener { _, pos ->
+            viewModel.setGiftId(giftItemAdapter.itemList[giftItemAdapter.mPosition].giftId)
             (activity as GiverMainActivity).changeFragment("wallet_detail")
         }
         setDataList()
@@ -63,12 +65,14 @@ class GiverWalletFragment : Fragment() {
 
     private fun setDataList() {
         viewModel.giverWalletInfo.observe(viewLifecycleOwner, Observer { data ->
-            with(binding.rvGiftItem.adapter as WalletDetailItemAdapter) {
-                data.data!!.giftList.let {
-                    if (it != null) {
-                        itemAdapter.setGiftItemList(it)
-                    }
-                }
+            with(binding.rvGiftItem.adapter as WalletGiftItemAdapter) {
+                data.data!!.giftList.let { if (it != null) giftItemAdapter.setGiftItemList(it) }
+            }
+        })
+
+        viewModel.giverWalletInfo.observe(viewLifecycleOwner, Observer { data ->
+            with(binding.rvImminentGiftItem.adapter as WalletImpedingItemAdapter) {
+                data.data!!.impendingList.let { if (it != null) impendingItemAdapter.setImpendingItemList(it) }
             }
         })
     }
