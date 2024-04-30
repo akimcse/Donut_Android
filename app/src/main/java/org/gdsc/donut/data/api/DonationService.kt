@@ -3,6 +3,7 @@ package org.gdsc.donut.data.api
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.gdsc.donut.data.remote.request.donation.RequestAssignReceiver
+import org.gdsc.donut.data.remote.response.donation.ResponseAddToWallet
 import org.gdsc.donut.data.remote.response.donation.ResponseAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseDirectDonation
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
@@ -32,6 +33,18 @@ interface DonationService {
         @Part("store") store: RequestBody,
         @Part("isRestored") isRestored: RequestBody
     ): ResponseDonateGiver
+
+    @Multipart
+    @POST("wallet")
+    suspend fun requestAddToWallet(
+        @Header("Authorization") accessToken : String,
+        @Part giftImage: MultipartBody.Part?,
+        @Part("product") product: RequestBody,
+        @Part("price") price: Int,
+        @Part("dueDate") dueDate: RequestBody,
+        @Part("store") store: RequestBody,
+        @Part("autoDonation") autoDonation: Boolean
+    ): ResponseAddToWallet
 
     @PATCH("donation/wallet/{giftId}")
     suspend fun requestDirectDonation(
