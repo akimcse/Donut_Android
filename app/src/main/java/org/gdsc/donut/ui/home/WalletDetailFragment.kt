@@ -7,12 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentWalletDetailBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.viewModel.HomeViewModel
+import org.gdsc.donut.util.DonutUtil
 
 class WalletDetailFragment : Fragment() {
     private lateinit var binding: FragmentWalletDetailBinding
-    val store = "GS25"
+    private val viewModel: HomeViewModel by activityViewModels()
+    var store = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,10 +27,36 @@ class WalletDetailFragment : Fragment() {
     ): View? {
         binding = FragmentWalletDetailBinding.inflate(inflater, container, false)
 
+        initNetwork()
+        getReceiverHomeGiftInfo()
         setButton()
-        setGoogleMapIcon()
 
         return binding.root
+    }
+
+    private fun initNetwork(){
+        viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+            DonutSharedPreferences.getAccessToken()?.let { viewModel.requestWalletDetailInfo(it, data) }
+        })
+    }
+
+    private fun getReceiverHomeGiftInfo(){
+        viewModel.walletDetailInfo.observe(viewLifecycleOwner, Observer { data ->
+            val date = data.data!!.dueDate.substring(0, 10)
+            binding.tvTitle.text = data.data.product
+            binding.tvAmountNum.text = data.data.price.toString()
+            binding.tvDueTitleNum.text = DonutUtil().setCalendarFormat(date)
+            binding.tvDueNum.text = date
+            binding.tvStoreText.text = data.data.store
+            store = data.data.store
+            setGoogleMapIcon()
+
+            if(data.data.status == "USED") binding.tvStatusText.text = "can use"
+            Glide.with(this)
+                .load(data.data.imgUrl)
+                .fitCenter()
+                .into(binding.ivImage)
+        })
     }
 
     private fun setButton() {

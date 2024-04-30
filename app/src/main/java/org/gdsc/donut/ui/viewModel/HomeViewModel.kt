@@ -12,6 +12,7 @@ import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
+import org.gdsc.donut.data.remote.response.home.ResponseWalletDetailItem
 import org.gdsc.donut.data.remote.response.home.ResponseWalletGiftList
 import org.gdsc.donut.data.remote.response.home.ResponseWalletGiver
 import org.gdsc.donut.data.remote.response.home.ResponseWalletImpendingList
@@ -33,6 +34,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _giverWalletGiftInfo = MutableLiveData<ResponseWalletGiftList>()
     val giverWalletGiftInfo: LiveData<ResponseWalletGiftList>
         get() = _giverWalletGiftInfo
+
+    private val _walletDetailInfo = MutableLiveData<ResponseWalletDetailItem>()
+    val walletDetailInfo: LiveData<ResponseWalletDetailItem>
+        get() = _walletDetailInfo
 
     private val _receiverHomeInfo = MutableLiveData<ResponseHomeReceiver>()
     val receiverHomeInfo: LiveData<ResponseHomeReceiver>
@@ -69,6 +74,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun requestGiverWalletInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _giverWalletInfo.postValue(
             RetrofitBuilder.homeService.getGiverWalletInfo("Bearer $accessToken")
+        )
+    }
+
+    fun requestWalletDetailInfo(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
+        _walletDetailInfo.postValue(
+            RetrofitBuilder.homeService.getWalletGiftInfo("Bearer $accessToken", giftId)
         )
     }
 
