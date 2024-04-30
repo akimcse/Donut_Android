@@ -1,7 +1,10 @@
 package org.gdsc.donut.data.api
 
+import org.gdsc.donut.data.remote.request.report.RequestReport
+import org.gdsc.donut.data.remote.response.report.ResponseReport
 import org.gdsc.donut.data.remote.response.report.ResponseReportUnused
 import org.gdsc.donut.data.remote.response.report.ResponseReportUsed
+import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -13,6 +16,12 @@ interface ReportService {
         @Header("Authorization") accessToken: String,
         @Query("giftId") giftId: Long,
     ): ResponseReportUsed
+
+    @POST("report/cheat")
+    suspend fun reportCheat(
+        @Header("Authorization") accessToken: String,
+        @Body reportedItemInfo: RequestReport,
+    ): ResponseReport
 
     @POST("report/{giftId}")
     suspend fun reportUnused(
