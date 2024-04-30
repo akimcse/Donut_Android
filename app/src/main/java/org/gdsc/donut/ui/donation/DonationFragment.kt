@@ -58,7 +58,8 @@ class DonationFragment : Fragment() {
     ): View? {
         binding = FragmentDonationBinding.inflate(inflater, container, false)
 
-        (activity as GiverMainActivity).disableFloatingButton()
+        (activity as GiverMainActivity).enableFloatingButton()
+        setStatus()
         checkNameStatus()
         checkAmountStatus()
         checkDueDateStatus()
@@ -68,6 +69,13 @@ class DonationFragment : Fragment() {
         setDonateButton()
 
         return binding.root
+    }
+
+    private fun setStatus(){
+        if (viewModel.sharedDirectDonationOption.value == false) {
+            binding.tvTitle.text = "Add gifticon to\nwallet!"
+            binding.tvDonate.text = "Add to wallet"
+        }
     }
 
     private fun checkNameStatus() {
@@ -284,9 +292,10 @@ class DonationFragment : Fragment() {
                 binding.btnDonate.setBackgroundDrawable(context?.let { AppCompatResources.getDrawable(it, R.drawable.bg_coral_round) })
                 binding.tvDonate.setTextColor(resources.getColor(R.color.white))
                 binding.btnDonate.setOnClickListener {
-                    sendDonationInfo()
-                    requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                    startActivity(Intent(context, DonationDoneActivity::class.java))                }
+                    if (viewModel.sharedDirectDonationOption.value == true) {
+                        sendDonationInfo()
+                    } else nextScreenWithDonationInfo()
+                }
             }
         }
     }
@@ -301,5 +310,18 @@ class DonationFragment : Fragment() {
         val isRestored = highResolution.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store, isRestored) }
+        requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+        startActivity(Intent(context, DonationDoneActivity::class.java))
+    }
+
+    private fun nextScreenWithDonationInfo() {
+        val imgString = img
+        val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val price = binding.etAmount.text.toString().toInt()
+        val store = store.toRequestBody("text/plain".toMediaTypeOrNull())
+        val dueDate = (binding.etDue.text.toString()+"T00:00:00.000000").toRequestBody("text/plain".toMediaTypeOrNull())
+
+        viewModel.setGifticonInfo(imgString, product, price, dueDate, store)
+        (activity as GiverMainActivity).changeFragment("donation_check")
     }
 }
