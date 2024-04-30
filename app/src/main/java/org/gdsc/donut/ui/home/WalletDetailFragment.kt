@@ -17,7 +17,7 @@ import org.gdsc.donut.ui.viewModel.HomeViewModel
 import org.gdsc.donut.ui.viewModel.ReportViewModel
 import org.gdsc.donut.util.DonutUtil
 
-class WalletDetailFragment : Fragment() {
+class WalletDetailFragment : Fragment(), MessageDialogInterface {
     private lateinit var binding: FragmentWalletDetailBinding
     private val viewModel: HomeViewModel by activityViewModels()
     private val reportViewModel: ReportViewModel by activityViewModels()
@@ -76,11 +76,25 @@ class WalletDetailFragment : Fragment() {
         }
     }
 
+    override fun onSendMsgButtonClicked(){
+        val content = viewModel.sharedContent.value
+        viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+            DonutSharedPreferences.getAccessToken()?.let {
+                if (content != null) {
+                    viewModel.requestSendMsg(it, data, content)
+                }
+            }
+        })
+    }
+
     private fun setUsedButton(){
         binding.btnUsed.setOnClickListener {
-            if(DonutSharedPreferences.getUserRole() == "receiver"){
+            if (DonutSharedPreferences.getUserRole() == "receiver") {
+                context?.let { MessageDialog(it, this, viewModel).show() }
+                onSendMsgButtonClicked()
                 viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
-                    DonutSharedPreferences.getAccessToken()?.let { reportViewModel.requestReportUsed(it, data) }
+                    DonutSharedPreferences.getAccessToken()
+                        ?.let { reportViewModel.requestReportUsed(it, data) }
                 })
             } else requireActivity().supportFragmentManager.popBackStack()
         }
