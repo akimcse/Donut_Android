@@ -43,4 +43,5 @@ object RetrofitBuilder {
     val rankingService: RankingService = donutRetrofit.create(RankingService::class.java)
     val reportService: ReportService = donutRetrofit.create(ReportService::class.java)
     val myPageService: MyPageService = donutRetrofit.create(MyPageService::class.java)
+    val messageService: MessageService = donutRetrofit.create(MessageService::class.java)
 }
