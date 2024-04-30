@@ -32,6 +32,8 @@ class WalletDetailFragment : Fragment() {
         initNetwork()
         getReceiverHomeGiftInfo()
         setReportButton()
+        setUsedButton()
+        setUnusedButton()
 
         return binding.root
     }
@@ -70,6 +72,20 @@ class WalletDetailFragment : Fragment() {
         binding.clReport.setOnClickListener {
             viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
                 DonutSharedPreferences.getAccessToken()?.let { reportViewModel.setCheatedItem(it, data) }
+            })
+        }
+    }
+
+    private fun setUsedButton(){
+        binding.btnUsed.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+        }
+    }
+
+    private fun setUnusedButton(){
+        binding.btnUnused.setOnClickListener {
+            viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+                DonutSharedPreferences.getAccessToken()?.let { reportViewModel.setUnusedItem(it, data) }
             })
         }
     }
