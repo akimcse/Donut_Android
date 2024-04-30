@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentReceiverMyPageBinding
-import org.gdsc.donut.ui.GiverMainActivity
+import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.sign.SignActivity
 import org.gdsc.donut.ui.viewModel.MyPageViewModel
 
@@ -50,7 +50,7 @@ class ReceiverMyPageFragment : Fragment() {
         }
 
         binding.clHistory.setOnClickListener {
-            (activity as GiverMainActivity).changeFragment("History")
+            (activity as ReceiverMainActivity).changeFragment("History")
         }
         binding.clService.setOnClickListener {
             Toast.makeText(activity, "준비중입니다.", Toast.LENGTH_SHORT).show()
