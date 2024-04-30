@@ -14,6 +14,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.donation.RequestAssignReceiver
+import org.gdsc.donut.data.remote.response.donation.ResponseAddToWallet
 import org.gdsc.donut.data.remote.response.donation.ResponseAssignReceiver
 import org.gdsc.donut.data.remote.response.donation.ResponseDirectDonation
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
@@ -29,6 +30,10 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     val donateGiverInfo: LiveData<ResponseDonateGiver>
         get() = _donateGiverInfo
 
+    private val _addToWalletInfo = MutableLiveData<ResponseAddToWallet>()
+    val addToWalletInfo: LiveData<ResponseAddToWallet>
+        get() = _addToWalletInfo
+
     private val _donateDirectInfo = MutableLiveData<ResponseDirectDonation>()
     val donateDirectInfo: LiveData<ResponseDirectDonation>
         get() = _donateDirectInfo
@@ -36,14 +41,28 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     private val _showErrorToast = MutableLiveData<Event<Boolean>>()
     val showErrorToast: LiveData<Event<Boolean>> = _showErrorToast
 
-    private val sharedDirectDonationOption = MutableLiveData<Boolean>()
+    val sharedDirectDonationOption = MutableLiveData<Boolean>()
     fun setDirectDonationOption(input: Boolean) {
         sharedDirectDonationOption.value = input
     }
 
     private val sharedStoreName = MutableLiveData<String>()
+    val sharedGiftImageString = MutableLiveData<String>()
+    val sharedProduct = MutableLiveData<RequestBody>()
+    val sharedPrice = MutableLiveData<Int>()
+    val sharedDueDate = MutableLiveData<RequestBody>()
+    val sharedStore = MutableLiveData<RequestBody>()
+
     fun setStoreName(input: String) {
         sharedStoreName.value = input
+    }
+
+    fun setGifticonInfo(img: String, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody) {
+        sharedGiftImageString.value = img
+        sharedProduct.value = product
+        sharedPrice.value = price
+        sharedDueDate.value = dueDate
+        sharedStore.value = store
     }
 
     fun requestAssignReceiver(accessToken: String, price: Int) =
@@ -61,6 +80,13 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch(Dispatchers.IO) {
             _donateGiverInfo.postValue(
                 RetrofitBuilder.donationService.donateGiver("Bearer $accessToken", giftImage, product, price, dueDate, store, isRestored)
+            )
+        }
+
+    fun requestAddToWallet(accessToken: String, giftImage: MultipartBody.Part?, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody, autoDonation: Boolean) =
+        viewModelScope.launch(Dispatchers.IO) {
+            _addToWalletInfo.postValue(
+                RetrofitBuilder.donationService.requestAddToWallet("Bearer $accessToken", giftImage, product, price, dueDate, store, autoDonation)
             )
         }
 
