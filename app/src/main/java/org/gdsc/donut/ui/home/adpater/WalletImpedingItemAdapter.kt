@@ -3,17 +3,14 @@ package org.gdsc.donut.ui.home.adpater
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import org.gdsc.donut.data.remote.response.home.ResponseWalletGiftList
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.remote.response.home.ResponseWalletImpendingList
-import org.gdsc.donut.databinding.ItemHistoryUnusedBinding
 import org.gdsc.donut.databinding.ItemWalletImminentBinding
-import org.gdsc.donut.ui.viewModel.HomeViewModel
+import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.util.DonutUtil
 
-class WalletImpedingItemAdapter(private val viewModel: HomeViewModel) : RecyclerView.Adapter<WalletImpedingItemAdapter.UnusedItemViewHolder>() {
+class WalletImpedingItemAdapter(private val viewModel: DonationViewModel) : RecyclerView.Adapter<WalletImpedingItemAdapter.UnusedItemViewHolder>() {
     var itemList = emptyList<ResponseWalletImpendingList>()
     private var listener: ((ResponseWalletImpendingList, Int) -> Unit)? = null
     var mPosition = 0
@@ -37,22 +34,10 @@ class WalletImpedingItemAdapter(private val viewModel: HomeViewModel) : Recycler
             binding.tvName.text = data.product
             binding.tvDollar.text = data.price.toString()
             binding.clDonate.setOnClickListener {
-                viewModel.
-            }
-            setClinkListenerOnPosition(data)
-        }
-
-        private fun setClinkListenerOnPosition(data: ResponseWalletImpendingList) {
-            binding.clUnusedItem.setOnClickListener {
-                val pos = adapterPosition
-                mPosition = pos
-                listener?.invoke(data, mPosition)
+                DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDirectDonation(it, data.giftId) }
+                notifyDataSetChanged()
             }
         }
-    }
-
-    fun setOnItemClickListener(listener: ((ResponseWalletImpendingList, Int) -> Unit)?) {
-        this.listener = listener
     }
 
     @SuppressLint("NotifyDataSetChanged")

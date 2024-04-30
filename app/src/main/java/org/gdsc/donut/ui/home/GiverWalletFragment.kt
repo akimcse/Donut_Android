@@ -13,6 +13,7 @@ import org.gdsc.donut.databinding.FragmentGiverWalletBinding
 import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.home.adpater.WalletImpedingItemAdapter
 import org.gdsc.donut.ui.home.adpater.WalletGiftItemAdapter
+import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 
 
@@ -21,6 +22,7 @@ class GiverWalletFragment : Fragment() {
     private lateinit var giftItemAdapter: WalletGiftItemAdapter
     private lateinit var impendingItemAdapter: WalletImpedingItemAdapter
     private val viewModel: HomeViewModel by activityViewModels()
+    private val donationViewModel: DonationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +52,7 @@ class GiverWalletFragment : Fragment() {
     }
 
     private fun setAdapter(){
-        impendingItemAdapter = WalletImpedingItemAdapter(viewModel)
+        impendingItemAdapter = WalletImpedingItemAdapter(donationViewModel)
         binding.rvImminentGiftItem.adapter = impendingItemAdapter
         giftItemAdapter = WalletGiftItemAdapter()
         binding.rvGiftItem.adapter = giftItemAdapter
