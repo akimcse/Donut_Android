@@ -78,7 +78,7 @@ class WalletDetailFragment : Fragment() {
 
     private fun setUsedButton(){
         binding.btnUsed.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
