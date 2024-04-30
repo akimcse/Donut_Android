@@ -62,6 +62,7 @@ class ReceiverMainActivity : AppCompatActivity() {
         supportFragmentManager.fragments
             .filter { it.isVisible }
             .forEach {
+                transaction.addToBackStack(tag)
                 transaction.hide(it)
             }
 
@@ -78,6 +79,10 @@ class ReceiverMainActivity : AppCompatActivity() {
         binding.fabReceiveBtn.setOnClickListener {
             changeFragment("receive_store_start")
         }
+    }
+
+    fun disableFloatingButton(){
+        binding.fabReceiveBtn.visibility = View.GONE
     }
 
     fun enableFloatingButton(){

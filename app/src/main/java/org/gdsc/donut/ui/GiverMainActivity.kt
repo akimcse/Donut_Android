@@ -59,6 +59,7 @@ class GiverMainActivity : AppCompatActivity() {
         supportFragmentManager.fragments
             .filter { it.isVisible }
             .forEach {
+                transaction.addToBackStack(tag)
                 transaction.hide(it)
             }
 
@@ -77,7 +78,7 @@ class GiverMainActivity : AppCompatActivity() {
         }
     }
 
-    fun enableFloatingButton(){
+    fun disableFloatingButton(){
         binding.fabDonationBtn.visibility = View.GONE
     }
 }
