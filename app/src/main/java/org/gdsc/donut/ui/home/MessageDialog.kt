@@ -2,6 +2,8 @@ package org.gdsc.donut.ui.home
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import org.gdsc.donut.R
@@ -21,6 +23,7 @@ class MessageDialog(context: Context, messageDialogInterface: MessageDialogInter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         mbinding = DialogMessageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -28,6 +31,7 @@ class MessageDialog(context: Context, messageDialogInterface: MessageDialogInter
 
         binding.btnSend.setOnClickListener {
             this.messageDialogInterface?.onSendMsgButtonClicked()
+            dismiss()
         }
     }
 

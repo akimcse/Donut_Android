@@ -34,7 +34,6 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
         setReportButton()
         setUsedButton()
         setUnusedButton()
-        onSendMsgButtonClicked()
 
         return binding.root
     }
@@ -92,7 +91,7 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
         binding.btnUsed.setOnClickListener {
             if (DonutSharedPreferences.getUserRole() == "receiver") {
                 context?.let { MessageDialog(it, this, viewModel).show() }
-
+                onSendMsgButtonClicked()
                 viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
                     DonutSharedPreferences.getAccessToken()
                         ?.let { reportViewModel.requestReportUsed(it, data) }
