@@ -16,11 +16,13 @@ import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.home.adpater.PackageItemAdapter
 import org.gdsc.donut.ui.receive.ReceiveDoneActivity
 import org.gdsc.donut.ui.viewModel.HomeViewModel
+import org.gdsc.donut.ui.viewModel.ReportViewModel
 import org.gdsc.donut.util.DonutUtil
 
 class ReceiverHomeGiftDetailFragment : Fragment() {
     private lateinit var binding: FragmentReceiverHomeGiftDetailBinding
     private val viewModel: HomeViewModel by activityViewModels()
+    private val reportViewModel: ReportViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +62,7 @@ class ReceiverHomeGiftDetailFragment : Fragment() {
     private fun setReportBtn(){
         binding.btnReport.setOnClickListener {
             viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
-                DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReportUsed(it, data) }
+                DonutSharedPreferences.getAccessToken()?.let { reportViewModel.requestReportUsed(it, data) }
             })
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
             startActivity(Intent(context, ReceiverMainActivity::class.java))

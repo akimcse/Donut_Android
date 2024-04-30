@@ -27,7 +27,7 @@ class DonationCheckFragment : Fragment() {
     ): View? {
         binding = FragmentDonationCheckBinding.inflate(inflater, container, false)
 
-        (activity as GiverMainActivity).enableFloatingButton()
+        (activity as GiverMainActivity).disableFloatingButton()
         setCheckBox()
 
         return binding.root
