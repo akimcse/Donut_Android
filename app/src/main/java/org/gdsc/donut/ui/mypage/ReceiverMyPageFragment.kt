@@ -38,7 +38,7 @@ class ReceiverMyPageFragment : Fragment() {
 
     private fun setInfo(){
         viewModel.receiverMyPageInfo.observe(viewLifecycleOwner, Observer { data ->
-            binding.tvDollarNum.text = data.data!!.total.toString()
+            binding.tvDollarNum.text = data.data!!.total.toInt().toString()
         })
     }
 

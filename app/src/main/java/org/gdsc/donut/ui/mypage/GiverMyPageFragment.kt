@@ -39,7 +39,7 @@ class GiverMyPageFragment : Fragment() {
     private fun setInfo(){
         viewModel.giverMyPageInfo.observe(viewLifecycleOwner, Observer { data ->
             binding.tvTitleYearNum.text = data.data!!.years.toString()
-            binding.tvDollarNum.text = data.data.donation.toString()
+            binding.tvDollarNum.text = data.data.donation.toInt().toString()
             binding.tvUnreceivedNum.text = data.data.stats!!.unreceived.toString()
             binding.tvReceivedNum.text = data.data.stats.received.toString()
             binding.tvMsgNum.text = data.data.stats.message.toString()
