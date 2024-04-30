@@ -34,19 +34,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="#FFFAFA"
-        app:layout_constraintTop_toBottomOf="@id/cl_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_title">
 
         <Spinner
             android:id="@+id/spn_year_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textAlignment="center"
             android:popupBackground="@drawable/bg_white_maincoral_round4"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,20 +56,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingHorizontal="18dp"
             android:orientation="horizontal"
+            android:paddingHorizontal="18dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/spn_year_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spn_year_menu"
             tools:itemCount="12"
-            tools:listitem="@layout/item_filter_months">
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_filter_months"></androidx.recyclerview.widget.RecyclerView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_gift_item"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="10dp"
             android:overScrollMode="never"
@@ -77,8 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_months"
-            tools:listitem="@layout/item_history_unused"
-            tools:itemCount="2"/>
+            tools:itemCount="2"
+            tools:listitem="@layout/item_history_unused" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

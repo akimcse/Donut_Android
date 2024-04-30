@@ -15,7 +15,7 @@ import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverHistoryBinding
 import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.history.adapter.HistoryAdapter
+import org.gdsc.donut.ui.history.adapter.GiverHistoryAdapter
 import org.gdsc.donut.ui.history.adapter.MonthAdapter
 import org.gdsc.donut.ui.viewModel.HistoryViewModel
 import java.time.LocalDate
@@ -24,7 +24,7 @@ import java.time.LocalDateTime
 class GiverHistoryFragment : Fragment() {
     private lateinit var binding: FragmentGiverHistoryBinding
     private lateinit var menuAdapter: MonthAdapter
-    private lateinit var itemAdapter: HistoryAdapter
+    private lateinit var itemAdapter: GiverHistoryAdapter
     private val viewModel: HistoryViewModel by activityViewModels()
     private var filteredYear: Int = LocalDate.now().year
     private var filteredMonth: Int = LocalDate.now().monthValue
@@ -108,7 +108,7 @@ class GiverHistoryFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        itemAdapter = HistoryAdapter()
+        itemAdapter = GiverHistoryAdapter()
         binding.rvGiftItem.adapter = itemAdapter
         binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
 
@@ -121,7 +121,7 @@ class GiverHistoryFragment : Fragment() {
 
     private fun setDataList() {
         viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
-            with(binding.rvGiftItem.adapter as HistoryAdapter) {
+            with(binding.rvGiftItem.adapter as GiverHistoryAdapter) {
                 data.data!!.donationList?.let { itemAdapter.setGiftItemList(it) }
             }
         })

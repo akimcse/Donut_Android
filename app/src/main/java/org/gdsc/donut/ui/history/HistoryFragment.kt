@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentHistoryBinding
 import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.history.adapter.HistoryAdapter
+import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.history.adapter.GiverHistoryAdapter
 import org.gdsc.donut.ui.history.adapter.MonthAdapter
+import org.gdsc.donut.ui.history.adapter.ReceiverHistoryAdapter
 import org.gdsc.donut.ui.viewModel.HistoryViewModel
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -24,7 +26,8 @@ import java.time.LocalDateTime
 class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var menuAdapter: MonthAdapter
-    private lateinit var itemAdapter: HistoryAdapter
+    private lateinit var giverItemAdapter: GiverHistoryAdapter
+    private lateinit var receiverItemAdapter: ReceiverHistoryAdapter
     private val viewModel: HistoryViewModel by activityViewModels()
     private var filteredYear: Int = LocalDate.now().year
     private var filteredMonth: Int = LocalDate.now().monthValue
@@ -38,7 +41,6 @@ class HistoryFragment : Fragment() {
         setDropDownMenu()
         setChipAdapter()
         initNetwork(LocalDateTime.now().withDayOfMonth(1))
-        setAdapter()
 
         return binding.root
     }
@@ -89,25 +91,51 @@ class HistoryFragment : Fragment() {
     }
 
     private fun initNetwork(date: LocalDateTime) {
-        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverHistoryInfo(it, date) }
+        if(DonutSharedPreferences.getUserRole() == "giver") {
+            DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverHistoryInfo(it, date) }
+            setGiverAdapter()
+        } else {
+            DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReceiverHistoryInfo(it) }
+            setReceiverAdapter()
+        }
     }
 
-    private fun setAdapter() {
-        itemAdapter = HistoryAdapter()
-        binding.rvGiftItem.adapter = itemAdapter
+    private fun setGiverAdapter() {
+        giverItemAdapter = GiverHistoryAdapter()
+        binding.rvGiftItem.adapter = giverItemAdapter
         binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
 
-        itemAdapter.setOnItemClickListener { _, pos ->
-            viewModel.setGiftId(itemAdapter.itemList[itemAdapter.mPosition].giftId)
+        giverItemAdapter.setOnItemClickListener { _, pos ->
+            viewModel.setGiftId(giverItemAdapter.itemList[giverItemAdapter.mPosition].giftId)
             (activity as GiverMainActivity).changeFragment("history_detail")
         }
-        setDataList()
+        setGiverDataList()
     }
 
-    private fun setDataList() {
+    private fun setGiverDataList() {
         viewModel.giverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
-            with(binding.rvGiftItem.adapter as HistoryAdapter) {
-                data.data!!.donationList?.let { itemAdapter.setGiftItemList(it) }
+            with(binding.rvGiftItem.adapter as GiverHistoryAdapter) {
+                data.data!!.donationList?.let { giverItemAdapter.setGiftItemList(it) }
+            }
+        })
+    }
+
+    private fun setReceiverAdapter() {
+        receiverItemAdapter = ReceiverHistoryAdapter()
+        binding.rvGiftItem.adapter = receiverItemAdapter
+        binding.rvGiftItem.layoutManager = GridLayoutManager(context, 2)
+
+        receiverItemAdapter.setOnItemClickListener { _, pos ->
+            viewModel.setGiftId(receiverItemAdapter.itemList[receiverItemAdapter.mPosition].giftId)
+            (activity as ReceiverMainActivity).changeFragment("history_detail")
+        }
+        setReceiverDataList()
+    }
+
+    private fun setReceiverDataList() {
+        viewModel.receiverHistoryInfo.observe(viewLifecycleOwner, Observer { data ->
+            with(binding.rvGiftItem.adapter as ReceiverHistoryAdapter) {
+                data.data!!.giftList?.let { receiverItemAdapter.setGiftItemList(it) }
             }
         })
     }
