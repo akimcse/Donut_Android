@@ -58,7 +58,7 @@ class DonationFragment : Fragment() {
     ): View? {
         binding = FragmentDonationBinding.inflate(inflater, container, false)
 
-        (activity as GiverMainActivity).enableFloatingButton()
+        (activity as GiverMainActivity).disableFloatingButton()
         checkNameStatus()
         checkAmountStatus()
         checkDueDateStatus()
