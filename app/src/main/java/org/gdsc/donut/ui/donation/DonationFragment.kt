@@ -59,6 +59,7 @@ class DonationFragment : Fragment() {
         binding = FragmentDonationBinding.inflate(inflater, container, false)
 
         (activity as GiverMainActivity).enableFloatingButton()
+        setStatus()
         checkNameStatus()
         checkAmountStatus()
         checkDueDateStatus()
@@ -68,6 +69,13 @@ class DonationFragment : Fragment() {
         setDonateButton()
 
         return binding.root
+    }
+
+    private fun setStatus(){
+        if (viewModel.sharedDirectDonationOption.value == false) {
+            binding.tvTitle.text = "Add gifticon to\nwallet!"
+            binding.tvDonate.text = "Add to wallet"
+        }
     }
 
     private fun checkNameStatus() {
@@ -284,7 +292,10 @@ class DonationFragment : Fragment() {
                 binding.btnDonate.setBackgroundDrawable(context?.let { AppCompatResources.getDrawable(it, R.drawable.bg_coral_round) })
                 binding.tvDonate.setTextColor(resources.getColor(R.color.white))
                 binding.btnDonate.setOnClickListener {
-                    sendDonationInfo()
+                    if (viewModel.sharedDirectDonationOption.value == true) {
+                        sendDonationInfo()
+                    } else nextScreenWithDonationInfo()
+
                     requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
                     startActivity(Intent(context, DonationDoneActivity::class.java))                }
             }
@@ -301,5 +312,16 @@ class DonationFragment : Fragment() {
         val isRestored = highResolution.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store, isRestored) }
+    }
+
+    private fun nextScreenWithDonationInfo() {
+        val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), File(img))
+        val giftImage = MultipartBody.Part.createFormData("giftImage", File(img).name, requestFile)
+        val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val price = binding.etAmount.text.toString().toInt()
+        val dueDate = (binding.etDue.text.toString()+"T00:00:00.000000").toRequestBody("text/plain".toMediaTypeOrNull())
+
+        viewModel.setGifticonInfo(giftImage, product,price,dueDate)
+        (activity as GiverMainActivity).changeFragment("donation_check")
     }
 }
