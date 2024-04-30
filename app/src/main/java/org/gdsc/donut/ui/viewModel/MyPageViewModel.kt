@@ -28,7 +28,7 @@ class MyPageViewModel(application: Application) : AndroidViewModel(application) 
             RetrofitBuilder.myPageService.getGiverMyPageInfo("Bearer $accessToken")
         )
     }
-    
+
     fun requestReceiverMyPageInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
         _receiverMyPageInfo.postValue(
             RetrofitBuilder.myPageService.getReceiverMyPageInfo("Bearer $accessToken")
