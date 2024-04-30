@@ -29,6 +29,12 @@ class ReceiverMainActivity : AppCompatActivity() {
         setFloatingButton()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        enableFloatingButton()
+    }
+
     private fun setBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -86,6 +92,6 @@ class ReceiverMainActivity : AppCompatActivity() {
     }
 
     fun enableFloatingButton(){
-        binding.fabReceiveBtn.visibility = View.GONE
+        binding.fabReceiveBtn.visibility = View.VISIBLE
     }
 }
