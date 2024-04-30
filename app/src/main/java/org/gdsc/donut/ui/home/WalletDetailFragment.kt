@@ -78,7 +78,11 @@ class WalletDetailFragment : Fragment() {
 
     private fun setUsedButton(){
         binding.btnUsed.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            if(DonutSharedPreferences.getUserRole() == "receiver"){
+                viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+                    DonutSharedPreferences.getAccessToken()?.let { reportViewModel.requestReportUsed(it, data) }
+                })
+            } else requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

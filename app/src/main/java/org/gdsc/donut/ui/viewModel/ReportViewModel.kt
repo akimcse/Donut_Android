@@ -20,6 +20,7 @@ import org.gdsc.donut.data.remote.response.donation.ResponseDirectDonation
 import org.gdsc.donut.data.remote.response.donation.ResponseDonateGiver
 import org.gdsc.donut.data.remote.response.report.ResponseReport
 import org.gdsc.donut.data.remote.response.report.ResponseReportUnused
+import org.gdsc.donut.data.remote.response.report.ResponseReportUsed
 import org.gdsc.donut.util.Event
 import kotlin.Exception
 
@@ -32,11 +33,21 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
     val unusedItemInfo: LiveData<ResponseReportUnused>
         get() = _unusedItemInfo
 
+    private val _reportUsedInfo = MutableLiveData<ResponseReportUsed>()
+    val reportUsedInfo: LiveData<ResponseReportUsed>
+        get() = _reportUsedInfo
+
     fun setCheatedItem(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO){
         _cheatedItemInfo.postValue((RetrofitBuilder.reportService.reportCheat("Bearer $accessToken", RequestReport(giftId))))
     }
 
     fun setUnusedItem(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO){
         _unusedItemInfo.postValue((RetrofitBuilder.reportService.reportUnused("Bearer $accessToken", giftId)))
+    }
+
+    fun requestReportUsed(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
+        _reportUsedInfo.postValue(
+            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", giftId= giftId)
+        )
     }
 }
