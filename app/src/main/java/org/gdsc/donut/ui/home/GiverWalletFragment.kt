@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverWalletBinding
 import org.gdsc.donut.ui.GiverMainActivity
-import org.gdsc.donut.ui.home.adpater.WalletImpedingItemAdapter
 import org.gdsc.donut.ui.home.adpater.WalletGiftItemAdapter
+import org.gdsc.donut.ui.home.adpater.WalletImpedingItemAdapter
 import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 
@@ -37,11 +37,11 @@ class GiverWalletFragment : Fragment() {
         return binding.root
     }
 
-    private fun initNetwork(){
+    private fun initNetwork() {
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverWalletInfo(it) }
     }
 
-    private fun getGiverWalletInfo(){
+    private fun getGiverWalletInfo() {
         viewModel.giverWalletInfo.observe(viewLifecycleOwner, Observer { data ->
             binding.tvChildrenNum.text = data.data!!.receivers.toString()
             binding.tvDollarNum.text = data.data.amount.toInt().toString()
@@ -51,7 +51,7 @@ class GiverWalletFragment : Fragment() {
         })
     }
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         impendingItemAdapter = WalletImpedingItemAdapter(donationViewModel)
         binding.rvImminentGiftItem.adapter = impendingItemAdapter
         giftItemAdapter = WalletGiftItemAdapter()
@@ -74,7 +74,14 @@ class GiverWalletFragment : Fragment() {
 
         viewModel.giverWalletInfo.observe(viewLifecycleOwner, Observer { data ->
             with(binding.rvImminentGiftItem.adapter as WalletImpedingItemAdapter) {
-                data.data!!.impendingList.let { if (it != null) impendingItemAdapter.setImpendingItemList(it) }
+                data.data!!.impendingList.let {
+                    if (it != null) {
+                        if (it.isNotEmpty()) {
+                            impendingItemAdapter.setImpendingItemList(it)
+                            binding.tvDonateTitle.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
         })
     }
