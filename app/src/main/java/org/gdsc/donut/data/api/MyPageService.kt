@@ -3,6 +3,8 @@ package org.gdsc.donut.data.api
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiver
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryGiverDetail
 import org.gdsc.donut.data.remote.response.history.ResponseHistoryReceiver
+import org.gdsc.donut.data.remote.response.mypage.ResponseGiverMyPage
+import org.gdsc.donut.data.remote.response.mypage.ResponseReceiverMyPage
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
