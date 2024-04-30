@@ -47,20 +47,22 @@ class DonationViewModel(application: Application) : AndroidViewModel(application
     }
 
     private val sharedStoreName = MutableLiveData<String>()
-    private val sharedGiftImage = MutableLiveData<MultipartBody.Part>()
-    private val sharedProduct = MutableLiveData<RequestBody>()
-    private val sharedPrice = MutableLiveData<Int>()
+    val sharedGiftImageString = MutableLiveData<String>()
+    val sharedProduct = MutableLiveData<RequestBody>()
+    val sharedPrice = MutableLiveData<Int>()
+    val sharedDueDate = MutableLiveData<RequestBody>()
+    val sharedStore = MutableLiveData<RequestBody>()
 
-    private val sharedDueDate = MutableLiveData<RequestBody>()
     fun setStoreName(input: String) {
         sharedStoreName.value = input
     }
 
-    fun setGifticonInfo(img: MultipartBody.Part, product: RequestBody, price: Int, dueDate: RequestBody) {
-        sharedGiftImage.value = img
+    fun setGifticonInfo(img: String, product: RequestBody, price: Int, dueDate: RequestBody, store: RequestBody) {
+        sharedGiftImageString.value = img
         sharedProduct.value = product
         sharedPrice.value = price
         sharedDueDate.value = dueDate
+        sharedStore.value = store
     }
 
     fun requestAssignReceiver(accessToken: String, price: Int) =

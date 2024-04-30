@@ -295,9 +295,7 @@ class DonationFragment : Fragment() {
                     if (viewModel.sharedDirectDonationOption.value == true) {
                         sendDonationInfo()
                     } else nextScreenWithDonationInfo()
-
-                    requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
-                    startActivity(Intent(context, DonationDoneActivity::class.java))                }
+                }
             }
         }
     }
@@ -312,16 +310,18 @@ class DonationFragment : Fragment() {
         val isRestored = highResolution.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         DonutSharedPreferences.getAccessToken()?.let { viewModel.requestDonateGiver(it, giftImage, product, price, dueDate, store, isRestored) }
+        requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
+        startActivity(Intent(context, DonationDoneActivity::class.java))
     }
 
     private fun nextScreenWithDonationInfo() {
-        val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), File(img))
-        val giftImage = MultipartBody.Part.createFormData("giftImage", File(img).name, requestFile)
+        val imgString = img
         val product = binding.etName.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val price = binding.etAmount.text.toString().toInt()
+        val store = store.toRequestBody("text/plain".toMediaTypeOrNull())
         val dueDate = (binding.etDue.text.toString()+"T00:00:00.000000").toRequestBody("text/plain".toMediaTypeOrNull())
 
-        viewModel.setGifticonInfo(giftImage, product,price,dueDate)
+        viewModel.setGifticonInfo(imgString, product, price, dueDate, store)
         (activity as GiverMainActivity).changeFragment("donation_check")
     }
 }
