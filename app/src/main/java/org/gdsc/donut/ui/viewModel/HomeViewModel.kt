@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.gdsc.donut.data.api.RetrofitBuilder
+import org.gdsc.donut.data.remote.request.message.RequestSendMsg
 import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
@@ -16,6 +17,8 @@ import org.gdsc.donut.data.remote.response.home.ResponseWalletDetailItem
 import org.gdsc.donut.data.remote.response.home.ResponseWalletGiftList
 import org.gdsc.donut.data.remote.response.home.ResponseWalletGiver
 import org.gdsc.donut.data.remote.response.home.ResponseWalletImpendingList
+import org.gdsc.donut.data.remote.response.message.ResponseSendMsg
+import org.gdsc.donut.data.remote.response.message.ResponseSendMsgData
 import org.gdsc.donut.data.remote.response.report.ResponseReportUsed
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -51,6 +54,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val receiverHomeGiftInfo: LiveData<ResponseHomeReceiverGiftItem>
         get() = _receiverHomeGiftInfo
 
+    private val _sendMsgInfo = MutableLiveData<ResponseSendMsg>()
+    val sendMsgInfo: LiveData<ResponseSendMsg>
+        get() = _sendMsgInfo
+
     val sharedBoxId = MutableLiveData<Long>()
     fun setBoxId(input: Long) {
         sharedBoxId.value = input
@@ -59,6 +66,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val sharedGiftId = MutableLiveData<Long>()
     fun setGiftId(input: Long) {
         sharedGiftId.value = input
+    }
+
+    val sharedContent = MutableLiveData<String>()
+    fun setContent(input: String){
+        sharedContent.value = input
     }
 
     fun requestGiverHomeInfo(accessToken: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -97,5 +109,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
+    fun requestSendMsg(accessToken: String, giftID: Long, content: String) = viewModelScope.launch(Dispatchers.IO) {
+        _sendMsgInfo.postValue(
+            RetrofitBuilder.messageService.sendMessage("Bearer $accessToken", RequestSendMsg(giftID, content))
+        )
+    }
 
 }
