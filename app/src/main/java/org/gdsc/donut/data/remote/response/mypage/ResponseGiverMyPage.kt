@@ -9,7 +9,7 @@ data class ResponseGiverMyPage(
 data class ResponseGiverMyPageData(
     val years: Int,
     val donation: Double,
-    val stats: List<ResponseGiverMyPageStatData>?
+    val stats: ResponseGiverMyPageStatData?
 )
 
 data class ResponseGiverMyPageStatData(
