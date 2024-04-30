@@ -14,11 +14,13 @@ import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentWalletDetailBinding
 import org.gdsc.donut.ui.ReceiverMainActivity
 import org.gdsc.donut.ui.viewModel.HomeViewModel
+import org.gdsc.donut.ui.viewModel.ReportViewModel
 import org.gdsc.donut.util.DonutUtil
 
 class WalletDetailFragment : Fragment() {
     private lateinit var binding: FragmentWalletDetailBinding
     private val viewModel: HomeViewModel by activityViewModels()
+    private val reportViewModel: ReportViewModel by activityViewModels()
     var store = ""
 
     override fun onCreateView(
@@ -29,7 +31,7 @@ class WalletDetailFragment : Fragment() {
 
         initNetwork()
         getReceiverHomeGiftInfo()
-        setButton()
+        setReportButton()
 
         return binding.root
     }
@@ -59,9 +61,16 @@ class WalletDetailFragment : Fragment() {
         })
     }
 
-    private fun setButton() {
+    private fun setReportButton() {
         binding.ivDots.setOnClickListener {
-            binding.clReport.visibility = View.VISIBLE
+            if(binding.clReport.visibility == View.VISIBLE) binding.clReport.visibility = View.INVISIBLE
+            else binding.clReport.visibility = View.VISIBLE
+        }
+
+        binding.clReport.setOnClickListener {
+            viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+                DonutSharedPreferences.getAccessToken()?.let { reportViewModel.setCheatedItem(it, data) }
+            })
         }
     }
 
