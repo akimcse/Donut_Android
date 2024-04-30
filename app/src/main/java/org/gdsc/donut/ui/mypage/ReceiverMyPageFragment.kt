@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentReceiverMyPageBinding
 import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.sign.SignActivity
+import org.gdsc.donut.ui.viewModel.MyPageViewModel
 
 class ReceiverMyPageFragment : Fragment() {
     private lateinit var binding: FragmentReceiverMyPageBinding
+    private val viewModel: MyPageViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,9 +25,21 @@ class ReceiverMyPageFragment : Fragment() {
     ): View? {
         binding = FragmentReceiverMyPageBinding.inflate(inflater, container, false)
 
+        initNetwork()
+        setInfo()
         setClickListener()
 
         return binding.root
+    }
+
+    private fun initNetwork(){
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestReceiverMyPageInfo(it) }
+    }
+
+    private fun setInfo(){
+        viewModel.receiverMyPageInfo.observe(viewLifecycleOwner, Observer { data ->
+            binding.tvDollarNum.text = data.data!!.total.toInt().toString()
+        })
     }
 
     private fun setClickListener(){

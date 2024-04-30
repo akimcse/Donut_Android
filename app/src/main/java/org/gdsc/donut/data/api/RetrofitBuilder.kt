@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 object RetrofitBuilder {
     private const val BASE_URL = "http://34.64.166.104:8080/api/"
@@ -41,4 +42,5 @@ object RetrofitBuilder {
     val homeService: HomeService = donutRetrofit.create(HomeService::class.java)
     val rankingService: RankingService = donutRetrofit.create(RankingService::class.java)
     val reportService: ReportService = donutRetrofit.create(ReportService::class.java)
+    val myPageService: MyPageService = donutRetrofit.create(MyPageService::class.java)
 }

@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentGiverMyPageBinding
 import org.gdsc.donut.ui.GiverMainActivity
 import org.gdsc.donut.ui.sign.SignActivity
+import org.gdsc.donut.ui.viewModel.MyPageViewModel
 
 class GiverMyPageFragment : Fragment() {
     private lateinit var binding: FragmentGiverMyPageBinding
+    private val viewModel: MyPageViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,9 +25,25 @@ class GiverMyPageFragment : Fragment() {
     ): View? {
         binding = FragmentGiverMyPageBinding.inflate(inflater, container, false)
 
+        initNetwork()
+        setInfo()
         setClickListener()
 
         return binding.root
+    }
+
+    private fun initNetwork(){
+        DonutSharedPreferences.getAccessToken()?.let { viewModel.requestGiverMyPageInfo(it) }
+    }
+
+    private fun setInfo(){
+        viewModel.giverMyPageInfo.observe(viewLifecycleOwner, Observer { data ->
+            binding.tvTitleYearNum.text = data.data!!.years.toString()
+            binding.tvDollarNum.text = data.data.donation.toInt().toString()
+            binding.tvUnreceivedNum.text = data.data.stats!!.unreceived.toString()
+            binding.tvReceivedNum.text = data.data.stats.received.toString()
+            binding.tvMsgNum.text = data.data.stats.message.toString()
+        })
     }
 
     private fun setClickListener(){
