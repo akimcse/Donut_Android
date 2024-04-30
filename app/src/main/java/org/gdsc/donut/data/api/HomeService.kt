@@ -4,6 +4,7 @@ import org.gdsc.donut.data.remote.response.home.ResponseHomeGiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiver
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverBoxItem
 import org.gdsc.donut.data.remote.response.home.ResponseHomeReceiverGiftItem
+import org.gdsc.donut.data.remote.response.home.ResponseWalletGiver
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -13,6 +14,11 @@ interface HomeService {
     suspend fun getGiverHomeInfo(
         @Header("Authorization") accessToken : String
     ): ResponseHomeGiver
+
+    @GET("home/wallet")
+    suspend fun getGiverWalletInfo(
+        @Header("Authorization") accessToken : String
+    ): ResponseWalletGiver
 
     @GET("home/receiver")
     suspend fun getReceiverHomeInfo(
