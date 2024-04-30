@@ -171,6 +171,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_7_dollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="₩"
+                    android:textColor="@color/black_100"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_7_num"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_7_num"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_7_num" />
+
+                <TextView
                     android:id="@+id/tv_7_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,7 +197,8 @@
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_7_dollar"
                     app:layout_constraintTop_toBottomOf="@+id/tv_7" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -211,6 +227,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_gs_dollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="₩"
+                    android:textColor="@color/black_100"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_gs_num"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_gs_num"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_gs_num" />
+
+                <TextView
                     android:id="@+id/tv_gs_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -222,7 +252,7 @@
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_gs_dollar"
                     app:layout_constraintTop_toBottomOf="@+id/tv_gs" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -252,6 +282,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_cu_dollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="₩"
+                    android:textColor="@color/black_100"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_cu_num"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_cu_num"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_cu_num" />
+
+                <TextView
                     android:id="@+id/tv_cu_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -263,7 +308,8 @@
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_cu_dollar"
                     app:layout_constraintTop_toBottomOf="@+id/tv_cu" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
