@@ -18,7 +18,7 @@ import org.gdsc.donut.ui.ReceiverMainActivity
 
 class ReceiveStoreStartFragment : Fragment(){
     private lateinit var binding: FragmentReceiveStoreStartBinding
-    private val gmmIntentUri = Uri.parse("geo:0,0?q=편의점")
+    private val gmmIntentUri = Uri.parse("geo:0,0?q=convenience store")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +26,7 @@ class ReceiveStoreStartFragment : Fragment(){
     ): View? {
         binding = FragmentReceiveStoreStartBinding.inflate(inflater, container, false)
 
-        (activity as ReceiverMainActivity).enableFloatingButton()
+        (activity as ReceiverMainActivity).disableFloatingButton()
         setFindButton()
 
         return binding.root

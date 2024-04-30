@@ -51,10 +51,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val receiverHomeGiftInfo: LiveData<ResponseHomeReceiverGiftItem>
         get() = _receiverHomeGiftInfo
 
-    private val _reportUsedInfo = MutableLiveData<ResponseReportUsed>()
-    val reportUsedInfo: LiveData<ResponseReportUsed>
-        get() = _reportUsedInfo
-
     val sharedBoxId = MutableLiveData<Long>()
     fun setBoxId(input: Long) {
         sharedBoxId.value = input
@@ -101,9 +97,5 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
-    fun requestReportUsed(accessToken: String, giftId: Long) = viewModelScope.launch(Dispatchers.IO) {
-        _reportUsedInfo.postValue(
-            RetrofitBuilder.reportService.reportUsed("Bearer $accessToken", giftId= giftId)
-        )
-    }
+
 }

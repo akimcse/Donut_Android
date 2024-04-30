@@ -27,6 +27,12 @@ class GiverMainActivity : AppCompatActivity() {
         setFloatingButton()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        enableFloatingButton()
+    }
+
     private fun setBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -59,6 +65,7 @@ class GiverMainActivity : AppCompatActivity() {
         supportFragmentManager.fragments
             .filter { it.isVisible }
             .forEach {
+                transaction.addToBackStack(tag)
                 transaction.hide(it)
             }
 
@@ -77,7 +84,11 @@ class GiverMainActivity : AppCompatActivity() {
         }
     }
 
-    fun enableFloatingButton(){
+    fun disableFloatingButton(){
         binding.fabDonationBtn.visibility = View.GONE
+    }
+
+    fun enableFloatingButton(){
+        binding.fabDonationBtn.visibility = View.VISIBLE
     }
 }

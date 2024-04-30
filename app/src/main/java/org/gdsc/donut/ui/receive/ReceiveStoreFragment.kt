@@ -26,7 +26,7 @@ class ReceiveStoreFragment : Fragment() {
     ): View? {
         binding = FragmentReceiveStoreBinding.inflate(inflater, container, false)
 
-        (activity as ReceiverMainActivity).enableFloatingButton()
+        (activity as ReceiverMainActivity).disableFloatingButton()
         setStoreSelector()
 
         return binding.root

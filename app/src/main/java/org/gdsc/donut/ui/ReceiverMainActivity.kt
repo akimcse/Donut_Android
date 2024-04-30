@@ -29,6 +29,12 @@ class ReceiverMainActivity : AppCompatActivity() {
         setFloatingButton()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        enableFloatingButton()
+    }
+
     private fun setBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -62,6 +68,7 @@ class ReceiverMainActivity : AppCompatActivity() {
         supportFragmentManager.fragments
             .filter { it.isVisible }
             .forEach {
+                transaction.addToBackStack(tag)
                 transaction.hide(it)
             }
 
@@ -80,7 +87,11 @@ class ReceiverMainActivity : AppCompatActivity() {
         }
     }
 
-    fun enableFloatingButton(){
+    fun disableFloatingButton(){
         binding.fabReceiveBtn.visibility = View.GONE
+    }
+
+    fun enableFloatingButton(){
+        binding.fabReceiveBtn.visibility = View.VISIBLE
     }
 }
