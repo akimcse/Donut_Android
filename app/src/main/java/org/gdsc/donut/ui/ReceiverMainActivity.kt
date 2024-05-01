@@ -27,11 +27,13 @@ import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreStartFragment
+import org.gdsc.donut.ui.viewModel.HomeViewModel
 import org.gdsc.donut.ui.viewModel.SignViewModel
 
 class ReceiverMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReceiverMainBinding
     private val viewModel: SignViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission(),) { isGranted: Boolean ->
         if (isGranted) setFCM()
         else Toast.makeText(baseContext, "Turn off push notification", Toast.LENGTH_SHORT).show()
@@ -56,7 +58,10 @@ class ReceiverMainActivity : AppCompatActivity() {
     private fun setBottomNavigation() {
         binding.bnvMain.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.menu_wallet -> changeFragment(getString(R.string.menu_wallet))
+                R.id.menu_wallet -> {
+                    changeFragment(getString(R.string.menu_wallet))
+                    DonutSharedPreferences.getAccessToken()?.let{homeViewModel.requestReceiverHomeInfo(it)}
+                }
                 R.id.menu_ranking -> changeFragment(getString(R.string.menu_ranking))
                 R.id.menu_my_page -> changeFragment(getString(R.string.menu_my_page))
             }
