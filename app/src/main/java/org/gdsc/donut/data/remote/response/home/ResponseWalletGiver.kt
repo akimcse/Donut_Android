@@ -7,11 +7,11 @@ data class ResponseWalletGiver(
 )
 
 data class ResponseWalletGiverData(
-    val receivers: Int,
+    val receiver: Int,
     val amount: Double,
     val cu: Int,
     val gs25: Int,
-    val sevenEleven: Int,
+    val seveneleven: Int,
     val impendingList: List<ResponseWalletImpendingList>?,
     val giftList: List<ResponseWalletGiftList>?
 )
