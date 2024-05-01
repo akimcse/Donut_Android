@@ -11,6 +11,7 @@ object DonutSharedPreferences {
     private const val USER_ID = "USER_ID"
     private const val USER_ROLE = "USER_ROLE"
     private const val ACCESS_TOKEN = "ACCESS_TOKEN"
+    private const val FCM_TOKEN = "FCM_TOKEN"
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
@@ -46,6 +47,18 @@ object DonutSharedPreferences {
     }
 
     fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
+
+    fun setFCMToken(token: String?){
+        preferences.edit {
+            if (token == null) {
+                remove(FCM_TOKEN)
+            } else {
+                putString(FCM_TOKEN, token)
+            }
+        }
+    }
+
+    fun getFCMToken(): String? = preferences.getString(FCM_TOKEN, null)
 
     fun setUserRole(role: String?){
         preferences.edit {

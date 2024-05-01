@@ -1,14 +1,25 @@
 package org.gdsc.donut.ui
 
+import android.Manifest
+import android.content.ContentValues
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.gdsc.donut.R
+import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.ActivityReceiverMainBinding
 import org.gdsc.donut.ui.history.HistoryDetailFragment
 import org.gdsc.donut.ui.history.HistoryFragment
 import org.gdsc.donut.ui.home.ReceiverHomeFragment
-import org.gdsc.donut.ui.home.ReceiverHomeGiftDetailFragment
 import org.gdsc.donut.ui.home.ReceiverHomePackageDetailFragment
 import org.gdsc.donut.ui.home.WalletDetailFragment
 import org.gdsc.donut.ui.mypage.ReceiverMyPageFragment
@@ -16,9 +27,15 @@ import org.gdsc.donut.ui.ranking.RankingFragment
 import org.gdsc.donut.ui.receive.ReceiveAmountFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreFragment
 import org.gdsc.donut.ui.receive.ReceiveStoreStartFragment
+import org.gdsc.donut.ui.viewModel.SignViewModel
 
 class ReceiverMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReceiverMainBinding
+    private val viewModel: SignViewModel by viewModels()
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission(),) { isGranted: Boolean ->
+        if (isGranted) setFCM()
+        else Toast.makeText(baseContext, "Turn off push notification", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +44,7 @@ class ReceiverMainActivity : AppCompatActivity() {
 
         setBottomNavigation()
         setFloatingButton()
+        askNotificationPermission()
     }
 
     override fun onBackPressed() {
@@ -93,5 +111,28 @@ class ReceiverMainActivity : AppCompatActivity() {
 
     fun enableFloatingButton(){
         binding.fabReceiveBtn.visibility = View.VISIBLE
+    }
+
+    private fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                setFCM()
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    private fun setFCM(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(ContentValues.TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            DonutSharedPreferences.setFCMToken(task.result)
+            DonutSharedPreferences.getAccessToken()
+                ?.let { accessToken -> DonutSharedPreferences.getFCMToken()
+                    ?.let { fcmToken -> viewModel.sendFCMToken(accessToken, fcmToken) }}
+        })
     }
 }

@@ -8,13 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.data.api.RetrofitBuilder
 import org.gdsc.donut.data.remote.request.auth.RequestGoogleLogin
+import org.gdsc.donut.data.remote.request.auth.RequestSendFCMToken
 import org.gdsc.donut.data.remote.request.auth.RequestSignInGiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseGoogleLogin
+import org.gdsc.donut.data.remote.response.auth.ResponseSendFCMToken
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
@@ -35,6 +38,10 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
     private val _googleLoginInfo = MutableLiveData<ResponseGoogleLogin>()
     val googleLoginInfo: LiveData<ResponseGoogleLogin>
         get() = _googleLoginInfo
+
+    private val _fcmInfo = MutableLiveData<ResponseSendFCMToken>()
+    val fcmInfo: LiveData<ResponseSendFCMToken>
+        get() = _fcmInfo
 
     fun saveUserId(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -75,6 +82,12 @@ class SignViewModel(application: Application) : AndroidViewModel(application) {
     fun requestGoogleLogin(clientId: String, clientSecret: String, code: String, grantType: String, redirectUri: String)= viewModelScope.launch(Dispatchers.IO) {
         _googleLoginInfo.postValue(
             RetrofitBuilder.googleService.signInWithGoogle(RequestGoogleLogin(clientId, clientSecret, code, grantType, redirectUri))
+        )
+    }
+
+    fun sendFCMToken(accessToken: String, token: String) = viewModelScope.launch(Dispatchers.IO) {
+        _fcmInfo.postValue(
+            RetrofitBuilder.authService.sendFCMToken("Bearer $accessToken", RequestSendFCMToken(token))
         )
     }
 }
