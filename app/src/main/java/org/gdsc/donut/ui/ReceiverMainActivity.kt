@@ -129,8 +129,10 @@ class ReceiverMainActivity : AppCompatActivity() {
                 Log.w(ContentValues.TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
-
-            DonutSharedPreferences.getAccessToken()?.let { viewModel.sendFCMToken(it, task.result)}
+            DonutSharedPreferences.setFCMToken(task.result)
+            DonutSharedPreferences.getAccessToken()
+                ?.let { accessToken -> DonutSharedPreferences.getFCMToken()
+                    ?.let { fcmToken -> viewModel.sendFCMToken(accessToken, fcmToken) }}
         })
     }
 }

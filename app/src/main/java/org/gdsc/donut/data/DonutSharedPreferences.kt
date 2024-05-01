@@ -47,6 +47,18 @@ object DonutSharedPreferences {
 
     fun getAccessToken(): String? = preferences.getString(ACCESS_TOKEN, null)
 
+    fun setFCMToken(token: String?){
+        preferences.edit {
+            if (token == null) {
+                remove(ACCESS_TOKEN)
+            } else {
+                putString(ACCESS_TOKEN, token)
+            }
+        }
+    }
+
+    fun getFCMToken(): String? = preferences.getString(ACCESS_TOKEN, null)
+
     fun setUserRole(role: String?){
         preferences.edit {
             if (role == null) {
