@@ -1,8 +1,10 @@
 package org.gdsc.donut.data.api
 
+import org.gdsc.donut.data.remote.request.auth.RequestSendFCMToken
 import org.gdsc.donut.data.remote.request.auth.RequestSignInGiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignInReceiver
 import org.gdsc.donut.data.remote.request.auth.RequestSignUpReceiver
+import org.gdsc.donut.data.remote.response.auth.ResponseSendFCMToken
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInGiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignInReceiver
 import org.gdsc.donut.data.remote.response.auth.ResponseSignUpReceiver
@@ -25,4 +27,10 @@ interface AuthService {
     suspend fun signInGiver(
         @Body giverSignInInfo: RequestSignInGiver
     ): ResponseSignInGiver
+
+    @POST("fcm/token")
+    suspend fun sendFCMToken(
+        @Header("Authorization") accessToken : String,
+        @Body fcmTokenInfo: RequestSendFCMToken
+    ): ResponseSendFCMToken
 }
