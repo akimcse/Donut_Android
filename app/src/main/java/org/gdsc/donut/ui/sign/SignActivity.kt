@@ -1,26 +1,18 @@
 package org.gdsc.donut.ui.sign
 
-import android.Manifest
-import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import org.gdsc.donut.R
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.ActivitySignBinding
@@ -39,12 +31,8 @@ class SignActivity : AppCompatActivity() {
             account.idToken?.let { viewModel.requestGiverSignIn(it) }
             // getGoogleAccessToken(task)
             setGiverUserInfo()
-            askNotificationPermission()
         }
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission(),) { isGranted: Boolean ->
-        if (isGranted) setFCM()
-        else Toast.makeText(baseContext, "Turn off push notification", Toast.LENGTH_SHORT).show()
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,7 +172,6 @@ class SignActivity : AppCompatActivity() {
         val password = binding.etPassword.text.toString()
         viewModel.requestReceiverSignIn(id, password)
         handleNetworkException()
-        askNotificationPermission()
     }
 
     private fun handleNetworkException() {
@@ -206,30 +193,6 @@ class SignActivity : AppCompatActivity() {
                     Toast.makeText(this, "서버 오류입니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
-        })
-    }
-
-
-    private fun askNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                setFCM()
-            } else {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
-        }
-    }
-
-    private fun setFCM(){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(ContentValues.TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            val token = task.result
-
-            Log.d(ContentValues.TAG, "FCMtoken: $token")
         })
     }
 }
