@@ -12,7 +12,8 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import org.gdsc.donut.data.DonutSharedPreferences
 import org.gdsc.donut.databinding.FragmentWalletDetailBinding
-import org.gdsc.donut.ui.ReceiverMainActivity
+import org.gdsc.donut.ui.donation.DonationDoneActivity
+import org.gdsc.donut.ui.viewModel.DonationViewModel
 import org.gdsc.donut.ui.viewModel.HomeViewModel
 import org.gdsc.donut.ui.viewModel.ReportViewModel
 import org.gdsc.donut.util.DonutUtil
@@ -21,6 +22,8 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
     private lateinit var binding: FragmentWalletDetailBinding
     private val viewModel: HomeViewModel by activityViewModels()
     private val reportViewModel: ReportViewModel by activityViewModels()
+    private val donationViewModel: DonationViewModel by activityViewModels()
+
     var store = ""
 
     override fun onCreateView(
@@ -34,17 +37,19 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
         setReportButton()
         setUsedButton()
         setUnusedButton()
+        setDonateButton()
 
         return binding.root
     }
 
-    private fun initNetwork(){
+    private fun initNetwork() {
         viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
-            DonutSharedPreferences.getAccessToken()?.let { viewModel.requestWalletDetailInfo(it, data) }
+            DonutSharedPreferences.getAccessToken()
+                ?.let { viewModel.requestWalletDetailInfo(it, data) }
         })
     }
 
-    private fun getReceiverHomeGiftInfo(){
+    private fun getReceiverHomeGiftInfo() {
         viewModel.walletDetailInfo.observe(viewLifecycleOwner, Observer { data ->
             val date = data.data!!.dueDate.substring(0, 10)
             binding.tvTitle.text = data.data.product
@@ -55,7 +60,7 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
             store = data.data.store
             setGoogleMapIcon()
 
-            if(data.data.status == "USED") binding.tvStatusText.text = "can use"
+            if (data.data.status == "USED") binding.tvStatusText.text = "can use"
             Glide.with(this)
                 .load(data.data.imgUrl)
                 .fitCenter()
@@ -65,18 +70,20 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
 
     private fun setReportButton() {
         binding.ivDots.setOnClickListener {
-            if(binding.clReport.visibility == View.VISIBLE) binding.clReport.visibility = View.INVISIBLE
+            if (binding.clReport.visibility == View.VISIBLE) binding.clReport.visibility =
+                View.INVISIBLE
             else binding.clReport.visibility = View.VISIBLE
         }
 
         binding.clReport.setOnClickListener {
             viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
-                DonutSharedPreferences.getAccessToken()?.let { reportViewModel.setCheatedItem(it, data) }
+                DonutSharedPreferences.getAccessToken()
+                    ?.let { reportViewModel.setCheatedItem(it, data) }
             })
         }
     }
 
-    override fun onSendMsgButtonClicked(){
+    override fun onSendMsgButtonClicked() {
         val content = viewModel.sharedContent.value
         viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
             DonutSharedPreferences.getAccessToken()?.let {
@@ -87,7 +94,7 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
         })
     }
 
-    private fun setUsedButton(){
+    private fun setUsedButton() {
         binding.btnUsed.setOnClickListener {
             if (DonutSharedPreferences.getUserRole() == "receiver") {
                 context?.let { MessageDialog(it, this, viewModel).show() }
@@ -100,11 +107,25 @@ class WalletDetailFragment : Fragment(), MessageDialogInterface {
         }
     }
 
-    private fun setUnusedButton(){
+    private fun setUnusedButton() {
         binding.btnUnused.setOnClickListener {
             viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
-                DonutSharedPreferences.getAccessToken()?.let { reportViewModel.setUnusedItem(it, data) }
+                DonutSharedPreferences.getAccessToken()
+                    ?.let { reportViewModel.setUnusedItem(it, data) }
             })
+        }
+    }
+
+    private fun setDonateButton() {
+        if (DonutSharedPreferences.getUserRole() == "giver") {
+            binding.btnDonate.setOnClickListener {
+                viewModel.sharedGiftId.observe(viewLifecycleOwner, Observer { data ->
+                    DonutSharedPreferences.getAccessToken()
+                        ?.let { donationViewModel.requestDirectDonation(it, data) }
+                })
+            }
+        } else {
+            binding.btnDonate.visibility = View.INVISIBLE
         }
     }
 
