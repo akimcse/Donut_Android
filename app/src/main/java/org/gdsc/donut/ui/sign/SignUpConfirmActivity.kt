@@ -88,7 +88,7 @@ class SignUpConfirmActivity : AppCompatActivity() {
     }
 
     private fun verifyUserStatusFromOCRText(text: String){
-        if(text.contains("가상계좌") && text.contains("NH") && text.contains("채움")){
+        if(text.contains("가상계좌") && text.contains("NH")){
             setContinueBtn()
         } else {
             Toast.makeText(this, "인증에 실패하였습니다. 다시 촬영해주세요.", Toast.LENGTH_SHORT).show()

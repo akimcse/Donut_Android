@@ -42,7 +42,8 @@ class HistoryDetailFragment : Fragment() {
         viewModel.giverHistoryDetailInfo.observe(viewLifecycleOwner, Observer { data ->
             val date = data.data!!.dueDate.substring(0, 10)
             val givenDate = data.data.donateDate.substring(0, 10)
-            val receivedDate = data.data.receivedDate.substring(0, 10)
+            var receivedDate = ""
+            if(data.data.receivedDate!=null) receivedDate = data.data.receivedDate.substring(0, 10)
 
             if(data.data.status == "USED"){
                 binding.clTag.setBackgroundResource(R.drawable.bg_gray100_round20)
