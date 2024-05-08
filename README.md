@@ -14,8 +14,8 @@
 </br></br>
 
 # 📂 Table of Contents
-  - [Architecture](#Architecture)
-  - [Tech Stacks](#Tech-stacks)
+  - [Project Architecture](#Project-Architecture)
+  - [Android Tech Stacks](#Android-Tech-stacks)
   - [How to Run](#How-to-Run)
   - [How to Use DONUT](#How-to-Use-DONUT)
   - [TEAM ZPE (0.8)](#TEAM-ZPE-(0.8))
