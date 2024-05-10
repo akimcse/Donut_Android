@@ -13,15 +13,6 @@
 
 </br></br>
 
-# 📂 Table of Contents
-  - [Project Architecture](#Project-Architecture)
-  - [Android Tech Stacks](#Android-Tech-stacks)
-  - [How to Run](#How-to-Run)
-  - [How to Use DONUT](#How-to-Use-DONUT)
-  - [TEAM ZPE (0.8)](#TEAM-ZPE-(0.8))
-
-</br></br>
-
 # 🛠️ Project Architecture
 
 <image src='https://github.com/akimcse/akimcse/assets/63237214/49c749af-5579-42fe-b45c-d85a9c258dd8'/>
